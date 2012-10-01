@@ -29,9 +29,9 @@ public class Person5 {
 	 * @param input the string to be modified
 	 * @return the modified string
 	 */
-	private String calc(String input) {
-	  //Person 5 put your implementation here
-	  return null;
+	private String calc(String input)
+	{
+	  return input.substr(3,input.length()-1)+input.substr(0,3);
 	}
 	
 	/**
