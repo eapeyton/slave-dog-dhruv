@@ -30,8 +30,21 @@ public class Person1 {
 	 * @return the modified string
 	 */
 	private String calc(String input) {
-	  //Person 1 put your implementation here
-	  return null;
+	  
+		char f[]=input.toCharArray();
+		char a,b;
+		
+		a=f[0];
+		b=f[1];
+		
+		for(int i=0;i<f.length-2;i++){
+			f[i]=f[i+2];
+		}
+		
+		f[f.length-1]=b;
+		f[f.length-2]=a;
+		
+	  return new String(f);
 	}
 	
 	/**
