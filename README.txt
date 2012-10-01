@@ -1,3 +1,3 @@
 Creating new repo....
 
-This is the story of four students and their slave dog, Dhruv, who revolutionize the game industry and cure cancer with a shitty rendition of a palm pilot game because they are cool like that.
+This is the story of four students and their slave dog, Dhruv, who revolutionize the game industry and cure Cancer with a shitty rendition of a palm pilot game because they are cool like that.
