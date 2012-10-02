@@ -31,7 +31,12 @@ public class Person5 {
 	 */
 	private String calc(String input)
 	{
-	  return input.substr(3,input.length()-1)+input.substr(0,3);
+	  String toReturn = input;
+	  for(int i=0;i<3;i++)
+	  {
+		  toReturn = toReturn.subString(1) + toReturn.substring(0,1);
+	  }
+	  return toReturn;
 	}
 	
 	/**
