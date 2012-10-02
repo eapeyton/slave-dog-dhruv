@@ -34,7 +34,7 @@ public class Person5 {
 	  String toReturn = input;
 	  for(int i=0;i<3;i++)
 	  {
-		  toReturn = toReturn.subString(1) + toReturn.substring(0,1);
+		  toReturn = toReturn.substring(1) + toReturn.substring(0,1);
 	  }
 	  return toReturn;
 	}
