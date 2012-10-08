@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--Ant M4-->
+<!--build.xml-->
+<!--Rikin Marfatia-->
+
+<project name="M4" basedir="." default="all">
+
+<!--initializes properties-->
+<target name="init">
+	<property name="build" location="build"/>
+	<property name="src.dir" location="src"/>
+	<property name="apidoc.dir" location="apidoc"/>
+</target>
+
+<!--initializes directories-->
+<target name="prepare" depends="init">
+	<mkdir dir="${build}"/>
+	<mkdir dir="${apidoc.dir}"/>
+</target>
+
+<!--compiles from source to build directory-->
+<target name="compile" depends="prepare">
+	<javac srcdir="${src.dir}" destdir="${build}" includeantruntime="false">
+		<classpath>
+			<pathelement location="lib/resources.jar"/>
+		</classpath>
+	</javac>
+</target>
+
+<!--creates the javadoc-->
+<target name="javadoc" depends="prepare, compile">
+	<javadoc sourcepath="${src.dir}" access="public" destdir="${doc.dir}" packagenames="edu.gatech.oad.antlab">
+		<fileset dir="${src.dir}">
+			<include name="**/*.java"/>
+		</fileset>
+	</javadoc>
+</target>
+
+<!--packages the compiled classes to AntLabRun.jar-->
+<target name="jar" depends="compile">
+	<jar destfile="AntLabRun.jar">
+		<fileset dir="build/">
+			<include name="**/*.class"/>
+		</fileset>
+
+		<manifest>
+                        <attribute name="Class-Path" value="lib/resources.jar"/>
+			<attribute name="Main-Class" value="edu.gatech.oad.antlab.pkg1.AntLabMain"/>
+		</manifest>
+	</jar>
+</target>
+
+<!--executes and runs jar file-->
+<target name="run" depends="jar">
+	<java jar="AntLabRun.jar" fork="true">
+	</java>
+</target>
+
+<!--performs all of the actions-->
+<target name="all" depends="run">
+</target>
+
+<!--removes the compiled classes and the JAR-->
+<target name="clean"  depends="init">
+	<delete file="AntLabRun.jar"/>
+	<delete dir="${build}"/>
+	<delete dir="${doc.dir}"/>
+</target>
+
+</project>
+
