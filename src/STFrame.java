@@ -3,7 +3,7 @@ import javax.swing.JFrame;
 
 /**
  * The primary JFrame of the game. Contains various panels.
- * @author Eric Peyton,Eric Slep, Eric Morphis, Rikin Marfatia
+ * @author Eric Peyton,Eric Slep, Eric Morphis, Rikin Marfatia, Dhruv Saksena
  *
  */
 public class STFrame extends JFrame {

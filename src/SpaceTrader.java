@@ -3,7 +3,7 @@ import javax.swing.JFrame;
 /**
  * The driver class for the SpaceTrader game. This contains the main method that creates
  * and runs the SpaceTrader game.
- * @author Eric Peyton,Eric Slep, Eric Morphis, Rikin Marfatia
+ * @author Eric Peyton,Eric Slep, Eric Morphis, Rikin Marfatia, Dhruv Saksena
  *
  */
 public class SpaceTrader {
