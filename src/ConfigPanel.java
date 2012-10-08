@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 /**
  * The configuration panels that displays when a new game is created.
- * @author Eric Peyton,Eric Slep, Eric Morphis, Rikin Marfatia
+ * @author Eric Peyton,Eric Slep, Eric Morphis, Rikin Marfatia, Dhruv Saksena
  *
  */
 public class ConfigPanel extends JPanel implements ActionListener,ChangeListener {
