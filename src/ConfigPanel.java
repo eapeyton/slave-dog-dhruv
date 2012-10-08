@@ -29,7 +29,7 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 	 */
 	
 	//player attributes
-	private String playerN;
+	private String playerName;
 	private int pilotSkill,fighterSkill,traderSkill, engineerSkill;
 	private int remainingPoints;
 	
