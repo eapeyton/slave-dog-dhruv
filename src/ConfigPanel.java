@@ -1,20 +1,9 @@
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SpinnerModel;
-import javax.swing.SpinnerNumberModel;
-
-import java.awt.Component;
+import javax.swing.*;
 import javax.swing.Box;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.SystemColor;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -42,22 +31,33 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 		//initial border layout, this will probably stay
 		setLayout(new BorderLayout(0, 0));
 		
+		//initial values for skill points
 		pilotSkill = fighterSkill = traderSkill = engineerSkill = 0;
 		remainingPoints = 16;
 		
-		//placeholder header text in the north area, delete if you want
-		JTextArea txtrConfigureTheGame = new JTextArea();
-		txtrConfigureTheGame.setBackground(SystemColor.control);
-		txtrConfigureTheGame.setText("Configure the game!");
-		//add(txtrConfigureTheGame, BorderLayout.NORTH);
+		//creating north panel that holds both title and player name field
+		JPanel northPanel = new JPanel();
+		northPanel.setLayout(new BorderLayout(0, 0));
+		
+		//creating and adding title
+		JLabel title = new JLabel("Player Configuration");
+		title.setHorizontalAlignment(SwingConstants.CENTER);
+		title.setFont(new Font("Rockwell", Font.BOLD, 30));
+		northPanel.add(title, BorderLayout.CENTER);
+		
+		//adding a little space between the title and top of window
+		northPanel.add(Box.createRigidArea(new Dimension(300, 10)),BorderLayout.NORTH);
 		
 		//Coded by E. Slep
-		nameInput = new JTextField();
 		JPanel namePanel = new JPanel();
+		nameInput = new JTextField();
 		nameInput.setPreferredSize(new Dimension(100, 20));
 		namePanel.add(new JLabel("Name: "));
 		namePanel.add(nameInput);
-		add(namePanel, BorderLayout.NORTH);
+		northPanel.add(namePanel, BorderLayout.SOUTH);
+		
+		//adding north panel to config panel
+		add(northPanel, BorderLayout.NORTH);
 		
 		//Coded by E. Slep
 		JPanel skillsPanel = new JPanel();
@@ -87,9 +87,13 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 		skillsPanel.add(engineerSpinner);
 		add(skillsPanel, BorderLayout.CENTER);
 		
-		//placeholder area in the center area to make the window a reasonable, will be deleted as real components are added
-		Component rigidArea = Box.createRigidArea(new Dimension(300, 100));
-		add(rigidArea, BorderLayout.SOUTH);
+		//a rigid area in the south panel that can be adjusted to control the width of the entire window
+		Component southWidth = Box.createRigidArea(new Dimension(500, 50));
+		add(southWidth, BorderLayout.SOUTH);
+		
+		//adding empty space to both sides of the window that can be adjusted to control the height of the entire window
+		add(Box.createRigidArea(new Dimension(20, 200)),BorderLayout.WEST);
+		add(Box.createRigidArea(new Dimension(20, 200)),BorderLayout.EAST);
 	}
 	
 	public void actionPerformed(ActionEvent e)
