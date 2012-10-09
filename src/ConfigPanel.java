@@ -26,7 +26,7 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 	private JTextField nameInput;
 	private JSpinner pilotSpinner,fighterSpinner,traderSpinner,engineerSpinner;
 	private JLabel remaining;
-	private JComboBox<String> difficulty;
+	private JComboBox difficulty;
 	private JButton pConfigDone=new JButton("Let's Play!");
 	boolean pConfigOption;
 	
@@ -61,7 +61,7 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 		namePanel.add(nameInput);
 		northPanel.add(namePanel, BorderLayout.NORTH);
 		String[] diffs = {"Easy","Medium","Hard"};
-		difficulty = new JComboBox<String>(diffs);
+		difficulty = new JComboBox(diffs);
 		northPanel.add(difficulty, BorderLayout.SOUTH);
 		
 		//adding north panel to config panel
@@ -108,18 +108,18 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 		
 		
 	}
-	//16 points allocated :Dhruv Saksena
+	//16 points allocated :Dhruv Saksena, Rikin Marfatia
 	public void actionPerformed(ActionEvent e)
 	{
 		
 		if(e.getSource()==pConfigDone&&pConfigDone.isEnabled()){
 			Player player= new Player(nameInput.getText(),(Integer)pilotSpinner.getValue(),(Integer)fighterSpinner.getValue(),(Integer)traderSpinner.getValue(),(Integer)engineerSpinner.getValue(),(String)difficulty.getSelectedItem());
-			System.out.println(player.name);
-			System.out.println(player.difficulty);
-			System.out.println(player.pilotp);
-			System.out.println(player.fighterp);
-			System.out.println(player.traderp);
-			System.out.println(player.enggp);
+			System.out.println("Name: " + player.name);
+			System.out.println("Difficulty: " + player.difficulty);
+			System.out.println("Pilot: " + player.pilotp);
+			System.out.println("Fighter: " + player.fighterp);
+			System.out.println("Trader: " + player.traderp);
+			System.out.println("Engineer: " + player.enggp);
 		}
 	}
 	
