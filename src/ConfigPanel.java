@@ -92,6 +92,7 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 		
 		//a rigid area in the south panel that can be adjusted to control the width of the entire window
 		Component southWidth = Box.createRigidArea(new Dimension(500, 50));
+		pConfigDone.setEnabled(false);
 		add(pConfigDone, BorderLayout.SOUTH);
 		
 		//adding empty space to both sides of the window that can be adjusted to control the height of the entire window
@@ -100,10 +101,21 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 		
 		
 	}
-	
+	//16 points allocated :Dhruv Saksena
 	public void actionPerformed(ActionEvent e)
 	{
-		Player player= new Player(playerName,pilotSkill,fighterSkill,traderSkill,engineerSkill);
+		if(remainingPoints==0&&(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner))
+		{
+			pConfigDone.setEnabled(true);
+		}
+		if(remainingPoints!=0&&(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner))
+		{
+			pConfigDone.setEnabled(false);
+		}
+		if(e.getSource()==pConfigDone&&pConfigDone.isEnabled()){
+			Player player= new Player(playerName,pilotSkill,fighterSkill,traderSkill,engineerSkill);
+			//Move to Difficulty Panel here
+		}
 	}
 	
 	/**
@@ -153,14 +165,5 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 		return engineerSkill;
 	}
 	
-	//Button Listener Class
-	private  class ButtonListener  implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			Player player= new Player(playerName,pilotSkill,fighterSkill,traderSkill,engineerSkill);
-			
-		}
-		
-	}
+	
 }
