@@ -19,7 +19,6 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 	 */
 	
 	//player attributes
-	private String playerName;
 	private int pilotSkill,fighterSkill,traderSkill, engineerSkill;
 	private int remainingPoints;
 	
@@ -100,6 +99,7 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 		//a rigid area in the south panel that can be adjusted to control the width of the entire window
 		Component southWidth = Box.createRigidArea(new Dimension(500, 50));
 		pConfigDone.setEnabled(false);
+		pConfigDone.addActionListener(this);
 		add(pConfigDone, BorderLayout.SOUTH);
 		
 		//adding empty space to both sides of the window that can be adjusted to control the height of the entire window
@@ -113,7 +113,7 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 	{
 		
 		if(e.getSource()==pConfigDone&&pConfigDone.isEnabled()){
-			Player player= new Player(playerName,pilotSkill,fighterSkill,traderSkill,engineerSkill,(String)difficulty.getSelectedItem());
+			Player player= new Player(nameInput.getText(),(Integer)pilotSpinner.getValue(),(Integer)fighterSpinner.getValue(),(Integer)traderSpinner.getValue(),(Integer)engineerSpinner.getValue(),(String)difficulty.getSelectedItem());
 			System.out.println(player.name);
 			System.out.println(player.difficulty);
 			System.out.println(player.pilotp);
@@ -191,32 +191,6 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 			pConfigDone.setEnabled(false);
 		}
 	}
-
-	public String getPlayerName()
-	{
-		return playerName;
-	}
-	
-	public int getPilotSkill()
-	{
-		return pilotSkill;
-	}
-	
-	public int getFighterSkill()
-	{
-		return fighterSkill;
-	}
-	
-	public int getTraderSkill()
-	{
-		return traderSkill;
-	}
-	
-	public int getEngineerSkill()
-	{
-		return engineerSkill;
-	}
-	
 	
 	
 }
