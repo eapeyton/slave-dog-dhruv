@@ -26,7 +26,7 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 	private JTextField nameInput;
 	private JSpinner pilotSpinner,fighterSpinner,traderSpinner,engineerSpinner;
 	private JLabel remaining;
-	private JComboBox<String> difficulty;
+	private JComboBox difficulty;
 	private JButton pConfigDone=new JButton("Let's Play!");
 	boolean pConfigOption;
 	
@@ -61,7 +61,7 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 		namePanel.add(nameInput);
 		northPanel.add(namePanel, BorderLayout.NORTH);
 		String[] diffs = {"Easy","Medium","Hard"};
-		difficulty = new JComboBox<String>(diffs);
+		difficulty = new JComboBox(diffs);
 		northPanel.add(difficulty, BorderLayout.SOUTH);
 		
 		//adding north panel to config panel
