@@ -26,6 +26,8 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 	private JTextField nameInput;
 	private JSpinner pilotSpinner,fighterSpinner,traderSpinner,engineerSpinner;
 	private JLabel remaining;
+	private JButton pConfigDone=new JButton("Let's Play!");
+	boolean pConfigOption;
 	
 	public ConfigPanel() {
 		//initial border layout, this will probably stay
@@ -87,17 +89,22 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 		skillsPanel.add(engineerSpinner);
 		add(skillsPanel, BorderLayout.CENTER);
 		
+		
 		//a rigid area in the south panel that can be adjusted to control the width of the entire window
 		Component southWidth = Box.createRigidArea(new Dimension(500, 50));
-		add(southWidth, BorderLayout.SOUTH);
+		pConfigDone.setEnabled(false);
+		add(pConfigDone, BorderLayout.SOUTH);
 		
 		//adding empty space to both sides of the window that can be adjusted to control the height of the entire window
 		add(Box.createRigidArea(new Dimension(20, 200)),BorderLayout.WEST);
 		add(Box.createRigidArea(new Dimension(20, 200)),BorderLayout.EAST);
+		
+		
 	}
-	
+	//16 points allocated :Dhruv Saksena
 	public void actionPerformed(ActionEvent e)
 	{
+		
 		
 	}
 	
@@ -119,6 +126,20 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 			traderSpinner.setModel(new SpinnerNumberModel((Number)traderSpinner.getValue(),(Integer)0,remainingPoints+(Integer)traderSpinner.getValue(),(Number)1));
 			engineerSpinner.setModel(new SpinnerNumberModel((Number)engineerSpinner.getValue(),(Integer)0,remainingPoints+(Integer)engineerSpinner.getValue(),(Number)1));
 			remaining.setText(new Integer(remainingPoints).toString());
+			
+		}
+		
+		if(remainingPoints==0&&(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner))
+		{
+			pConfigDone.setEnabled(true);
+		}
+		if(remainingPoints!=0&&(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner))
+		{
+			pConfigDone.setEnabled(false);
+		}
+		if(e.getSource()==pConfigDone&&pConfigDone.isEnabled()){
+			Player player= new Player(playerName,pilotSkill,fighterSkill,traderSkill,engineerSkill);
+			//Move to Difficulty Panel here
 		}
 	}
 
@@ -146,5 +167,6 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 	{
 		return engineerSkill;
 	}
+	
 	
 }
