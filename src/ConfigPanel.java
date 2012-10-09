@@ -1,18 +1,19 @@
 import javax.swing.*;
-import javax.swing.Box;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * The configuration panels that displays when a new game is created.
  * @author Eric Peyton,Eric Slep, Eric Morphis, Rikin Marfatia, Dhruv Saksena
  *
  */
-public class ConfigPanel extends JPanel implements ActionListener,ChangeListener {
+public class ConfigPanel extends JPanel implements ActionListener,ChangeListener,KeyListener {
 	/**
 	 * Creates the configuration panel with its components.
 	 */
@@ -26,6 +27,7 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 	private JTextField nameInput;
 	private JSpinner pilotSpinner,fighterSpinner,traderSpinner,engineerSpinner;
 	private JLabel remaining;
+	private JComboBox<String> difficulty;
 	private JButton pConfigDone=new JButton("Let's Play!");
 	boolean pConfigOption;
 	
@@ -54,9 +56,14 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 		JPanel namePanel = new JPanel();
 		nameInput = new JTextField();
 		nameInput.setPreferredSize(new Dimension(100, 20));
+		nameInput.addActionListener(this);
+		nameInput.addKeyListener(this);
 		namePanel.add(new JLabel("Name: "));
 		namePanel.add(nameInput);
-		northPanel.add(namePanel, BorderLayout.SOUTH);
+		northPanel.add(namePanel, BorderLayout.NORTH);
+		String[] diffs = {"Easy","Medium","Hard"};
+		difficulty = new JComboBox<String>(diffs);
+		northPanel.add(difficulty, BorderLayout.SOUTH);
 		
 		//adding north panel to config panel
 		add(northPanel, BorderLayout.NORTH);
@@ -105,7 +112,15 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 	public void actionPerformed(ActionEvent e)
 	{
 		
-		
+		if(e.getSource()==pConfigDone&&pConfigDone.isEnabled()){
+			Player player= new Player(playerName,pilotSkill,fighterSkill,traderSkill,engineerSkill,(String)difficulty.getSelectedItem());
+			System.out.println(player.name);
+			System.out.println(player.difficulty);
+			System.out.println(player.pilotp);
+			System.out.println(player.fighterp);
+			System.out.println(player.traderp);
+			System.out.println(player.enggp);
+		}
 	}
 	
 	/**
@@ -129,7 +144,7 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 			
 		}
 		
-		if(remainingPoints==0&&(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner))
+		if(remainingPoints==0&&!nameInput.getText().isEmpty()&&(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner))
 		{
 			pConfigDone.setEnabled(true);
 		}
@@ -137,9 +152,43 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 		{
 			pConfigDone.setEnabled(false);
 		}
-		if(e.getSource()==pConfigDone&&pConfigDone.isEnabled()){
-			Player player= new Player(playerName,pilotSkill,fighterSkill,traderSkill,engineerSkill);
-			//Move to Difficulty Panel here
+		
+	}
+	
+	
+	public void keyPressed(KeyEvent e)
+	{
+		if(e.getSource()==nameInput&&!nameInput.getText().isEmpty()&&remainingPoints==0)
+		{
+			pConfigDone.setEnabled(true);
+		}
+		if(e.getSource()==nameInput&&nameInput.getText().isEmpty())
+		{
+			pConfigDone.setEnabled(false);
+		}
+	}
+	
+	public void keyReleased(KeyEvent e)
+	{
+		if(e.getSource()==nameInput&&!nameInput.getText().isEmpty()&&remainingPoints==0)
+		{
+			pConfigDone.setEnabled(true);
+		}
+		if(e.getSource()==nameInput&&nameInput.getText().isEmpty())
+		{
+			pConfigDone.setEnabled(false);
+		}
+	}
+	
+	public void keyTyped(KeyEvent e)
+	{
+		if(e.getSource()==nameInput&&!nameInput.getText().isEmpty()&&remainingPoints==0)
+		{
+			pConfigDone.setEnabled(true);
+		}
+		if(e.getSource()==nameInput&&nameInput.getText().isEmpty())
+		{
+			pConfigDone.setEnabled(false);
 		}
 	}
 
@@ -167,6 +216,7 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 	{
 		return engineerSkill;
 	}
+	
 	
 	
 }
