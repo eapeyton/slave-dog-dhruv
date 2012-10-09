@@ -104,18 +104,8 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 	//16 points allocated :Dhruv Saksena
 	public void actionPerformed(ActionEvent e)
 	{
-		if(remainingPoints==0&&(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner))
-		{
-			pConfigDone.setEnabled(true);
-		}
-		if(remainingPoints!=0&&(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner))
-		{
-			pConfigDone.setEnabled(false);
-		}
-		if(e.getSource()==pConfigDone&&pConfigDone.isEnabled()){
-			Player player= new Player(playerName,pilotSkill,fighterSkill,traderSkill,engineerSkill);
-			//Move to Difficulty Panel here
-		}
+		
+		
 	}
 	
 	/**
@@ -137,6 +127,19 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 			engineerSpinner.setModel(new SpinnerNumberModel((Number)engineerSpinner.getValue(),(Integer)0,remainingPoints+(Integer)engineerSpinner.getValue(),(Number)1));
 			remaining.setText(new Integer(remainingPoints).toString());
 			
+		}
+		
+		if(remainingPoints==0&&(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner))
+		{
+			pConfigDone.setEnabled(true);
+		}
+		if(remainingPoints!=0&&(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner))
+		{
+			pConfigDone.setEnabled(false);
+		}
+		if(e.getSource()==pConfigDone&&pConfigDone.isEnabled()){
+			Player player= new Player(playerName,pilotSkill,fighterSkill,traderSkill,engineerSkill);
+			//Move to Difficulty Panel here
 		}
 	}
 
