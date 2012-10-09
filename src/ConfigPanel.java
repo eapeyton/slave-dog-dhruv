@@ -88,11 +88,11 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 		skillsPanel.add(new JLabel("Engineer: "));
 		skillsPanel.add(engineerSpinner);
 		add(skillsPanel, BorderLayout.CENTER);
-		add(pConfigDone);
+		
 		
 		//a rigid area in the south panel that can be adjusted to control the width of the entire window
 		Component southWidth = Box.createRigidArea(new Dimension(500, 50));
-		add(southWidth, BorderLayout.SOUTH);
+		add(pConfigDone, BorderLayout.SOUTH);
 		
 		//adding empty space to both sides of the window that can be adjusted to control the height of the entire window
 		add(Box.createRigidArea(new Dimension(20, 200)),BorderLayout.WEST);
@@ -103,7 +103,7 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 	
 	public void actionPerformed(ActionEvent e)
 	{
-		
+		Player player= new Player(playerName,pilotSkill,fighterSkill,traderSkill,engineerSkill);
 	}
 	
 	/**
@@ -124,8 +124,6 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 			traderSpinner.setModel(new SpinnerNumberModel((Number)traderSpinner.getValue(),(Integer)0,remainingPoints+(Integer)traderSpinner.getValue(),(Number)1));
 			engineerSpinner.setModel(new SpinnerNumberModel((Number)engineerSpinner.getValue(),(Integer)0,remainingPoints+(Integer)engineerSpinner.getValue(),(Number)1));
 			remaining.setText(new Integer(remainingPoints).toString());
-			
-			//adding and removing button:Dhruv
 			
 		}
 	}
