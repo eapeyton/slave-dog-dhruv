@@ -10,9 +10,9 @@ public class StarSystem {
 	final int screenWidth=150;
 	final int screenHeight=100;
 	
-	public StarSystem(int resources) {
+	public StarSystem(String name) {
 		super();
-		this.resources = resources;
+		this.name=name;
 		xMap=(int) (Math.random()*screenWidth);
 		yMap=(int) (Math.random()*screenHeight);
 		techLevel=(int) (Math.random()*8);
