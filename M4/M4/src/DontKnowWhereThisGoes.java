@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 /**
@@ -141,6 +142,14 @@ public class DontKnowWhereThisGoes {
 		}
 		//TODO Add check so that Star Systems dont get generated on top of each other
 		return universe;
+	}
+	
+	public void drawUniverse(ArrayList<StarSystem> universe,Graphics g){
+		
+		int p=2;//Planet Circle Size
+		for(int i=0;i<universe.size();i++){
+			g.drawOval(universe.get(i).xMap,universe.get(i).yMap,universe.get(i).xMap+p,universe.get(i).xMap+p);
+		}
 	}
 	
 }
