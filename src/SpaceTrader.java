@@ -14,8 +14,11 @@ public class SpaceTrader {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+		//Config
 		STFrame frame = new STFrame("Space Trader Revamped");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.add(new GalacticMap()); //To generate the galactic map in the new frame but config panel doesnt run then
 		frame.pack();
 		frame.setVisible(true);
 		
