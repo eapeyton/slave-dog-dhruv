@@ -12,6 +12,7 @@ public class Player {
 	int fighterp;
 	int traderp;
 	int enggp;
+	int location;//TODO How to figure out initial location
 	
 	public Player(String name, int pilotp, int fighterp, int traderp, int enggp, String difficulty) {
 		super();
@@ -23,6 +24,9 @@ public class Player {
 		this.difficulty = difficulty;
 	}
 	
+	public void relocate(){
+		//TODO this method if player wants to warp to something
+	}
 	
 	
 }
