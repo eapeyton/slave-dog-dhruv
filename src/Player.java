@@ -24,6 +24,13 @@ public class Player {
 		this.difficulty = difficulty;
 	}
 	
+	/**
+	 * Rewrote the toString method to return the player's attributes.
+	 */
+	public String toString() {
+		return "Player... \nName: " + name + "\nDifficulty: " + difficulty + "\nSkills...\nPilot: " + pilotp + "\nFighter: " + fighterp + "\nTrader: " + traderp + "\nEngineer: " + enggp;
+	}
+	
 	public void relocate(){
 		//TODO this method if player wants to warp to something
 	}

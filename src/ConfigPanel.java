@@ -13,7 +13,7 @@ import java.awt.event.KeyListener;
  * @author Eric Peyton,Eric Slep, Eric Morphis, Rikin Marfatia, Dhruv Saksena
  *
  */
-public class ConfigPanel extends JPanel implements ActionListener,ChangeListener,KeyListener {
+public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 	/**
 	 * Creates the configuration panel with its components.
 	 */
@@ -27,10 +27,13 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 	private JSpinner pilotSpinner,fighterSpinner,traderSpinner,engineerSpinner;
 	private JLabel remaining;
 	private JComboBox difficulty;
-	private JButton pConfigDone=new JButton("Let's Play!");
+	private JButton pConfigDone;
 	boolean pConfigOption;
 	
-	public ConfigPanel() {
+	//player class to be created
+	private Player player;
+	
+	public ConfigPanel(ActionListener listener) {
 		//initial border layout, this will probably stay
 		setLayout(new BorderLayout(0, 0));
 		
@@ -55,7 +58,7 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 		JPanel namePanel = new JPanel();
 		nameInput = new JTextField();
 		nameInput.setPreferredSize(new Dimension(100, 20));
-		nameInput.addActionListener(this);
+		//nameInput.addActionListener(this);
 		nameInput.addKeyListener(this);
 		namePanel.add(new JLabel("Name: "));
 		namePanel.add(nameInput);
@@ -98,8 +101,10 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 		
 		//a rigid area in the south panel that can be adjusted to control the width of the entire window
 		Component southWidth = Box.createRigidArea(new Dimension(500, 50));
+		pConfigDone= new JButton("Let's Play!");
 		pConfigDone.setEnabled(false);
-		pConfigDone.addActionListener(this);
+		//adding STPanel as action listener
+		pConfigDone.addActionListener(listener);
 		add(pConfigDone, BorderLayout.SOUTH);
 		
 		//adding empty space to both sides of the window that can be adjusted to control the height of the entire window
@@ -108,19 +113,17 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 		
 		
 	}
-	//16 points allocated :Dhruv Saksena, Rikin Marfatia
-	public void actionPerformed(ActionEvent e)
-	{
-		
-		if(e.getSource()==pConfigDone&&pConfigDone.isEnabled()){
-			Player player= new Player(nameInput.getText(),(Integer)pilotSpinner.getValue(),(Integer)fighterSpinner.getValue(),(Integer)traderSpinner.getValue(),(Integer)engineerSpinner.getValue(),(String)difficulty.getSelectedItem());
-			System.out.println("Name: " + player.name);
-			System.out.println("Difficulty: " + player.difficulty);
-			System.out.println("Pilot: " + player.pilotp);
-			System.out.println("Fighter: " + player.fighterp);
-			System.out.println("Trader: " + player.traderp);
-			System.out.println("Engineer: " + player.enggp);
-		}
+	
+
+	/**
+	 * When activated, this method creates the player from the input fields. The STPanel
+	 * activates this method so that only one listener is listening to the pConfigDone button
+	 * instead of two.
+	 * @return the created player
+	 */
+	public Player createPlayer() {
+		player= new Player(nameInput.getText(),(Integer)pilotSpinner.getValue(),(Integer)fighterSpinner.getValue(),(Integer)traderSpinner.getValue(),(Integer)engineerSpinner.getValue(),(String)difficulty.getSelectedItem());
+		return player;
 	}
 	
 	/**
@@ -141,7 +144,7 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 			traderSpinner.setModel(new SpinnerNumberModel((Number)traderSpinner.getValue(),(Integer)0,remainingPoints+(Integer)traderSpinner.getValue(),(Number)1));
 			engineerSpinner.setModel(new SpinnerNumberModel((Number)engineerSpinner.getValue(),(Integer)0,remainingPoints+(Integer)engineerSpinner.getValue(),(Number)1));
 			remaining.setText(new Integer(remainingPoints).toString());
-			
+		
 		}
 		
 		if(remainingPoints==0&&!nameInput.getText().isEmpty()&&(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner))
@@ -190,6 +193,16 @@ public class ConfigPanel extends JPanel implements ActionListener,ChangeListener
 		{
 			pConfigDone.setEnabled(false);
 		}
+	}
+	
+	public Player getPlayer() {
+		return player;
+	}
+	public JButton getpConfigDone() {
+		return pConfigDone;
+	}
+	public void setpConfigDone(JButton pConfigDone) {
+		this.pConfigDone = pConfigDone;
 	}
 	
 	
