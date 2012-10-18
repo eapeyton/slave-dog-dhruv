@@ -12,14 +12,17 @@ import java.awt.event.ActionListener;
  */
 public class STPanel extends JPanel implements ActionListener {
 	
-	CardLayout layout;
+	private CardLayout layout;
 	
-	ConfigPanel config;
-	GalacticChart chart;
-	Player player;
+	private ConfigPanel config;
+	private GalacticChart chart;
+	private TitlePanel title;
+	
+	private Player player;
 	
 	final static String CONFIGPANEL = "Player Configuration Panel";
 	final static String CHARTPANEL = "Galactic Chart Panel";
+	final static String TITLEPANEL = "Title Panel";
 	
 	/**
 	 * Creates a STPanel with a card layout and initializes all the JPanels.
@@ -30,11 +33,13 @@ public class STPanel extends JPanel implements ActionListener {
 		
 		config = new ConfigPanel(this);
 		chart = new GalacticChart();
+		title = new TitlePanel(this);
 		
 		add(config, CONFIGPANEL);
 		add(chart, CHARTPANEL);
+		add(title, TITLEPANEL);
 		
-		layout.show(this,CONFIGPANEL);
+		layout.show(this,TITLEPANEL);
 		
 	}
 	
@@ -49,6 +54,13 @@ public class STPanel extends JPanel implements ActionListener {
 		if (e.getSource() == config.getpConfigDone()) {
 			player = config.createPlayer();
 			System.out.println(player);
+		}
+		/**
+		 * If the source is the New Game button on the title screen, move on the to the
+		 * configuration panel.
+		 */
+		if (e.getSource() == title.getBtnNewGame()) {
+			layout.show(this,CONFIGPANEL);
 		}
 	}
 }
