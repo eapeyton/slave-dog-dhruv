@@ -9,14 +9,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- * The configuration panels that displays when a new game is created.
+ * The configuration panel that displays when a new game is created.
  * @author Eric Peyton,Eric Slep, Eric Morphis, Rikin Marfatia, Dhruv Saksena
  *
  */
 public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
-	/**
-	 * Creates the configuration panel with its components.
-	 */
+	
 	
 	//player attributes
 	private int pilotSkill,fighterSkill,traderSkill, engineerSkill;
@@ -33,15 +31,26 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 	//player class to be created
 	private Player player;
 	
+	/**
+	 * Creates the configuration panel with its components and passes an action listener.
+	 * @param listener an action listener
+	 */
 	public ConfigPanel(ActionListener listener) {
-		//initial border layout, this will probably stay
+		/**
+		 * Set the layout to a border layout.
+		 */
 		setLayout(new BorderLayout(0, 0));
 		
-		//initial values for skill points
+		/**
+		 * Initialize the skills of the player to 0.
+		 */
 		pilotSkill = fighterSkill = traderSkill = engineerSkill = 0;
 		remainingPoints = 16;
 		
-		//creating north panel that holds both title and player name field
+		/**
+		 * Create the north panel to hold both title and player name field.
+		 */
+		//creating north panel
 		JPanel northPanel = new JPanel();
 		northPanel.setLayout(new BorderLayout(0, 0));
 		
@@ -70,10 +79,15 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 		//adding north panel to config panel
 		add(northPanel, BorderLayout.NORTH);
 		
+		/**
+		 * Create skills panel that holds the spinner to select skill points and 
+		 * that sits in the CENTER section of the layout.
+		 */
 		//Coded by E. Slep
 		JPanel skillsPanel = new JPanel();
 		skillsPanel.setLayout(new GridLayout(5,2));
 		skillsPanel.setPreferredSize(new Dimension(200,100));
+		
 		//set up Spinners and JLabel to show remaining skill points
 		pilotSpinner = new JSpinner(new SpinnerNumberModel());
 		fighterSpinner = new JSpinner();
@@ -98,7 +112,9 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 		skillsPanel.add(engineerSpinner);
 		add(skillsPanel, BorderLayout.CENTER);
 		
-		
+		/**
+		 * Create GUI struts to control the width and height of the window.
+		 */
 		//a rigid area in the south panel that can be adjusted to control the width of the entire window
 		Component southWidth = Box.createRigidArea(new Dimension(500, 50));
 		pConfigDone= new JButton("Let's Play!");

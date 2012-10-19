@@ -25,4 +25,20 @@ public class StarSystem {
 		xMap=(int) (Math.random()*screenWidth);
 		yMap=(int) (Math.random()*screenHeight);
 	}
+	
+	/**
+	 * Rewrite toString method to display name and attributes.
+	 */
+	public String toString() {
+		
+		String str = "";
+		str += "\nPlanet......." + name;
+		str += "\nLocation....." + xMap + "," + yMap;
+		str += "\nTech Level..." + techLevel;
+		str += "\nResources...." + resources;
+		str += "\nGovernment..." + govt;
+		str += "\n=======================";
+		
+		return str;
+	}
 }
