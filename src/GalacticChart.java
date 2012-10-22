@@ -3,13 +3,23 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
-
+/**
+ * Creates and draws a universe
+ * @author Dhruv Saksena
+ */
 public class GalacticChart extends JPanel{
-
+	
+	/**
+	 * Empty constructor
+	 */
 	public GalacticChart(){
 		
 	}
 	
+	/**
+	 * Generates and returns a universe with star systems named according to a pre-allocated library of names
+	 * @return Newly generated universe
+	 */
 	public ArrayList<StarSystem> generateUniverse(){
 		
 		
@@ -146,6 +156,11 @@ public class GalacticChart extends JPanel{
 		return universe;
 	}
 	
+	/**
+	 * Draws universe using the designated graphics object
+	 * @param universe The universe to be drawn
+	 * @param g The graphics object to draw the universe
+	 */
 	public void drawUniverse(ArrayList<StarSystem> universe,Graphics g){
 		
 		int p=5;//Planet Circle Size
@@ -155,8 +170,11 @@ public class GalacticChart extends JPanel{
 		}
 	}
 	
+	/**
+	 * Draws a newly generated universe using the designated graphics object
+	 * @param g The graphics object to draw the universe
+	 */
 	public void paintComponent(Graphics g){
 		drawUniverse(generateUniverse(),g);
 	}
-	
 }
