@@ -4,7 +4,7 @@ import java.util.HashSet;
 /**
  * Holds information about a star system. Used by Galactic chart to add star systems 
  * to the universe.
- * @author Dhruv Saksena, Eric Morphis
+ * @author Dhruv Saksena, Eric Morphis, Rikin Marfatia
  *
  */
 public class StarSystem {
@@ -45,6 +45,25 @@ public class StarSystem {
 		yMap=(int) (Math.random()*screenHeight);
 		location = new Point(xMap, yMap);
 	}
+	
+	/**
+	 * Getter for the name of the StarSystem
+	 * @return
+	 */
+	public String getName()
+	{
+		return name;
+	}
+	
+	/**
+	 * Getter for the tech level of the StarSystem
+	 * @return
+	 */
+	public int getTechLevel()
+	{
+		return techLevel;
+	}
+	
 	
 	/**
 	 * @return The star system's name and attributes as a string

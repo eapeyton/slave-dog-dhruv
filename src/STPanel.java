@@ -74,7 +74,7 @@ public class STPanel extends JPanel implements ActionListener {
 			player = config.createPlayer();
 			
 			//create game panel and show
-			game = new GamePanel(this);
+			game = new GamePanel(this, player);
 			add(game, GAMEPANEL);
 			layout.show(this,GAMEPANEL);
 			

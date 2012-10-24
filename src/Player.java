@@ -8,11 +8,14 @@ public class Player {
 
 	String name;
 	String difficulty;
+	Ship ship;
+	int money;
 	int pilotp;
 	int fighterp;
 	int traderp;
 	int enggp;
-	int location;//TODO How to figure out initial location
+	int bays;
+	StarSystem location;//TODO How to figure out initial location
 	
 	public Player(String name, int pilotp, int fighterp, int traderp, int enggp, String difficulty) {
 		super();
@@ -22,6 +25,23 @@ public class Player {
 		this.traderp = traderp;
 		this.enggp = enggp;
 		this.difficulty = difficulty;
+		money = 1000;
+		ship = new Ship();
+	}
+	
+	public void setLocation(StarSystem system)
+	{
+		location = system;
+	}
+	
+	public StarSystem getLocation()
+	{
+		return location;
+	}
+	
+	public Ship getShip()
+	{
+		return ship;
 	}
 	
 	/**

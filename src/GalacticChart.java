@@ -12,7 +12,10 @@ public class GalacticChart extends JPanel{
 	/**
 	 * Empty constructor
 	 */
-	public GalacticChart(){
+	public GalacticChart()
+	{
+		
+		
 		
 	}
 	
@@ -153,6 +156,7 @@ public class GalacticChart extends JPanel{
 			universe.add(new StarSystem(SolarSystemName[i]));
 		}
 		//TODO Add check so that Star Systems dont get generated on top of each other
+		
 		return universe;
 	}
 	
