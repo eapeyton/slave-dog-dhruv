@@ -7,7 +7,8 @@ import java.awt.event.ActionListener;
  * The STPanel class is the single JPanel that always sits inside the STFrame class. This class
  * uses a card layout to display the correct screen (represented by JPanels) as the user interacts 
  * with the game.
- * @author Eric Peyton
+ * @author Eric Peyton, Rikin Marfatia
+ * @version M7
  *
  */
 public class STPanel extends JPanel implements ActionListener {
@@ -20,6 +21,7 @@ public class STPanel extends JPanel implements ActionListener {
 	private ConfigPanel config;
 	private GalacticChart chart;
 	private TitlePanel title;
+	private CargoPanel cargo;
 	
 	//store the player of the game
 	private Player player;
@@ -29,6 +31,7 @@ public class STPanel extends JPanel implements ActionListener {
 	final static String CONFIGPANEL = "Player Configuration Panel";
 	final static String CHARTPANEL = "Galactic Chart Panel";
 	final static String TITLEPANEL = "Title Panel";
+	final static String CARGOPANEL = "Cargo Panel";
 	
 	/**
 	 * Creates a STPanel with a card layout and initializes all the JPanels.
@@ -45,6 +48,7 @@ public class STPanel extends JPanel implements ActionListener {
 		 * Create the various panels or "screens' and pass in STPanel as an Action Listener.
 		 */
 		game = null;
+		cargo = null;
 		config = new ConfigPanel(this);
 		chart = new GalacticChart();
 		title = new TitlePanel(this);
@@ -68,6 +72,9 @@ public class STPanel extends JPanel implements ActionListener {
 		 * If the source of the action is the Let's Play button in the configuration panel, then tell
 		 * the configuration to panel to create a player and assign it to player. Then, create
 		 * a game screen and show it.
+		 * 
+		 * If the source of the action is the Marketplace button on the Game Screen, create a new cargo
+		 * display screen and show it.
 		 */
 		if (e.getSource() == config.getpConfigDone()) {
 			//create player
@@ -81,6 +88,18 @@ public class STPanel extends JPanel implements ActionListener {
 			//for testing purposes
 			System.out.println(player);
 		}
+		
+		if(game != null)
+		{	
+			if(e.getSource() == game.getMarketButton())
+			{
+				cargo = new CargoPanel(player);
+				add(cargo, CARGOPANEL);
+				layout.show(this, CARGOPANEL);
+			}
+		}
+		
+		
 		/**
 		 * If the source is the New Game button on the title screen, move on the to the
 		 * configuration panel.

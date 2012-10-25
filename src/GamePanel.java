@@ -20,6 +20,7 @@ public class GamePanel extends JPanel
 	Player player;
 	StarSystem location;
 	JLabel planet;
+	JButton market;
 	
 	/**
 	 * Creates a new GamePanel taking in an ActionListener as a parameter.
@@ -45,6 +46,8 @@ public class GamePanel extends JPanel
 		
 		planet = new JLabel("Current Location: " + player.getLocation().getName()
 						+ "\n    Tech Level: " + player.getLocation().getTechLevel());
+		market = new JButton("Marketplace");
+		market.addActionListener(listener);
 		
 		/**
 		 * TEST:
@@ -52,14 +55,35 @@ public class GamePanel extends JPanel
 		 */
 		add(new JLabel("Game Screen"),BorderLayout.CENTER);
 		add(planet, BorderLayout.SOUTH);
+		add(market, BorderLayout.NORTH);
 	}
 	
-	
+	/**
+	 * Gets the current location as given from the player
+	 * @return the current location
+	 */
 	public StarSystem getCurrentLocation()
 	{
 		return player.getLocation();
 	}
 	
+	/**
+	 * Gets the "market" button, essentially seeing if it was pressed.
+	 * @return
+	 */
+	public JButton getMarketButton()
+	{
+		return market;
+	}
+	
+	public void setMarketButton(JButton market)
+	{
+		this.market = market;
+	}
+	
+	/**
+	 *  Updates the current location on the Game Screen.
+	 */
 	public void update()
 	{
 		planet.setText("Current Location: " + player.getLocation().getName()
