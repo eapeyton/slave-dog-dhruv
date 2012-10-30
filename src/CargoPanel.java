@@ -2,10 +2,10 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
+//import com.jgoodies.forms.layout.FormLayout;
+//import com.jgoodies.forms.layout.ColumnSpec;
+//import com.jgoodies.forms.layout.RowSpec;
+//import com.jgoodies.forms.factories.FormFactory;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,6 +44,7 @@ public class CargoPanel extends JPanel implements ActionListener{
 	private JLabel cBays;
 	private JButton buyBtn;
 	private JButton sellBtn;
+	private JButton backBtn;
 	private int waCost, fCost, dCost, mCost, weCost, rCost;
 	private Player player;
 	private StarSystem curr;
@@ -51,7 +52,7 @@ public class CargoPanel extends JPanel implements ActionListener{
 	/**
 	 * Create the panel, using WindowBuilder. Sets the default values.
 	 */
-	public CargoPanel(Player player) {
+	public CargoPanel(ActionListener listener, Player player) {
 		
 		this.player = player;
 		curr = player.getLocation();
@@ -162,6 +163,9 @@ public class CargoPanel extends JPanel implements ActionListener{
 		
 		sellBtn = new JButton("Sell");
 		sellBtn.addActionListener(this);
+		
+		backBtn = new JButton("Back");
+		backBtn.addActionListener(listener);
 		
 		JLabel lblMoney = new JLabel("Money: ");
 		
@@ -276,7 +280,10 @@ public class CargoPanel extends JPanel implements ActionListener{
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(buyBtn, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(sellBtn, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(sellBtn, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(backBtn, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+							))
 					.addGap(17))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(14)
@@ -361,7 +368,8 @@ public class CargoPanel extends JPanel implements ActionListener{
 						.addComponent(lblQuantity)
 						.addComponent(qField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(buyBtn)
-						.addComponent(sellBtn))
+						.addComponent(sellBtn)
+						.addComponent(backBtn))
 					.addGap(22))
 		);
 		setLayout(groupLayout);
@@ -379,6 +387,10 @@ public class CargoPanel extends JPanel implements ActionListener{
 		int quant;
 		int bays;
 		int totalCost;
+		
+		if(e.getSource() == backBtn) {
+			
+		}
 		
 		if(e.getSource() == buyBtn)
 		{
@@ -664,5 +676,9 @@ public class CargoPanel extends JPanel implements ActionListener{
 		cMoney.setText("" + player.getMoney());
 		
 		cBays.setText("" + player.getBays());
+	}
+	
+	public JButton getBackButton() {
+		return backBtn;
 	}
 }

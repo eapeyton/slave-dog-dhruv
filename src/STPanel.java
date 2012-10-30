@@ -93,10 +93,13 @@ public class STPanel extends JPanel implements ActionListener {
 		{	
 			if(e.getSource() == game.getMarketButton())
 			{
-				cargo = new CargoPanel(player);
+				cargo = new CargoPanel(this, player);
 				add(cargo, CARGOPANEL);
 				layout.show(this, CARGOPANEL);
 			}
+		}
+		if (cargo != null && e.getSource() == cargo.getBackButton()) {
+			layout.show(this, GAMEPANEL);
 		}
 		
 		
