@@ -21,7 +21,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 	private JLabel plyrWater, plyrFood, plyrDrugs, plyrMeds, plyrWeps, plyrRobots; 
 	private JLabel plWater, plFood, plDrugs, plMeds, plWeps, plRobots, cMoney, cBays;
 	private JSpinner[] spinners;
-	private JButton buyBtn,sellBtn;
+	private JButton buyBtn,sellBtn,backBtn;
 	private int waterCost, foodCost, drugCost, medCost, weaponCost, robotCost;
 	private Player player;
 	private StarSystem curr;
@@ -29,7 +29,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 	/**
 	 * Create the panel, using WindowBuilder. Sets the default values.
 	 */
-	public CargoPanel(Player player) {
+	public CargoPanel(Player player,ActionListener listener) {
 		
 		this.player = player;
 		curr = player.getLocation();
@@ -199,6 +199,9 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 		southPanel.add(sellBtn);
 		
 		//create and add back button
+		backBtn = new JButton("Back");
+		backBtn.addActionListener(listener);
+		southPanel.add(backBtn);
 		
 		//add southPanel to main panel
 		add(southPanel,BorderLayout.SOUTH);
@@ -518,5 +521,13 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 		cMoney.setText("" + player.getMoney());
 		
 		cBays.setText("" + player.getBays());
+	}
+
+	public JButton getBackBtn() {
+		return backBtn;
+	}
+
+	public void setBackBtn(JButton backBtn) {
+		this.backBtn = backBtn;
 	}
 }

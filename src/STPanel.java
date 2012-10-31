@@ -72,9 +72,6 @@ public class STPanel extends JPanel implements ActionListener {
 		 * If the source of the action is the Let's Play button in the configuration panel, then tell
 		 * the configuration to panel to create a player and assign it to player. Then, create
 		 * a game screen and show it.
-		 * 
-		 * If the source of the action is the Marketplace button on the Game Screen, create a new cargo
-		 * display screen and show it.
 		 */
 		if (e.getSource() == config.getpConfigDone()) {
 			//create player
@@ -88,15 +85,25 @@ public class STPanel extends JPanel implements ActionListener {
 			//for testing purposes
 			System.out.println(player);
 		}
-		
 		if(game != null)
-		{	
+		{
+			/**
+			 * If the source of the action is the Marketplace button on the Game Screen, create a new cargo
+			 * display screen and show it.
+			*/
 			if(e.getSource() == game.getMarketButton())
 			{
-				cargo = new CargoPanel(player);
+				cargo = new CargoPanel(player,this);
 				add(cargo, CARGOPANEL);
 				layout.show(this, CARGOPANEL);
 			}
+		}
+		/**
+		 * If the cargo panel is created and source of the action is the back button 
+		 * in the marketplace, then show the game screen again.
+		 */
+		if(cargo!=null&&e.getSource() == cargo.getBackBtn()) {
+			layout.show(this, GAMEPANEL);
 		}
 		
 		
