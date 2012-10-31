@@ -1,21 +1,8 @@
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
+import javax.swing.*;
+import java.awt.GridLayout;
 
 
 /**
@@ -28,8 +15,9 @@ import javax.swing.JButton;
 public class CargoPanel extends JPanel implements ActionListener{
 	private JTextField itemField;
 	private JTextField qField;
-	private JLabel pWater;
-	private JLabel pFood;
+	private JLabel plyrWater, plyrFood, plyrDrugs, plyrMeds, plyrWeps, plyrRobots; 
+	private JLabel plWater, plFood, plDrugs, plMeds, plWeps, plRobots, cMoney, cBays;
+	/**
 	private JLabel pDrugs;
 	private JLabel pMeds;
 	private JLabel pWeps;
@@ -42,16 +30,104 @@ public class CargoPanel extends JPanel implements ActionListener{
 	private JLabel plRobots;
 	private JLabel cMoney;
 	private JLabel cBays;
+	*/
 	private JButton buyBtn;
 	private JButton sellBtn;
 	private int waCost, fCost, dCost, mCost, weCost, rCost;
 	private Player player;
 	private StarSystem curr;
+	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JLabel label_4;
 
 	/**
 	 * Create the panel, using WindowBuilder. Sets the default values.
 	 */
 	public CargoPanel(Player player) {
+		
+		/**
+		 * Set layout to a border layout.
+		 */
+		setLayout(new BorderLayout(0,0));
+		
+		/**
+		 * NORTH Section:
+		 * 	a new JPanel that contains:
+		 * 		money label, money count, bays label, bays count
+		 */
+		
+		//create components
+		JLabel lblMoney = new JLabel("Money: ");
+		cMoney = new JLabel("" + player.getMoney());
+		JLabel lblBays = new JLabel("Bays: ");
+		cBays = new JLabel("" + player.getBays());
+		
+		//add components to northPanel
+		JPanel northPanel = new JPanel();
+		northPanel.add(lblMoney);
+		northPanel.add(cMoney);
+		northPanel.add(lblBays);
+		northPanel.add(cBays);
+		
+		//add north panel to main panel
+		add(northPanel,BorderLayout.NORTH);
+		
+		/**
+		 * CENTER Section:
+		 * 	a new JPanel that contains information about the planet's supplies
+		 */
+		
+		/**
+		 * WEST Section:
+		 * 	a new JPanel that contains information about the player's supplies
+		 */
+		
+		//create components
+		plyrWater = new JLabel("" + player.getCargo("water"));
+		plyrFood = new JLabel("" + player.getCargo("food"));
+		plyrDrugs = new JLabel("" + player.getCargo("drugs"));
+		plyrMeds = new JLabel("" + player.getCargo("medicine"));
+		plyrWeps = new JLabel("" + player.getCargo("weapons"));
+		plyrRobots = new JLabel("" + player.getCargo("robots"));
+		
+		//add components to westPanel
+		JPanel westPanel = new JPanel();
+		westPanel.setLayout(new GridLayout(4, 10, 0, 0));
+		westPanel.add(plyrWater);
+		
+		label = new JLabel("");
+		westPanel.add(label);
+		
+		label_1 = new JLabel("");
+		westPanel.add(label_1);
+		
+		label_2 = new JLabel("");
+		westPanel.add(label_2);
+		
+		label_3 = new JLabel("");
+		westPanel.add(label_3);
+		
+		label_4 = new JLabel("");
+		westPanel.add(label_4);
+		westPanel.add(plyrFood);
+		westPanel.add(plyrDrugs);
+		westPanel.add(plyrMeds);
+		westPanel.add(plyrWeps);
+		westPanel.add(plyrRobots);
+
+		//add west panel to main panel
+		add(westPanel,BorderLayout.WEST);
+		
+		
+		/**
+		 * EAST section:
+		 */
+		
+		
+		
+		
 		
 		this.player = player;
 		curr = player.getLocation();
@@ -80,17 +156,7 @@ public class CargoPanel extends JPanel implements ActionListener{
 		
 		JLabel lblRobots = new JLabel("Robots: ");
 		
-		pWater = new JLabel("" + player.getCargo("water"));
 		
-		pFood = new JLabel("" + player.getCargo("food"));
-		
-		pDrugs = new JLabel("" + player.getCargo("drugs"));
-		
-		pMeds = new JLabel("" + player.getCargo("medicine"));
-		
-		pWeps = new JLabel("" + player.getCargo("weapons"));
-		
-		pRobots = new JLabel("" + player.getCargo("robots"));
 		
 		JLabel sellPrice = new JLabel("Price:");
 		
@@ -163,14 +229,12 @@ public class CargoPanel extends JPanel implements ActionListener{
 		sellBtn = new JButton("Sell");
 		sellBtn.addActionListener(this);
 		
-		JLabel lblMoney = new JLabel("Money: ");
 		
-		cMoney = new JLabel("" + player.getMoney());
 		
-		JLabel lblBays = new JLabel("Bays: ");
 		
-		cBays = new JLabel("" + player.getBays());
 		
+		
+		/**
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -365,6 +429,7 @@ public class CargoPanel extends JPanel implements ActionListener{
 					.addGap(22))
 		);
 		setLayout(groupLayout);
+		*/
 
 	}
 
@@ -637,17 +702,17 @@ public class CargoPanel extends JPanel implements ActionListener{
 	public void updateValues()
 	{
 
-		pWater.setText("" + player.getCargo("water"));
+		plyrWater.setText("" + player.getCargo("water"));
 		
-		pFood.setText("" + player.getCargo("food"));
+		plyrFood.setText("" + player.getCargo("food"));
 		
-		pDrugs.setText("" + player.getCargo("drugs"));
+		plyrDrugs.setText("" + player.getCargo("drugs"));
 		
-		pMeds.setText("" + player.getCargo("medicine"));
+		plyrMeds.setText("" + player.getCargo("medicine"));
 		
-		pWeps.setText("" + player.getCargo("weapons"));
+		plyrWeps.setText("" + player.getCargo("weapons"));
 		
-		pRobots.setText("" + player.getCargo("robots"));
+		plyrRobots.setText("" + player.getCargo("robots"));
 		
 		plWater.setText("" + curr.getCargo("water"));
 		
