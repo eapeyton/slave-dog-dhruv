@@ -15,6 +15,7 @@ public class Player {
 	int traderp;
 	int enggp;
 	int bays;
+	int fuel;
 	int water, food, drugs, medicine, weapons, robots;
 	StarSystem location;//TODO How to figure out initial location
 	
@@ -38,6 +39,7 @@ public class Player {
 		money = 1000;
 		ship = new Ship();
 		//bays = ship.getBays();
+		fuel = 100;
 		bays = 12;
 		water = 0;
 		food = 0;

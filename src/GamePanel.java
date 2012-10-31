@@ -21,6 +21,8 @@ public class GamePanel extends JPanel
 	StarSystem location;
 	JLabel planet;
 	JButton market;
+	GalacticChart chart;
+	ArrayList<StarSystem> universe;
 	
 	/**
 	 * Creates a new GamePanel taking in an ActionListener as a parameter.
@@ -32,13 +34,9 @@ public class GamePanel extends JPanel
 		 */
 		setLayout(new BorderLayout(0,0));
 		
-		/**
-		 * TEST:
-		 * Generate and print out the universe for demoing purposes
-		 */
-		GalacticChart chart = new GalacticChart();
-		ArrayList<StarSystem> universe = chart.generateUniverse();
-		System.out.println(universe);
+		chart = new GalacticChart();
+		universe = chart.generateUniverse();
+		chart.setPlayer(player);
 		
 		this.player = player;
 		Random rand = new Random();
@@ -48,12 +46,8 @@ public class GamePanel extends JPanel
 						+ "\n    Tech Level: " + player.getLocation().getTechLevel());
 		market = new JButton("Marketplace");
 		market.addActionListener(listener);
-		
-		/**
-		 * TEST:
-		 * Add a label to the CENTER section to see if the panel is working...
-		 */
-		add(new JLabel("Game Screen"),BorderLayout.CENTER);
+
+		add(chart, BorderLayout.CENTER);
 		add(planet, BorderLayout.SOUTH);
 		add(market, BorderLayout.NORTH);
 	}
@@ -88,5 +82,9 @@ public class GamePanel extends JPanel
 	{
 		planet.setText("Current Location: " + player.getLocation().getName()
 						+ "\n    Tech Level: " + player.getLocation().getTechLevel());
+	}
+	
+	public void drawUniverse() {
+		chart.paintComponent(chart.getGraphics());
 	}
 }

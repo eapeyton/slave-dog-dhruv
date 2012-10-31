@@ -17,8 +17,8 @@ public class StarSystem {
 	int resources;
 	int govt;
 	static HashSet<Point> usedLocations = new HashSet<Point>();
-	final int screenWidth=150;
-	final int screenHeight=100;
+	final int screenWidth=450;
+	final int screenHeight=250;
 	int water = 0;
 	int food = 0;
 	int drugs = 0;

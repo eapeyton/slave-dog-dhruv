@@ -9,13 +9,11 @@ import javax.swing.JPanel;
  */
 public class GalacticChart extends JPanel{
 	
-	/**
-	 * Empty constructor
-	 */
+	private ArrayList<StarSystem> universe;
+	private Player player;
+	
 	public GalacticChart()
 	{
-		
-		
 		
 	}
 	
@@ -157,7 +155,16 @@ public class GalacticChart extends JPanel{
 		}
 		//TODO Add check so that Star Systems dont get generated on top of each other
 		
+		this.universe = universe;
+		
 		return universe;
+	}
+	
+	/**
+	 * @param The player currently existing within this galactic chart's universe
+	 */
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 	
 	/**
@@ -165,13 +172,16 @@ public class GalacticChart extends JPanel{
 	 * @param universe The universe to be drawn
 	 * @param g The graphics object to draw the universe
 	 */
-	public void drawUniverse(ArrayList<StarSystem> universe,Graphics g){
+	public void drawUniverse(ArrayList<StarSystem> universe, Player player, Graphics g){
 		
-		int p=5;//Planet Circle Size
+		int p=8;//Planet Circle Size
+		g.setColor(Color.GREEN);
 		for(int i=0;i<universe.size();i++){
-			g.setColor(Color.GREEN);
-			g.fillOval(universe.get(i).xMap,universe.get(i).yMap,p,p);
+			g.fillOval(universe.get(i).xMap - p/2,universe.get(i).yMap - p/2,p,p);
 		}
+		g.setColor(Color.BLUE);
+		g.fillOval(player.location.xMap - p/2, player.location.yMap - p/2, p, p);
+		g.drawOval(player.location.xMap - player.fuel/2, player.location.yMap - player.fuel/2, player.fuel, player.fuel);
 	}
 	
 	/**
@@ -179,6 +189,6 @@ public class GalacticChart extends JPanel{
 	 * @param g The graphics object to draw the universe
 	 */
 	public void paintComponent(Graphics g){
-		drawUniverse(generateUniverse(),g);
+		drawUniverse(universe, player, g);
 	}
 }
