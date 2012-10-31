@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
  * The STPanel class is the single JPanel that always sits inside the STFrame class. This class
  * uses a card layout to display the correct screen (represented by JPanels) as the user interacts 
  * with the game.
- * @author Eric Peyton, Rikin Marfatia
+ * @author Eric Peyton, Rikin Marfatia, Eric Morphis
  * @version M7
  *
  */
@@ -29,7 +29,6 @@ public class STPanel extends JPanel implements ActionListener {
 	//store the strings to reference screens in the card layout
 	final static String GAMEPANEL = "Main Game Panel";
 	final static String CONFIGPANEL = "Player Configuration Panel";
-	final static String CHARTPANEL = "Galactic Chart Panel";
 	final static String TITLEPANEL = "Title Panel";
 	final static String CARGOPANEL = "Cargo Panel";
 	
@@ -50,14 +49,12 @@ public class STPanel extends JPanel implements ActionListener {
 		game = null;
 		cargo = null;
 		config = new ConfigPanel(this);
-		chart = new GalacticChart();
 		title = new TitlePanel(this);
 		
 		/**
 		 * Add the panels to the card layout along with static string variables to reference them. Show the title panel.
 		 */
 		add(config, CONFIGPANEL);
-		add(chart, CHARTPANEL);
 		add(title, TITLEPANEL);
 		
 		layout.show(this,TITLEPANEL);
@@ -84,20 +81,32 @@ public class STPanel extends JPanel implements ActionListener {
 			game = new GamePanel(this, player);
 			add(game, GAMEPANEL);
 			layout.show(this,GAMEPANEL);
-			
-			//for testing purposes
-			System.out.println(player);
 		}
+		
 		
 		if(game != null)
 		{	
+			/**
+			 * If the source is the market button on the game screen, go to the market panel
+			 */
 			if(e.getSource() == game.getMarketButton())
 			{
 				cargo = new CargoPanel(this, player);
 				add(cargo, CARGOPANEL);
 				layout.show(this, CARGOPANEL);
 			}
+			
+			/**
+			 * If the source is the go button, update location information
+			 */
+			if (e.getSource() == game.getGoButton()) {
+				game.update();
+			}
 		}
+		
+		/**
+		 * If the source is the back button on the cargo screen, go back to the game panel
+		 */
 		if (cargo != null && e.getSource() == cargo.getBackButton()) {
 			layout.show(this, GAMEPANEL);
 		}
@@ -110,5 +119,6 @@ public class STPanel extends JPanel implements ActionListener {
 		if (e.getSource() == title.getBtnNewGame()) {
 			layout.show(this,CONFIGPANEL);
 		}
+		
 	}
 }

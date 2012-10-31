@@ -19,7 +19,7 @@ public class StarSystem {
 	int govt;
 	static HashMap<Point, StarSystem> usedLocations = new HashMap<Point, StarSystem>();
 	final int screenWidth=450;
-	final int screenHeight=250;
+	final int screenHeight=200;
 	int water = 0;
 	int food = 0;
 	int drugs = 0;
@@ -193,6 +193,12 @@ public class StarSystem {
 		}
 	}
 	
+	/**
+	 * Determines which points on the map point to valid planet destinations
+	 * @param mapPlanetSize The size of the planets on the map
+	 * @param range The distance the player is capable of flying
+	 * @return A hashmap mapping points on the map to star systems
+	 */
 	public HashMap<Point, StarSystem> getClickMap(int mapPlanetSize, int range) {
 		HashMap<Point, StarSystem> clickMap = new HashMap<Point, StarSystem>();
 		for (StarSystem ss : usedLocations.values()) {
@@ -207,6 +213,9 @@ public class StarSystem {
 		return clickMap;
 	}
 	
+	/**
+	 * @return the distance between this star system an another
+	 */
 	public int distanceToStarSystem(StarSystem ss) {
 		return (int)Math.sqrt((ss.xMap-xMap)*(ss.xMap-xMap)+(ss.yMap-yMap)*(ss.yMap-yMap));
 	}

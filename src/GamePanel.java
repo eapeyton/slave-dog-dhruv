@@ -1,4 +1,4 @@
-import java.awt.BorderLayout;
+import javax.swing.BoxLayout;
 import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import javax.swing.JButton;
 /**
  * The main screen of the game. This is where the user will spend much of their time.
  * The GamePanel first appears after a player is created in the configuration screen.
- * @author Eric Peyton, Rikin Marfatia
+ * @author Eric Peyton, Rikin Marfatia, Eric Morphis
  *
  */
 public class GamePanel extends JPanel 
@@ -20,7 +20,9 @@ public class GamePanel extends JPanel
 	Player player;
 	StarSystem location;
 	JLabel planet;
+	JLabel destination;
 	JButton market;
+	JButton go;
 	GalacticChart chart;
 	ArrayList<StarSystem> universe;
 	
@@ -32,9 +34,13 @@ public class GamePanel extends JPanel
 		/**
 		 * Set the layout to border layout.
 		 */
-		setLayout(new BorderLayout(0,0));
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		chart = new GalacticChart();
+		destination = new JLabel("Destination:");
+		go = new JButton("Go!");
+		go.setEnabled(false);
+		
+		chart = new GalacticChart(destination, go);
 		universe = chart.generateUniverse();
 		chart.setPlayer(player);
 		
@@ -46,10 +52,27 @@ public class GamePanel extends JPanel
 						+ "\n    Tech Level: " + player.getLocation().getTechLevel());
 		market = new JButton("Marketplace");
 		market.addActionListener(listener);
-
-		add(chart, BorderLayout.CENTER);
-		add(planet, BorderLayout.SOUTH);
-		add(market, BorderLayout.NORTH);
+		go.addActionListener(listener);
+		
+		add(market);
+		add(chart);
+		add(planet);
+		add(destination);
+		add(go);
+	}
+	
+	/**
+	 * updates fields when location changes
+	 */
+	public void update() {
+		StarSystem oldLocation = getPlayer().getLocation();
+		StarSystem newLocation = getChart().getSelected();
+		getPlayer().setLocation(newLocation);
+		getPlayer().setFuel(-oldLocation.distanceToStarSystem(newLocation));
+		getChart().setSelected(null);
+		getChart().repaint();
+		planet.setText("Current Location: " + player.getLocation().getName()
+				+ "\n    Tech Level: " + player.getLocation().getTechLevel());
 	}
 	
 	/**
@@ -70,21 +93,25 @@ public class GamePanel extends JPanel
 		return market;
 	}
 	
-	public void setMarketButton(JButton market)
+	/**
+	 * @return The go button
+	 */
+	public JButton getGoButton()
 	{
-		this.market = market;
+		return go;
 	}
 	
 	/**
-	 *  Updates the current location on the Game Screen.
+	 * @return The player
 	 */
-	public void update()
-	{
-		planet.setText("Current Location: " + player.getLocation().getName()
-						+ "\n    Tech Level: " + player.getLocation().getTechLevel());
+	public Player getPlayer() {
+		return player;
 	}
 	
-	public void drawUniverse() {
-		chart.paintComponent(chart.getGraphics());
+	/**
+	 * @return The chart
+	 */
+	public GalacticChart getChart() {
+		return chart;
 	}
 }

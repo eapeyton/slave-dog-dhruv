@@ -15,8 +15,7 @@ public class Player {
 	int traderp;
 	int enggp;
 	int bays;
-	int fuel;
-	int water, food, drugs, medicine, weapons, robots;
+	int water, food, drugs, medicine, weapons, robots, fuel;
 	StarSystem location;//TODO How to figure out initial location
 	
 	/**
@@ -92,6 +91,13 @@ public class Player {
 	}
 	
 	/**
+	 * @return Amount of fuel the player currently has
+	 */
+	public int getFuel() {
+		return fuel;
+	}
+	
+	/**
 	 * Method is used when trading, subtracts/adds the change of quantity
 	 * of an item to that type of item held by the player depending on if 
 	 * it is bought or sold. 
@@ -138,6 +144,15 @@ public class Player {
 			bays -= change;
 		}
 	
+	}
+	
+	/**
+	 * Method is used when travelling, subtracts the amount of fuel that is used to go from
+	 * planet to planet
+	 * @param fuelLoss The amount of fuel to be subtracted
+	 */
+	public void setFuel(int fuelChange) {
+		fuel += fuelChange;
 	}
 	
 	/**

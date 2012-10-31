@@ -5,20 +5,25 @@ import javax.swing.JPanel;
 import java.awt.event.*;
 import java.awt.Point;
 import java.util.HashMap;
+import javax.swing.*;
 
 /**
  * Creates and draws a universe
- * @author Dhruv Saksena
+ * @author Dhruv Saksena, Eric Morphis
  */
 public class GalacticChart extends JPanel{
 	
 	private ArrayList<StarSystem> universe;
 	private Player player;
 	private StarSystem selected;
+	private JLabel destination;
+	private JButton go;
+	private Adapter adapter;
 	
-	public GalacticChart()
+	public GalacticChart(JLabel destination, JButton go)
 	{
-		
+		this.destination = destination;
+		this.go = go;
 	}
 	
 	/**
@@ -185,12 +190,20 @@ public class GalacticChart extends JPanel{
 		}
 		g.setColor(Color.BLUE);
 		g.fillRect(player.location.xMap - p/2, player.location.yMap - p/2, p, p);
-		g.drawOval(player.location.xMap - player.fuel, player.location.yMap - player.fuel, 2*player.fuel, 2*player.fuel);
+		g.drawOval(player.location.xMap - player.getFuel(), player.location.yMap - player.getFuel(), 2*player.getFuel(), 2*player.getFuel());
 		if (selected != null) {
 			g.setColor(Color.RED);
 			g.fillRect(selected.xMap - p/2, selected.yMap - p/2, p, p);
+			destination.setText("Destination: " + selected.name);
+			go.setEnabled(true);
 		}
-		addMouseListener(new Adapter(p));
+		else {
+			destination.setText("Destination:");
+			go.setEnabled(false);
+		}
+		removeMouseListener(adapter);
+		adapter = new Adapter(p);
+		addMouseListener(adapter);
 	}
 	
 	/**
@@ -201,26 +214,48 @@ public class GalacticChart extends JPanel{
 		drawUniverse(universe, player, g);
 	}
 	
+	/**
+	 * @return The currently selected star system
+	 */
+	public StarSystem getSelected() {
+		return selected;
+	}
+	
+	/**
+	 * param selected The currently selected star system
+	 */
+	public void setSelected(StarSystem selected) {
+		this.selected = selected;
+	}
+	
+	/**
+	 * 
+	 * @author Eric Morphis
+	 * Attached to a galactic chart to update the selected planet based on where the user clicks
+	 */
 	private class Adapter extends MouseAdapter {
 		int mapPlanetSize;
 		HashMap<Point, StarSystem> clickMap;
 		Graphics g;
 		
+		/**
+		 * Constructor gets a map of valid click locations
+		 * @param mapPlanetSize The size of the planets on the map
+		 */
 		public Adapter(int mapPlanetSize) {
 			this.mapPlanetSize = mapPlanetSize;
-			clickMap = player.location.getClickMap(mapPlanetSize, player.fuel);
+			clickMap = player.location.getClickMap(mapPlanetSize, player.getFuel());
 			g = getGraphics();
 		}
 		
+		/**
+		 * Determines whether or not a valid selection was made, and if so, selects new planet
+		 * @param The mouse event causing this method to be called
+		 */
 		public void mouseReleased(MouseEvent me) {
 			if (clickMap.containsKey(me.getPoint())) {
-				if (selected != null && selected != clickMap.get(me.getPoint())) {
-					g.setColor(Color.GREEN);
-					g.fillRect(selected.xMap - mapPlanetSize/2, selected.yMap - mapPlanetSize/2, mapPlanetSize, mapPlanetSize);
-				}
 				selected = clickMap.get(me.getPoint());
-				g.setColor(Color.RED);
-				g.fillRect(selected.xMap - mapPlanetSize/2, selected.yMap - mapPlanetSize/2, mapPlanetSize, mapPlanetSize);
+				paintComponent(getGraphics());
 			}
 		}
 	}
