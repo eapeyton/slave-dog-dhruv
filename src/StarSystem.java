@@ -1,5 +1,6 @@
 import java.awt.Point;
 import java.util.HashSet;
+import java.util.HashMap;
 
 /**
  * Holds information about a star system. Used by Galactic chart to add star systems 
@@ -16,7 +17,7 @@ public class StarSystem {
 	int techLevel;
 	int resources;
 	int govt;
-	static HashSet<Point> usedLocations = new HashSet<Point>();
+	static HashMap<Point, StarSystem> usedLocations = new HashMap<Point, StarSystem>();
 	final int screenWidth=450;
 	final int screenHeight=250;
 	int water = 0;
@@ -35,10 +36,10 @@ public class StarSystem {
 	public StarSystem(String name) {
 		super();
 		this.name=name;
-		while (location == null || usedLocations.contains(location)) {
+		while (location == null || usedLocations.containsKey(location)) {
 			setLocation();
 		}
-		usedLocations.add(location);
+		usedLocations.put(location, this);
 		techLevel=(int) (Math.random()*8);
 		resources=(int) ((Math.random()*13)*(Math.floor(Math.random()*2)));
 		govt=(int) (Math.random()*18);
@@ -190,6 +191,24 @@ public class StarSystem {
 		{
 			robots += change;
 		}
+	}
+	
+	public HashMap<Point, StarSystem> getClickMap(int mapPlanetSize, int range) {
+		HashMap<Point, StarSystem> clickMap = new HashMap<Point, StarSystem>();
+		for (StarSystem ss : usedLocations.values()) {
+			if (ss != this && distanceToStarSystem(ss) <= range) {
+				for (int i = -mapPlanetSize/2; i <= mapPlanetSize/2; i++) {
+					for (int j = -mapPlanetSize/2; j<= mapPlanetSize/2; j++) {
+						clickMap.put(new Point(ss.xMap + i, ss.yMap + j), ss);
+					}
+				}
+			}
+		}
+		return clickMap;
+	}
+	
+	public int distanceToStarSystem(StarSystem ss) {
+		return (int)Math.sqrt((ss.xMap-xMap)*(ss.xMap-xMap)+(ss.yMap-yMap)*(ss.yMap-yMap));
 	}
 	
 	

@@ -2,6 +2,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import java.awt.event.*;
+import java.awt.Point;
+import java.util.HashMap;
 
 /**
  * Creates and draws a universe
@@ -11,6 +14,7 @@ public class GalacticChart extends JPanel{
 	
 	private ArrayList<StarSystem> universe;
 	private Player player;
+	private StarSystem selected;
 	
 	public GalacticChart()
 	{
@@ -177,11 +181,16 @@ public class GalacticChart extends JPanel{
 		int p=8;//Planet Circle Size
 		g.setColor(Color.GREEN);
 		for(int i=0;i<universe.size();i++){
-			g.fillOval(universe.get(i).xMap - p/2,universe.get(i).yMap - p/2,p,p);
+			g.fillRect(universe.get(i).xMap - p/2,universe.get(i).yMap - p/2,p,p);
 		}
 		g.setColor(Color.BLUE);
-		g.fillOval(player.location.xMap - p/2, player.location.yMap - p/2, p, p);
-		g.drawOval(player.location.xMap - player.fuel/2, player.location.yMap - player.fuel/2, player.fuel, player.fuel);
+		g.fillRect(player.location.xMap - p/2, player.location.yMap - p/2, p, p);
+		g.drawOval(player.location.xMap - player.fuel, player.location.yMap - player.fuel, 2*player.fuel, 2*player.fuel);
+		if (selected != null) {
+			g.setColor(Color.RED);
+			g.fillRect(selected.xMap - p/2, selected.yMap - p/2, p, p);
+		}
+		addMouseListener(new Adapter(p));
 	}
 	
 	/**
@@ -190,5 +199,29 @@ public class GalacticChart extends JPanel{
 	 */
 	public void paintComponent(Graphics g){
 		drawUniverse(universe, player, g);
+	}
+	
+	private class Adapter extends MouseAdapter {
+		int mapPlanetSize;
+		HashMap<Point, StarSystem> clickMap;
+		Graphics g;
+		
+		public Adapter(int mapPlanetSize) {
+			this.mapPlanetSize = mapPlanetSize;
+			clickMap = player.location.getClickMap(mapPlanetSize, player.fuel);
+			g = getGraphics();
+		}
+		
+		public void mouseReleased(MouseEvent me) {
+			if (clickMap.containsKey(me.getPoint())) {
+				if (selected != null && selected != clickMap.get(me.getPoint())) {
+					g.setColor(Color.GREEN);
+					g.fillRect(selected.xMap - mapPlanetSize/2, selected.yMap - mapPlanetSize/2, mapPlanetSize, mapPlanetSize);
+				}
+				selected = clickMap.get(me.getPoint());
+				g.setColor(Color.RED);
+				g.fillRect(selected.xMap - mapPlanetSize/2, selected.yMap - mapPlanetSize/2, mapPlanetSize, mapPlanetSize);
+			}
+		}
 	}
 }

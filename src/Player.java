@@ -39,7 +39,7 @@ public class Player {
 		money = 1000;
 		ship = new Ship();
 		//bays = ship.getBays();
-		fuel = 100;
+		fuel = 50;
 		bays = 12;
 		water = 0;
 		food = 0;
