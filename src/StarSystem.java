@@ -19,13 +19,8 @@ public class StarSystem {
 	static HashSet<Point> usedLocations = new HashSet<Point>();
 	final int screenWidth=150;
 	final int screenHeight=100;
-	int water = 0;
-	int food = 0;
-	int drugs = 0;
-	int medicine = 0;
-	int weapons = 0;
-	int robots = 0;
-	int[] cargoItems = new int[6];
+	int water,food,drugs,medicine,weapons,robots = 0;
+	int[] cargo;
 	// more cargo can be added
 	
 	/**
@@ -38,10 +33,16 @@ public class StarSystem {
 		while (location == null || usedLocations.contains(location)) {
 			setLocation();
 		}
+		/**
+		 * Initialize tech, resources, government, and empty cargo.
+		 */
 		usedLocations.add(location);
 		techLevel=(int) (Math.random()*8);
 		resources=(int) ((Math.random()*13)*(Math.floor(Math.random()*2)));
 		govt=(int) (Math.random()*18);
+		cargo = new int[7]; //0 excluded, six supply items
+		
+		//generate the cargo
 		generateCargo();
 		
 	}
@@ -78,34 +79,40 @@ public class StarSystem {
 	 */
 	public void generateCargo()
 	{
+		//water
 		if(techLevel >= 0)
 		{
-			water = (int)(Math.random() * 31);
+			cargo[1] = (int)(Math.random() * 31);
 		}
 		
+		//food
 		if(techLevel >= 1)
 		{
-			food = (int)(Math.random() * 31);
+			cargo[2] = (int)(Math.random() * 31);
 		}
 		
+		//drugs
 		if(techLevel >= 3)
 		{
-			drugs = (int)(Math.random() * 26);
+			cargo[3]  = (int)(Math.random() * 26);
 		}
 		
+		//medicine
 		if(techLevel >= 4)
 		{
-			medicine = (int)(Math.random() * 21);
+			cargo[4] = (int)(Math.random() * 21);
 		}
 		
+		//weapons
 		if(techLevel >= 4)
 		{
-			weapons = (int)(Math.random() * 16);
+			cargo[5] = (int)(Math.random() * 16);
 		}
 		
+		//robots
 		if(techLevel >= 6)
 		{
-			robots = (int)(Math.random() * 11);
+			cargo[6] = (int)(Math.random() * 11);
 		}
 	}
 	
@@ -113,42 +120,12 @@ public class StarSystem {
 	 * Returns the amount of a certain type of Cargo that is held
 	 * by the StarSystem.
 	 * 
-	 * @param type The type of Cargo
+	 * @param cargoIndex The type of supply
 	 * @return the amount of that type of cargo
 	 */
-	public int getCargo(String type)
+	public int getCargo(int cargoIndex)
 	{
-		if(type.equalsIgnoreCase("water"))
-		{
-			return water;
-		}
-		
-		else if(type.equalsIgnoreCase("food"))
-		{
-			return food;
-		}
-		
-		else if(type.equalsIgnoreCase("drugs"))
-		{
-			return drugs;
-		}
-		
-		else if(type.equalsIgnoreCase("medicine"))
-		{
-			return medicine;
-		}
-		
-		else if(type.equalsIgnoreCase("weapons"))
-		{
-			return weapons;
-		}
-		
-		else if(type.equalsIgnoreCase("robots"))
-		{
-			return robots;
-		}
-		
-		return 0;
+		return cargo[cargoIndex];
 	}
 	
 	/**
@@ -156,40 +133,12 @@ public class StarSystem {
 	 * of an item to that type of item held by the StarSystem depending on if 
 	 * it is bought or sold. 
 	 * 
-	 * @param type The type of item
+	 * @param cargoIndex The type of supply to change
 	 * @param change The amount being bought/sold
 	 */
-	public void setCargo(String type, int change)
+	public void setCargo(int cargoIndex, int change)
 	{
-		if(type.equalsIgnoreCase("water"))
-		{
-			water += change;
-		}
-		
-		else if(type.equalsIgnoreCase("food"))
-		{
-			food += change;
-		}
-		
-		else if(type.equalsIgnoreCase("drugs"))
-		{
-			drugs += change;
-		}
-		
-		else if(type.equalsIgnoreCase("medicine"))
-		{
-			medicine += change;
-		}
-		
-		else if(type.equalsIgnoreCase("weapons"))
-		{
-			weapons += change;
-		}
-		
-		else if(type.equalsIgnoreCase("robots"))
-		{
-			robots += change;
-		}
+		cargo[cargoIndex] += change;
 	}
 	
 	
