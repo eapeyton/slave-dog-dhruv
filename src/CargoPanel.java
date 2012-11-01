@@ -66,94 +66,136 @@ public class CargoPanel extends JPanel implements ActionListener{
 		
 		
 		JLabel lblPlayer = new JLabel("Player:");
+		lblPlayer.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblPlanet = new JLabel("Planet:");
+		lblPlanet.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblWater = new JLabel("Water: ");
+		lblWater.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblFood = new JLabel("Food: ");
+		lblFood.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblDrugs = new JLabel("Drugs: ");
+		lblDrugs.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblMedicine = new JLabel("Medicine: ");
+		lblMedicine.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblWeapons = new JLabel("Weapons:");
+		lblWeapons.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblRobots = new JLabel("Robots: ");
+		lblRobots.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		pWater = new JLabel("" + player.getCargo("water"));
+		pWater.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		pFood = new JLabel("" + player.getCargo("food"));
+		pFood.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		pDrugs = new JLabel("" + player.getCargo("drugs"));
+		pDrugs.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		pMeds = new JLabel("" + player.getCargo("medicine"));
+		pMeds.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		pWeps = new JLabel("" + player.getCargo("weapons"));
+		pWeps.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		pRobots = new JLabel("" + player.getCargo("robots"));
+		pRobots.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel sellPrice = new JLabel("Price:");
+		sellPrice.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel buyPrice = new JLabel("Price:");
+		buyPrice.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel waPriceSell = new JLabel("" + (waCost / 2));
+		waPriceSell.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel fPriceSell = new JLabel("" + (fCost / 2));
 		fPriceSell.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel dPriceSell = new JLabel("" + (dCost / 2));
+		dPriceSell.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel mPriceSell = new JLabel("" + (mCost / 2));
+		mPriceSell.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel wePriceSell = new JLabel("" + (weCost / 2));
+		wePriceSell.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel rPriceSell = new JLabel("" + (rCost / 2));
+		rPriceSell.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		plWater = new JLabel("" + curr.getCargo("water"));
+		plWater.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		plFood = new JLabel("" + curr.getCargo("food"));
+		plFood.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		plDrugs = new JLabel("" + curr.getCargo("drugs"));
+		plDrugs.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		plMeds = new JLabel("" + curr.getCargo("medicine"));
+		plMeds.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		plWeps = new JLabel("" + curr.getCargo("weapons"));
+		plWeps.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		plRobots = new JLabel("" + curr.getCargo("robots"));
+		plRobots.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel waPriceBuy = new JLabel("" + waCost);
+		waPriceBuy.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel fPriceBuy = new JLabel("" + fCost);
+		fPriceBuy.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel dPriceBuy = new JLabel("" + dCost);
+		dPriceBuy.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel mPriceBuy = new JLabel("" + mCost);
+		mPriceBuy.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel wePriceBuy = new JLabel("" + weCost);
+		wePriceBuy.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel rPriceBuy = new JLabel("" + rCost);
+		rPriceBuy.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel itemNumber = new JLabel("Item #:");
+		itemNumber.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel waItem = new JLabel("0");
+		waItem.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel fItem = new JLabel("1");
+		fItem.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel dItem = new JLabel("2");
+		dItem.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel mItem = new JLabel("3");
+		mItem.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel weItem = new JLabel("4");
+		weItem.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel rItem = new JLabel("5");
+		rItem.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel itemSelect = new JLabel("Item (0-5)");
+		itemSelect.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		itemField = new JTextField();
 		itemField.setColumns(10);
 		
 		JLabel lblQuantity = new JLabel("Quantity: ");
+		lblQuantity.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		qField = new JTextField();
 		qField.setColumns(10);
@@ -168,12 +210,16 @@ public class CargoPanel extends JPanel implements ActionListener{
 		backBtn.addActionListener(listener);
 		
 		JLabel lblMoney = new JLabel("Money: ");
+		lblMoney.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		cMoney = new JLabel("" + player.getMoney());
+		cMoney.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblBays = new JLabel("Bays: ");
+		lblBays.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		cBays = new JLabel("" + player.getBays());
+		cBays.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -181,31 +227,25 @@ public class CargoPanel extends JPanel implements ActionListener{
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblWeapons)
-							.addGap(18)
-							.addComponent(pWeps))
-						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(18)
 									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 										.addComponent(lblRobots)
+										.addComponent(lblWeapons)
+										.addComponent(lblMedicine)
 										.addComponent(lblDrugs)
 										.addComponent(lblFood)
 										.addComponent(lblWater))
 									.addPreferredGap(ComponentPlacement.UNRELATED)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(pWater, GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+										.addComponent(pWater)
 										.addComponent(pFood)
 										.addComponent(pDrugs)
+										.addComponent(pMeds)
+										.addComponent(pWeps)
 										.addComponent(pRobots))
 									.addGap(17))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(lblMedicine)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(pMeds))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(66)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -250,7 +290,7 @@ public class CargoPanel extends JPanel implements ActionListener{
 											.addGap(129))
 										.addGroup(groupLayout.createSequentialGroup()
 											.addComponent(sellPrice)
-											.addGap(39)
+											.addPreferredGap(ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
 											.addComponent(lblPlanet)
 											.addPreferredGap(ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
 											.addComponent(buyPrice)))))
@@ -306,7 +346,7 @@ public class CargoPanel extends JPanel implements ActionListener{
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblPlayer)
 							.addComponent(lblPlanet)
-							.addComponent(buyPrice, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+							.addComponent(buyPrice)
 							.addComponent(sellPrice))
 						.addComponent(itemNumber))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -324,12 +364,12 @@ public class CargoPanel extends JPanel implements ActionListener{
 								.addComponent(waItem))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(pFood, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+								.addComponent(pFood)
 								.addComponent(fPriceSell)
 								.addComponent(plFood)
 								.addComponent(fPriceBuy)
 								.addComponent(fItem))))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblDrugs)
 						.addComponent(pDrugs)
@@ -345,7 +385,7 @@ public class CargoPanel extends JPanel implements ActionListener{
 						.addComponent(plMeds)
 						.addComponent(mPriceBuy)
 						.addComponent(mItem))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(pWeps)
 						.addComponent(lblWeapons)
@@ -353,7 +393,7 @@ public class CargoPanel extends JPanel implements ActionListener{
 						.addComponent(plWeps)
 						.addComponent(wePriceBuy)
 						.addComponent(weItem))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblRobots)
 						.addComponent(pRobots)
