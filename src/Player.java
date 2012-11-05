@@ -9,13 +9,8 @@ public class Player {
 	String name;
 	String difficulty;
 	Ship ship;
-	int money;
-	int pilotp;
-	int fighterp;
-	int traderp;
-	int enggp;
-	int bays;
-	int water, food, drugs, medicine, weapons, robots, fuel;
+	int money,pilotp,fighterp,traderp,enggp,bays,fuel;
+	int[] cargo;
 	StarSystem location;//TODO How to figure out initial location
 	
 	/**
@@ -40,54 +35,19 @@ public class Player {
 		//bays = ship.getBays();
 		fuel = 50;
 		bays = 12;
-		water = 0;
-		food = 0;
-		drugs = 0;
-		medicine = 0;
-		weapons = 0;
-		robots = 0;
+		cargo = new int[7]; //six types of supplies, 0 excluded
 	}
 	
 	/**
 	 * Returns the amount of a certain type of Cargo that is held
 	 * by the player.
 	 * 
-	 * @param type The type of Cargo
+	 * @param cargoIndex The type of Cargo
 	 * @return the amount of that type of cargo
 	 */
-	public int getCargo(String type)
+	public int getCargo(int cargoIndex)
 	{
-		if(type.equalsIgnoreCase("water"))
-		{
-			return water;
-		}
-		
-		else if(type.equalsIgnoreCase("food"))
-		{
-			return food;
-		}
-		
-		else if(type.equalsIgnoreCase("drugs"))
-		{
-			return drugs;
-		}
-		
-		else if(type.equalsIgnoreCase("medicine"))
-		{
-			return medicine;
-		}
-		
-		else if(type.equalsIgnoreCase("weapons"))
-		{
-			return weapons;
-		}
-		
-		else if(type.equalsIgnoreCase("robots"))
-		{
-			return robots;
-		}
-		
-		return 0;
+		return cargo[cargoIndex];
 	}
 	
 	/**
@@ -102,48 +62,13 @@ public class Player {
 	 * of an item to that type of item held by the player depending on if 
 	 * it is bought or sold. 
 	 * 
-	 * @param type The type of item
+	 * @param cargoIndex The type of item
 	 * @param change The amount being bought/sold
 	 */
-	public void setCargo(String type, int change)
+	public void setCargo(int cargoIndex, int change)
 	{
-		
-		if(type.equalsIgnoreCase("water"))
-		{
-			water += change;
-			bays -= change;
-		}
-		
-		else if(type.equalsIgnoreCase("food"))
-		{
-			food += change;
-			bays -= change;
-		}
-		
-		else if(type.equalsIgnoreCase("drugs"))
-		{
-			drugs += change;
-			bays -= change;
-		}
-		
-		else if(type.equalsIgnoreCase("medicine"))
-		{
-			medicine += change;
-			bays -= change;
-		}
-		
-		else if(type.equalsIgnoreCase("weapons"))
-		{
-			weapons += change;
-			bays -= change;
-		}
-		
-		else if(type.equalsIgnoreCase("robots"))
-		{
-			robots += change;
-			bays -= change;
-		}
-	
+		cargo[cargoIndex] += change;
+		bays -= change;	
 	}
 	
 	/**

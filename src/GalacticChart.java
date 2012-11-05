@@ -186,15 +186,15 @@ public class GalacticChart extends JPanel{
 		int p=8;//Planet Circle Size
 		g.setColor(Color.GREEN);
 		for(int i=0;i<universe.size();i++){
-			g.fillRect(universe.get(i).xMap - p/2,universe.get(i).yMap - p/2,p,p);
+			g.fillRect((int)universe.get(i).getLocation().getX() - p/2,(int)universe.get(i).getLocation().getY() - p/2,p,p);
 		}
 		g.setColor(Color.BLUE);
-		g.fillRect(player.location.xMap - p/2, player.location.yMap - p/2, p, p);
-		g.drawOval(player.location.xMap - player.getFuel(), player.location.yMap - player.getFuel(), 2*player.getFuel(), 2*player.getFuel());
+		g.fillRect((int)player.location.getLocation().getX() - p/2, (int)player.location.getLocation().getY() - p/2, p, p);
+		g.drawOval((int)player.location.getLocation().getX() - player.getFuel(), (int)player.location.getLocation().getY() - player.getFuel(), 2*player.getFuel(), 2*player.getFuel());
 		if (selected != null) {
 			g.setColor(Color.RED);
-			g.fillRect(selected.xMap - p/2, selected.yMap - p/2, p, p);
-			destination.setText("Destination: " + selected.name);
+			g.fillRect((int)selected.getLocation().getX() - p/2, (int)selected.getLocation().getY() - p/2, p, p);
+			destination.setText("Destination: " + selected.getName());
 			go.setEnabled(true);
 		}
 		else {

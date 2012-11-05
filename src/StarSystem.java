@@ -1,5 +1,4 @@
 import java.awt.Point;
-import java.util.HashSet;
 import java.util.HashMap;
 
 /**
@@ -9,24 +8,14 @@ import java.util.HashMap;
  * @version M7
  */
 public class StarSystem {
-
-	String name;
-	int xMap;
-	int yMap;
-	Point location;
-	int techLevel;
-	int resources;
-	int govt;
-	static HashMap<Point, StarSystem> usedLocations = new HashMap<Point, StarSystem>();
-	final int screenWidth=450;
-	final int screenHeight=200;
-	int water = 0;
-	int food = 0;
-	int drugs = 0;
-	int medicine = 0;
-	int weapons = 0;
-	int robots = 0;
-	int[] cargoItems = new int[6];
+	
+	private String name;	//name of the star system
+	private Point location;	//location of star system
+	private int techLevel,resources,govt;	//planet attributes
+	private static HashMap<Point, StarSystem> usedLocations = new HashMap<Point, StarSystem>();
+	private final int screenWidth=450;
+	private final int screenHeight=200;
+	private int[] cargo;
 	// more cargo can be added
 	
 	/**
@@ -37,12 +26,18 @@ public class StarSystem {
 		super();
 		this.name=name;
 		while (location == null || usedLocations.containsKey(location)) {
-			setLocation();
+			setRandLocation();
 		}
+		/**
+		 * Initialize tech, resources, government, and empty cargo.
+		 */
 		usedLocations.put(location, this);
 		techLevel=(int) (Math.random()*8);
 		resources=(int) ((Math.random()*13)*(Math.floor(Math.random()*2)));
 		govt=(int) (Math.random()*18);
+		cargo = new int[7]; //0 excluded, six supply items
+		
+		//generate the cargo
 		generateCargo();
 		
 	}
@@ -50,10 +45,8 @@ public class StarSystem {
 	/**
 	 * Randomly selects a location for the star system
 	 */
-	public void setLocation(){//Incase 2 StarSystems overlap
-		xMap=(int) (Math.random()*screenWidth);
-		yMap=(int) (Math.random()*screenHeight);
-		location = new Point(xMap, yMap);
+	public void setRandLocation(){//Incase 2 StarSystems overlap
+		location = new Point((int) (Math.random()*screenWidth),(int) (Math.random()*screenHeight));
 	}
 	
 	/**
@@ -79,34 +72,40 @@ public class StarSystem {
 	 */
 	public void generateCargo()
 	{
+		//water
 		if(techLevel >= 0)
 		{
-			water = (int)(Math.random() * 31);
+			cargo[1] = (int)(Math.random() * 31);
 		}
 		
+		//food
 		if(techLevel >= 1)
 		{
-			food = (int)(Math.random() * 31);
+			cargo[2] = (int)(Math.random() * 31);
 		}
 		
+		//drugs
 		if(techLevel >= 3)
 		{
-			drugs = (int)(Math.random() * 26);
+			cargo[3]  = (int)(Math.random() * 26);
 		}
 		
+		//medicine
 		if(techLevel >= 4)
 		{
-			medicine = (int)(Math.random() * 21);
+			cargo[4] = (int)(Math.random() * 21);
 		}
 		
+		//weapons
 		if(techLevel >= 4)
 		{
-			weapons = (int)(Math.random() * 16);
+			cargo[5] = (int)(Math.random() * 16);
 		}
 		
+		//robots
 		if(techLevel >= 6)
 		{
-			robots = (int)(Math.random() * 11);
+			cargo[6] = (int)(Math.random() * 11);
 		}
 	}
 	
@@ -114,42 +113,12 @@ public class StarSystem {
 	 * Returns the amount of a certain type of Cargo that is held
 	 * by the StarSystem.
 	 * 
-	 * @param type The type of Cargo
+	 * @param cargoIndex The type of supply
 	 * @return the amount of that type of cargo
 	 */
-	public int getCargo(String type)
+	public int getCargo(int cargoIndex)
 	{
-		if(type.equalsIgnoreCase("water"))
-		{
-			return water;
-		}
-		
-		else if(type.equalsIgnoreCase("food"))
-		{
-			return food;
-		}
-		
-		else if(type.equalsIgnoreCase("drugs"))
-		{
-			return drugs;
-		}
-		
-		else if(type.equalsIgnoreCase("medicine"))
-		{
-			return medicine;
-		}
-		
-		else if(type.equalsIgnoreCase("weapons"))
-		{
-			return weapons;
-		}
-		
-		else if(type.equalsIgnoreCase("robots"))
-		{
-			return robots;
-		}
-		
-		return 0;
+		return cargo[cargoIndex];
 	}
 	
 	/**
@@ -157,40 +126,12 @@ public class StarSystem {
 	 * of an item to that type of item held by the StarSystem depending on if 
 	 * it is bought or sold. 
 	 * 
-	 * @param type The type of item
+	 * @param cargoIndex The type of supply to change
 	 * @param change The amount being bought/sold
 	 */
-	public void setCargo(String type, int change)
+	public void setCargo(int cargoIndex, int change)
 	{
-		if(type.equalsIgnoreCase("water"))
-		{
-			water += change;
-		}
-		
-		else if(type.equalsIgnoreCase("food"))
-		{
-			food += change;
-		}
-		
-		else if(type.equalsIgnoreCase("drugs"))
-		{
-			drugs += change;
-		}
-		
-		else if(type.equalsIgnoreCase("medicine"))
-		{
-			medicine += change;
-		}
-		
-		else if(type.equalsIgnoreCase("weapons"))
-		{
-			weapons += change;
-		}
-		
-		else if(type.equalsIgnoreCase("robots"))
-		{
-			robots += change;
-		}
+		cargo[cargoIndex] += change;
 	}
 	
 	/**
@@ -205,7 +146,7 @@ public class StarSystem {
 			if (ss != this && distanceToStarSystem(ss) <= range) {
 				for (int i = -mapPlanetSize/2; i <= mapPlanetSize/2; i++) {
 					for (int j = -mapPlanetSize/2; j<= mapPlanetSize/2; j++) {
-						clickMap.put(new Point(ss.xMap + i, ss.yMap + j), ss);
+						clickMap.put(new Point((int)ss.getLocation().getX() + i, (int)ss.getLocation().getY() + j), ss);
 					}
 				}
 			}
@@ -214,10 +155,12 @@ public class StarSystem {
 	}
 	
 	/**
-	 * @return the distance between this star system an another
+	 * @return the distance between this star system and another
 	 */
 	public int distanceToStarSystem(StarSystem ss) {
-		return (int)Math.sqrt((ss.xMap-xMap)*(ss.xMap-xMap)+(ss.yMap-yMap)*(ss.yMap-yMap));
+		return (int)Math.sqrt(
+				Math.pow(ss.getLocation().getX()-location.getX(), 2) + Math.pow(ss.getLocation().getY()-location.getY(), 2)
+				);
 	}
 	
 	
@@ -228,12 +171,26 @@ public class StarSystem {
 		
 		String str = "";
 		str += "\nPlanet......." + name;
-		str += "\nLocation....." + xMap + "," + yMap;
+		str += "\nLocation....." + location.getX() + "," + location.getY();
 		str += "\nTech Level..." + techLevel;
 		str += "\nResources...." + resources;
 		str += "\nGovernment..." + govt;
 		str += "\n=======================";
 		
 		return str;
+	}
+
+	/**
+	 * @return the location
+	 */
+	public Point getLocation() {
+		return location;
+	}
+
+	/**
+	 * @param location the location to set
+	 */
+	public void setLocation(Point location) {
+		this.location = location;
 	}
 }
