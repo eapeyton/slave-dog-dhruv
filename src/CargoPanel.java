@@ -263,6 +263,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 						player.setCargo(1, quant);
 						player.setMoney(player.getMoney()-totalCost);
 						curr.setCargo(1, -quant);
+						spinners[1].setValue(0);
 					}
 				}
 				
@@ -286,6 +287,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 						player.setCargo(2, quant);
 						player.setMoney(player.getMoney()-totalCost);
 						curr.setCargo(2, -quant);
+						spinners[2].setValue(0);
 					}
 				}
 					
@@ -307,6 +309,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 						player.setCargo(3, quant);
 						player.setMoney(player.getMoney()-totalCost);
 						curr.setCargo(3, -quant);
+						spinners[3].setValue(0);
 					}
 				}	
 				
@@ -328,6 +331,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 						player.setCargo(4, quant);
 						player.setMoney(player.getMoney()-totalCost);
 						curr.setCargo(4, -quant);
+						spinners[4].setValue(0);
 					}
 				}
 				
@@ -349,6 +353,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 						player.setCargo(5, quant);
 						player.setMoney(player.getMoney()-totalCost);
 						curr.setCargo(5, -quant);
+						spinners[5].setValue(0);
 					}
 				}
 					
@@ -371,6 +376,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 						player.setCargo(6, quant);
 						player.setMoney(player.getMoney()-totalCost);
 						curr.setCargo(6, -quant);
+						spinners[6].setValue(0);
 					}	
 				}
 			}
@@ -404,6 +410,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 				player.setCargo(1, -quant);
 				player.setMoney(player.getMoney()+totalCost);
 				curr.setCargo(1, quant);
+				spinners[1].setValue(0);
 			}
 			
 			//check food spinner
@@ -418,6 +425,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 				player.setCargo(2, -quant);
 				player.setMoney(player.getMoney()+totalCost);
 				curr.setCargo(2, quant);
+				spinners[2].setValue(0);
 			}
 			
 			//check drug spinner
@@ -432,6 +440,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 				player.setCargo(3, -quant);
 				player.setMoney(player.getMoney()+totalCost);
 				curr.setCargo(3, quant);
+				spinners[3].setValue(0);
 			}
 			
 			//check medicine spinner
@@ -446,6 +455,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 				player.setCargo(4, -quant);
 				player.setMoney(player.getMoney()+totalCost);
 				curr.setCargo(4, quant);
+				spinners[4].setValue(0);
 			}
 			
 			//check weapons spinner
@@ -460,6 +470,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 				player.setCargo(5, -quant);
 				player.setMoney(player.getMoney()+totalCost);
 				curr.setCargo(5, quant);
+				spinners[5].setValue(0);
 			}
 			
 			//check robots spinner
@@ -474,6 +485,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 				player.setCargo(6, -quant);
 				player.setMoney(player.getMoney()+totalCost);
 				curr.setCargo(6, quant);
+				spinners[6].setValue(0);
 			}
 			
 			updateValues();
