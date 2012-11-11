@@ -11,7 +11,8 @@ public class Player {
 	Ship ship;
 	int money,pilotp,fighterp,traderp,enggp,bays,fuel;
 	int[] cargo;
-	StarSystem location;//TODO How to figure out initial location
+	int health=100;
+	StarSystem location;
 	
 	/**
 	 * 
@@ -32,6 +33,7 @@ public class Player {
 		this.difficulty = difficulty;
 		money = 1000;
 		ship = new Ship();
+		
 		//bays = ship.getBays();
 		fuel = 50;
 		bays = 12;
@@ -150,5 +152,24 @@ public class Player {
 		//TODO this method if player wants to warp to something
 	}
 	
-	
+	/**
+	 * Pass in damage player has to take
+	 * @param damage
+	 * @return true if player is dead=> Game Over?
+	 */
+	public boolean takeDamage(int damage){
+		if(health>0){
+			health=health-damage;
+		}
+		else{
+			health=0;
+		}
+		
+		if(health>=0){//Dead
+			return true;
+		}
+		else{//Not Dead
+			return false;
+		}
+	}
 }
