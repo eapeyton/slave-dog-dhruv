@@ -1,7 +1,10 @@
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+
 
 /**
  * The STPanel class is the single JPanel that always sits inside the STFrame class. This class
@@ -13,6 +16,7 @@ import java.awt.event.ActionListener;
  */
 public class STPanel extends JPanel implements ActionListener {
 	
+
 	//store the layout
 	private CardLayout layout;
 	
@@ -22,6 +26,7 @@ public class STPanel extends JPanel implements ActionListener {
 	private GalacticChart chart;
 	private TitlePanel title;
 	private CargoPanel cargo;
+	private FilePanel files;
 	
 	//store the player of the game
 	private Player player;
@@ -31,12 +36,12 @@ public class STPanel extends JPanel implements ActionListener {
 	final static String CONFIGPANEL = "Player Configuration Panel";
 	final static String TITLEPANEL = "Title Panel";
 	final static String CARGOPANEL = "Cargo Panel";
+	final static String FILEPANEL = "File Select Panel";
 	
 	/**
 	 * Creates a STPanel with a card layout and initializes all the JPanels.
 	 */
 	public STPanel() {
-		
 		/**
 		 * Set the layout to a card layout and store the layout for use later.
 		 */
@@ -50,12 +55,15 @@ public class STPanel extends JPanel implements ActionListener {
 		cargo = null;
 		config = new ConfigPanel(this);
 		title = new TitlePanel(this);
+		files = new FilePanel(this);
+		
 		
 		/**
 		 * Add the panels to the card layout along with static string variables to reference them. Show the title panel.
 		 */
 		add(config, CONFIGPANEL);
 		add(title, TITLEPANEL);
+		add(files, FILEPANEL);
 		
 		layout.show(this,TITLEPANEL);
 		
@@ -98,6 +106,12 @@ public class STPanel extends JPanel implements ActionListener {
 			if (e.getSource() == game.getGoButton()) {
 				game.update();
 			}
+			
+			if(e.getSource() == game.getSaveButton())
+			{
+				files.setModeSave();
+				layout.show(this,FILEPANEL);
+			}
 		}
 		
 		/**
@@ -117,5 +131,46 @@ public class STPanel extends JPanel implements ActionListener {
 			layout.show(this,CONFIGPANEL);
 		}
 		
+		/**
+		 * 
+		 */
+		if(e.getSource() == title.getBtnLoadGame())
+		{
+			files.setModeOpen();
+			layout.show(this,FILEPANEL);
+		}
+		
+		if(e.getSource() == files.getFileChooser())
+		{
+			if(e.getActionCommand().equals("ApproveSelection"))
+			{
+				if(files.getFileChooser().getDialogType()==JFileChooser.OPEN_DIALOG)
+				{
+					File savefile = files.getFileChooser().getSelectedFile();
+					//load file
+					if(game!=null)
+					{
+						layout.show(this, GAMEPANEL);
+					}
+					else
+					{
+						layout.show(this, TITLEPANEL);
+					}
+				}
+				else if(files.getFileChooser().getDialogType()==JFileChooser.SAVE_DIALOG)
+				{
+					File savefile = files.getFileChooser().getSelectedFile();
+					//save file
+					layout.show(this, GAMEPANEL);
+				}
+			}
+			else if(e.getActionCommand().equals("CancelSelection"))
+			{
+				if(files.getFileChooser().getDialogType()==JFileChooser.OPEN_DIALOG)
+					layout.show(this, TITLEPANEL);
+				else if(files.getFileChooser().getDialogType()==JFileChooser.SAVE_DIALOG)
+					layout.show(this, GAMEPANEL);
+			}
+		}
 	}
 }

@@ -23,6 +23,7 @@ public class GamePanel extends JPanel
 	JLabel destination;
 	JButton market;
 	JButton go;
+	JButton save;
 	GalacticChart chart;
 	ArrayList<StarSystem> universe;
 	
@@ -37,6 +38,7 @@ public class GamePanel extends JPanel
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		destination = new JLabel("Destination:");
+		save = new JButton("Save");
 		go = new JButton("Go!");
 		go.setEnabled(false);
 		
@@ -53,12 +55,14 @@ public class GamePanel extends JPanel
 		market = new JButton("Marketplace");
 		market.addActionListener(listener);
 		go.addActionListener(listener);
+		save.addActionListener(listener);
 		
 		add(market);
 		add(chart);
 		add(planet);
 		add(destination);
 		add(go);
+		add(save);
 	}
 	
 	/**
@@ -99,6 +103,11 @@ public class GamePanel extends JPanel
 	public JButton getGoButton()
 	{
 		return go;
+	}
+	
+	public JButton getSaveButton()
+	{
+		return save;
 	}
 	
 	/**

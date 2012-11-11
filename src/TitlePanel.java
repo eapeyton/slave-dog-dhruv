@@ -53,6 +53,7 @@ public class TitlePanel extends JPanel {
 		btnLoadGame = new JButton("LOAD GAME");
 		btnLoadGame.setFont(new Font("Purisa", Font.BOLD, 20));
 		btnLoadGame.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnLoadGame.addActionListener(listener);
 		panel.add(btnLoadGame);
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(15);
@@ -84,6 +85,24 @@ public class TitlePanel extends JPanel {
 	 * @param btnNewGame the btnNewGame to set
 	 */
 	public void setBtnNewGame(JButton btnNewGame) {
+		this.btnNewGame = btnNewGame;
+	}
+	
+	/**
+	 * 
+	 * @return the btnLoadGame
+	 */
+	public JButton getBtnLoadGame()
+	{
+		return btnLoadGame;
+	}
+	
+	/**
+	 * 
+	 * @param btnNewGame the btnLoadGame to set
+	 */
+	public void setBtnLoadGame(JButton btnNewGame)
+	{
 		this.btnNewGame = btnNewGame;
 	}
 
