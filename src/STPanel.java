@@ -111,6 +111,7 @@ public class STPanel extends JPanel implements ActionListener {
 			{
 				files.setModeSave();
 				layout.show(this,FILEPANEL);
+				
 			}
 		}
 		
@@ -138,6 +139,9 @@ public class STPanel extends JPanel implements ActionListener {
 		{
 			files.setModeOpen();
 			layout.show(this,FILEPANEL);
+			File loadFile=files.getFileChooser().getSelectedFile();
+			
+			
 		}
 		
 		if(e.getSource() == files.getFileChooser())
@@ -145,9 +149,21 @@ public class STPanel extends JPanel implements ActionListener {
 			if(e.getActionCommand().equals("ApproveSelection"))
 			{
 				if(files.getFileChooser().getDialogType()==JFileChooser.OPEN_DIALOG)
-				{
-					File savefile = files.getFileChooser().getSelectedFile();
-					//load file
+				{	//Code to get objects from loaded file and write it to current in play objects
+					File loadFile = files.getFileChooser().getSelectedFile();
+					try{
+						FileInputStream loadStream=new FileInputStream(loadFile.getPath());
+						ObjectInputStream inStream=new ObjectInputStream(loadStream);
+						player=(Player)inStream.readObject();
+						chart=(GalacticChart)inStream.readObject();
+						inStream.close();
+						layout.show(this,GAMEPANEL);
+						System.out.println("Game Loaded");
+					}
+					catch(Exception g){
+						
+					}
+					
 					if(game!=null)
 					{
 						layout.show(this, GAMEPANEL);
@@ -159,8 +175,15 @@ public class STPanel extends JPanel implements ActionListener {
 				}
 				else if(files.getFileChooser().getDialogType()==JFileChooser.SAVE_DIALOG)
 				{
-					File savefile = files.getFileChooser().getSelectedFile();
-					//save file
+					File saveFile=files.getFileChooser().getSelectedFile();//Code that writes the GamePanel to the file selected by the JFielChooser
+					try{
+						
+						ObjectOutputStream outStream=new ObjectOutputStream(new FileOutputStream(saveFile.getPath()));
+						outStream.writeObject(player);
+						outStream.writeObject(chart);//TODO not writing 2nd object:combine to make 1 savefile object
+						outStream.close();
+					}
+					catch(Exception g){}
 					layout.show(this, GAMEPANEL);
 				}
 			}

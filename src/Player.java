@@ -116,6 +116,7 @@ public class Player {
 	 */
 	public void setLocation(StarSystem system)
 	{
+		
 		location = system;
 	}
 	
