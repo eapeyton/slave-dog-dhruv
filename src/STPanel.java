@@ -109,12 +109,18 @@ public class STPanel extends JPanel implements ActionListener {
 			if (e.getSource() == game.getGoButton()) {
 				game.update();
 			}
-			
+			/**
+			 * If the source is the save button, Opens JFileChooser to save the game
+			 */
 			if(e.getSource() == game.getSaveButton())
 			{
 				files.setModeSave();
 				layout.show(this,FILEPANEL);
 				
+			}
+			if(e.getSource() == game.getBuyFuelButton())
+			{
+				//TODO Buy Fuel Functionality
 			}
 		}
 		
@@ -186,8 +192,11 @@ public class STPanel extends JPanel implements ActionListener {
 						game = new GamePanel(this, player, chart);
 						this.player = player;
 					}
-					catch (ClassNotFoundException | IOException e1) {
+					catch (ClassNotFoundException e1) {
 						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					catch (IOException e1) {
 						e1.printStackTrace();
 					}
 					if(game!=null)
