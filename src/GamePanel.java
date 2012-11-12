@@ -70,7 +70,7 @@ public class GamePanel extends JPanel
 	}
 	
 	/**
-	 * Creates a new GamePanel taking in an ActionListener as a parameter.
+	 * Creates a new GamePanel from a save file.
 	 * @param listener an action listener
 	 */
 	public GamePanel(ActionListener listener, Player player, GalacticChart chart) {
@@ -83,6 +83,8 @@ public class GamePanel extends JPanel
 		save = new JButton("Save");
 		go = new JButton("Go!");
 		go.setEnabled(false);
+		buyFuel=new JButton("Buy Fuel");
+		
 		
 		this.chart = chart;
 		universe = chart.getUniverse();
@@ -104,6 +106,7 @@ public class GamePanel extends JPanel
 		add(destination);
 		add(go);
 		add(save);
+		add(buyFuel);
 	}
 	
 	/**
