@@ -204,7 +204,8 @@ public class GalacticChart extends JPanel{
 			destination.setText("Destination: " + selected.getName());
 			go.setEnabled(true);
 		}
-		else {
+		else
+		{
 			destination.setText("Destination:");
 			go.setEnabled(false);
 		}

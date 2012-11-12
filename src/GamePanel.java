@@ -82,7 +82,7 @@ public class GamePanel extends JPanel
 		
 		this.chart = chart;
 		universe = chart.getUniverse();
-		chart.setPlayer(player);
+		this.chart.setPlayer(player);
 		
 		this.player = player;
 		

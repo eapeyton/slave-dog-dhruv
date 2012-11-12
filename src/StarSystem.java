@@ -11,6 +11,10 @@ import java.util.HashMap;
 public class StarSystem implements Serializable
 {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3L;
 	private String name;	//name of the star system
 	private Point location;	//location of star system
 	private int techLevel,resources,govt;	//planet attributes

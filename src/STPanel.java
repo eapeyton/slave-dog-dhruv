@@ -142,7 +142,6 @@ public class STPanel extends JPanel implements ActionListener {
 		{
 			files.setModeOpen();
 			layout.show(this,FILEPANEL);
-			File loadFile=files.getFileChooser().getSelectedFile();
 			
 			
 		}
