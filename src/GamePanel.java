@@ -24,6 +24,7 @@ public class GamePanel extends JPanel
 	JButton market;
 	JButton go;
 	JButton save;
+	JButton buyFuel;
 	GalacticChart chart;
 	ArrayList<StarSystem> universe;
 	
@@ -40,6 +41,7 @@ public class GamePanel extends JPanel
 		destination = new JLabel("Destination:");
 		save = new JButton("Save");
 		go = new JButton("Go!");
+		buyFuel=new JButton("Buy Fuel");
 		go.setEnabled(false);
 		
 		chart = new GalacticChart(destination, go);
@@ -56,6 +58,7 @@ public class GamePanel extends JPanel
 		market.addActionListener(listener);
 		go.addActionListener(listener);
 		save.addActionListener(listener);
+		buyFuel.addActionListener(listener);
 		
 		add(market);
 		add(chart);
@@ -63,6 +66,7 @@ public class GamePanel extends JPanel
 		add(destination);
 		add(go);
 		add(save);
+		add(buyFuel);
 	}
 	
 	/**
@@ -92,6 +96,7 @@ public class GamePanel extends JPanel
 		market.addActionListener(listener);
 		go.addActionListener(listener);
 		save.addActionListener(listener);
+		buyFuel.addActionListener(listener);
 		
 		add(market);
 		add(chart);
@@ -158,5 +163,14 @@ public class GamePanel extends JPanel
 	 */
 	public GalacticChart getChart() {
 		return chart;
+	}
+
+	/**
+	 * Getter for buyFuel JButton
+	 * @return buyFuel JButton
+	 */
+	public Object getBuyFuelButton() {
+		
+		return buyFuel;
 	}
 }
