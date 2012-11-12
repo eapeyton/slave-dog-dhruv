@@ -1,4 +1,5 @@
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
@@ -7,7 +8,8 @@ import java.util.HashMap;
  * @author Dhruv Saksena, Eric Morphis, Rikin Marfatia
  * @version M7
  */
-public class StarSystem {
+public class StarSystem implements Serializable
+{
 	
 	private String name;	//name of the star system
 	private Point location;	//location of star system

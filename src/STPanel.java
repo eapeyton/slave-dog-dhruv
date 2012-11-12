@@ -1,16 +1,19 @@
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.util.ArrayList;
 
 
 /**
  * The STPanel class is the single JPanel that always sits inside the STFrame class. This class
  * uses a card layout to display the correct screen (represented by JPanels) as the user interacts 
  * with the game.
- * @author Eric Peyton, Rikin Marfatia, Eric Morphis
+ * @author Eric Peyton, Rikin Marfatia, Eric Morphis, Eric Slep
  * @version M7
  *
  */
@@ -18,15 +21,15 @@ public class STPanel extends JPanel implements ActionListener {
 	
 
 	//store the layout
-	private CardLayout layout;
+	private transient CardLayout layout;
 	
 	//store the various screens
 	private GamePanel game;
-	private ConfigPanel config;
+	private transient ConfigPanel config;
 	private GalacticChart chart;
-	private TitlePanel title;
-	private CargoPanel cargo;
-	private FilePanel files;
+	private transient TitlePanel title;
+	private transient CargoPanel cargo;
+	private transient FilePanel files;
 	
 	//store the player of the game
 	private Player player;
@@ -149,23 +152,47 @@ public class STPanel extends JPanel implements ActionListener {
 			if(e.getActionCommand().equals("ApproveSelection"))
 			{
 				if(files.getFileChooser().getDialogType()==JFileChooser.OPEN_DIALOG)
-				{	//Code to get objects from loaded file and write it to current in play objects
-					File loadFile = files.getFileChooser().getSelectedFile();
-					try{
-						FileInputStream loadStream=new FileInputStream(loadFile.getPath());
-						ObjectInputStream inStream=new ObjectInputStream(loadStream);
-						player=(Player)inStream.readObject();
-						chart=(GalacticChart)inStream.readObject();
-						inStream.close();
-						layout.show(this,GAMEPANEL);
-						System.out.println("Game Loaded");
+				{
+					File savefile = files.getFileChooser().getSelectedFile();
+					FileInputStream FIStream = null;
+					ObjectInputStream OIStream = null;
+					try
+					{
+						FIStream = new FileInputStream(savefile);
 					}
-					catch(Exception g){
-						
+					catch (FileNotFoundException e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
-					
+					try
+					{
+						OIStream = new ObjectInputStream(FIStream);
+					}
+					catch (IOException e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					try
+					{
+						Player player = (Player)OIStream.readObject();
+						ArrayList<StarSystem> universe = (ArrayList<StarSystem>)OIStream.readObject();
+						JLabel destination = new JLabel("Destination:");
+						JButton go = new JButton("Go!");
+						go.setEnabled(false);
+						GalacticChart chart = new GalacticChart(destination,go,universe);
+						chart.setPlayer(player);
+						game = new GamePanel(this, player, chart);
+						this.player = player;
+					}
+					catch (ClassNotFoundException | IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					if(game!=null)
 					{
+						add(game, GAMEPANEL);
 						layout.show(this, GAMEPANEL);
 					}
 					else
@@ -175,15 +202,38 @@ public class STPanel extends JPanel implements ActionListener {
 				}
 				else if(files.getFileChooser().getDialogType()==JFileChooser.SAVE_DIALOG)
 				{
-					File saveFile=files.getFileChooser().getSelectedFile();//Code that writes the GamePanel to the file selected by the JFielChooser
-					try{
-						
-						ObjectOutputStream outStream=new ObjectOutputStream(new FileOutputStream(saveFile.getPath()));
-						outStream.writeObject(player);
-						outStream.writeObject(chart);//TODO not writing 2nd object:combine to make 1 savefile object
-						outStream.close();
+					File savefile = files.getFileChooser().getSelectedFile();
+					FileOutputStream FOStream = null;
+					ObjectOutputStream OOStream = null;
+					try
+					{
+						FOStream = new FileOutputStream(savefile);
 					}
-					catch(Exception g){}
+					catch (FileNotFoundException e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					try
+					{
+						OOStream = new ObjectOutputStream(FOStream);
+					}
+					catch (IOException e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					try
+					{
+						OOStream.writeObject(game.getPlayer());
+						OOStream.writeObject(game.getChart().getUniverse());
+					}
+					catch (IOException e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 					layout.show(this, GAMEPANEL);
 				}
 			}

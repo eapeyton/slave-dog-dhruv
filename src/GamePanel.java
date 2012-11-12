@@ -66,6 +66,42 @@ public class GamePanel extends JPanel
 	}
 	
 	/**
+	 * Creates a new GamePanel taking in an ActionListener as a parameter.
+	 * @param listener an action listener
+	 */
+	public GamePanel(ActionListener listener, Player player, GalacticChart chart) {
+		/**
+		 * Set the layout to border layout.
+		 */
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		destination = new JLabel("Destination:");
+		save = new JButton("Save");
+		go = new JButton("Go!");
+		go.setEnabled(false);
+		
+		this.chart = chart;
+		universe = chart.getUniverse();
+		chart.setPlayer(player);
+		
+		this.player = player;
+		
+		planet = new JLabel("Current Location: " + player.getLocation().getName()
+						+ "\n    Tech Level: " + player.getLocation().getTechLevel());
+		market = new JButton("Marketplace");
+		market.addActionListener(listener);
+		go.addActionListener(listener);
+		save.addActionListener(listener);
+		
+		add(market);
+		add(chart);
+		add(planet);
+		add(destination);
+		add(go);
+		add(save);
+	}
+	
+	/**
 	 * updates fields when location changes
 	 */
 	public void update() {

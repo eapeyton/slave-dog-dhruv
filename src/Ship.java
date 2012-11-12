@@ -1,11 +1,17 @@
+import java.io.Serializable;
+
 /**
  * This class represents the general ship class, which holds the base information about the ship.
  * 
  * @author Rikin Marfatia
  *
  */
-public class Ship 
+public class Ship implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2L;
 	int bays;
 	int health;
 	int sheild;

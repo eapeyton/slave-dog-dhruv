@@ -26,6 +26,13 @@ public class GalacticChart extends JPanel{
 		this.go = go;
 	}
 	
+	public GalacticChart(JLabel destination, JButton go, ArrayList<StarSystem> universe)
+	{
+		this.destination = destination;
+		this.go = go;
+		this.universe = universe;
+	}
+	
 	/**
 	 * Generates and returns a universe with star systems named according to a pre-allocated library of names
 	 * @return Newly generated universe
@@ -226,6 +233,15 @@ public class GalacticChart extends JPanel{
 	 */
 	public void setSelected(StarSystem selected) {
 		this.selected = selected;
+	}
+	
+	/**
+	 * Get the universe
+	 * @return universe
+	 */
+	public ArrayList<StarSystem> getUniverse()
+	{
+		return universe;
 	}
 	
 	/**

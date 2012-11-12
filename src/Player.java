@@ -1,11 +1,18 @@
+import java.io.Serializable;
+
 /**
  * Represents the actual Player
  * 
  * @author Dhruv Saksena, Rikin Marfatia
  * @version M7
  */
-public class Player {
+public class Player implements Serializable
+{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String name;
 	String difficulty;
 	Ship ship;
