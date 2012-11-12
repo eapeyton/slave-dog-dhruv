@@ -21,15 +21,15 @@ public class STPanel extends JPanel implements ActionListener {
 	
 
 	//store the layout
-	private transient CardLayout layout;
+	private CardLayout layout;
 	
 	//store the various screens
-	private transient GamePanel game;
-	private transient ConfigPanel config;
+	private GamePanel game;
+	private ConfigPanel config;
 	private GalacticChart chart;
-	private transient TitlePanel title;
-	private transient CargoPanel cargo;
-	private transient FilePanel files;
+	private TitlePanel title;
+	private CargoPanel cargo;
+	private FilePanel files;
 	
 	//store the player of the game
 	private Player player;
