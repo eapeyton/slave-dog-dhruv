@@ -6,6 +6,8 @@ import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.util.HashMap;
+import java.awt.Point;
 import java.util.ArrayList;
 
 
@@ -183,11 +185,15 @@ public class STPanel extends JPanel implements ActionListener {
 					{
 						Player player = (Player)OIStream.readObject();
 						ArrayList<StarSystem> universe = (ArrayList<StarSystem>)OIStream.readObject();
+						HashMap<Point, StarSystem> usedLocations = (HashMap<Point, StarSystem>)OIStream.readObject();
+						StarSystem.setUsedLocations(usedLocations);
+						StarSystem selected = (StarSystem)OIStream.readObject();
 						JLabel destination = new JLabel("Destination:");
 						JButton go = new JButton("Go!");
 						go.setEnabled(false);
 						GalacticChart chart = new GalacticChart(destination,go,universe);
 						chart.setPlayer(player);
+						chart.setSelected(selected);
 						game = new GamePanel(this, player, chart);
 						this.player = player;
 					}
@@ -235,6 +241,8 @@ public class STPanel extends JPanel implements ActionListener {
 					{
 						OOStream.writeObject(game.getPlayer());
 						OOStream.writeObject(game.getChart().getUniverse());
+						OOStream.writeObject(StarSystem.getUsedLocations());
+						OOStream.writeObject(game.getChart().getSelected());
 					}
 					catch (IOException e1)
 					{

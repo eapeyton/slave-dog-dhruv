@@ -199,4 +199,18 @@ public class StarSystem implements Serializable
 	public void setLocation(Point location) {
 		this.location = location;
 	}
+	
+	/**
+	 * @return The locations already occupied by StarSystems
+	 */
+	public static HashMap<Point, StarSystem> getUsedLocations() {
+		return usedLocations;
+	}
+	
+	/**
+	 * @param uL The locations already occupied by StarSystems; used when loading game from file
+	 */
+	public static void setUsedLocations(HashMap<Point, StarSystem> uL) {
+		usedLocations = uL;
+	}
 }
