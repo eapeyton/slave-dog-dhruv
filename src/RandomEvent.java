@@ -103,11 +103,24 @@ public class RandomEvent extends JPanel{
 					}
 					
 					if(nptype==1||nptype==0){//Police or Pirate Attack back
-						message.setText("You have been attacked back, What do you want to do?");
-						player.takeDamage((int)Math.random()*10);
+						int attack = (int)Math.random()*10;
+						message.setText("You have been attacked back. What do you want to do?");
+						player.takeDamage(attack);
 					}
 				}
 				
+			}
+			
+			/* If threaten button is pressed */
+			if(e.getSource()==func1) {
+			        if(Math.random() < .5) {
+			                message.setText("You scared him off!");
+			                exist=false;
+			        }
+			        else {
+			                message.setText("You have been attacked back, What do you want to do?");
+				        player.takeDamage((int)Math.random()*10);
+			        }
 			}
 			
 			/* Check to see if the player has fleed or the enemy has died */

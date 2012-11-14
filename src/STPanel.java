@@ -222,12 +222,12 @@ public class STPanel extends JPanel implements ActionListener {
 						StarSystem.setUsedLocations(usedLocations);
 						StarSystem selected = (StarSystem)OIStream.readObject();
 						JLabel destination = new JLabel("Destination:");
-						JButton go = new JButton("Go!");
-						go.setEnabled(false);
-						GalacticChart chart = new GalacticChart(destination,go,universe);
+						JButton newGo = new JButton("Go!");
+						GalacticChart chart = new GalacticChart(destination,newGo,universe);
 						chart.setPlayer(player);
 						chart.setSelected(selected);
 						game = new GamePanel(this, player, chart);
+						newGo.setEnabled(true);
 						this.player = player;
 					}
 					catch (ClassNotFoundException e1) {

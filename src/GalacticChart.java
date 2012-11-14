@@ -276,4 +276,20 @@ public class GalacticChart extends JPanel{
 			}
 		}
 	}
+	
+	/**
+        * Set the go button
+        * @param the new go button
+        */
+        public void setGoBtn(JButton newGoBtn) {
+                go = newGoBtn;
+        }
+        
+        /**
+        * Get the go button
+        * @return the go button
+        */
+        public JButton getGoBtn() {
+                return go;
+        }
 }

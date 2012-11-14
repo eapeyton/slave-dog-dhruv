@@ -86,9 +86,11 @@ public class GamePanel extends JPanel
 		
 		destination = new JLabel("Destination:");
 		save = new JButton("Save");
-		go = new JButton("Go!");
+		go = chart.getGoBtn();
 		go.setEnabled(false);
 		buyFuel=new JButton("Buy Fuel");
+		go.setEnabled(false);
+                fuelSel=new JSpinner();
 		
 		
 		this.chart = chart;
@@ -105,6 +107,8 @@ public class GamePanel extends JPanel
 		save.addActionListener(listener);
 		buyFuel.addActionListener(listener);
 		
+		add(fuelSel);
+                add(buyFuel);
 		add(market);
 		add(chart);
 		add(planet);
@@ -193,5 +197,21 @@ public class GamePanel extends JPanel
 
         public void fuelSelReset() {
                 fuelSel.setValue(new Integer(0));
+        }
+        
+        /**
+        * Set the go button
+        * @param the new go button
+        */
+        public void setGoBtn(JButton newGoBtn) {
+                go = newGoBtn;
+        }
+        
+        /**
+        * Get the go button
+        * @return the go button
+        */
+        public JButton getGoBtn() {
+                return go;
         }
 }
