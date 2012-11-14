@@ -7,6 +7,7 @@ import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JSpinner;
 
 /**
  * The main screen of the game. This is where the user will spend much of their time.
@@ -21,6 +22,7 @@ public class GamePanel extends JPanel
 	StarSystem location;
 	JLabel planet;
 	JLabel destination;
+        JSpinner fuelSel;
 	JButton market;
 	JButton go;
 	JButton save;
@@ -43,6 +45,7 @@ public class GamePanel extends JPanel
 		go = new JButton("Go!");
 		buyFuel=new JButton("Buy Fuel");
 		go.setEnabled(false);
+                fuelSel=new JSpinner();
 		
 		chart = new GalacticChart(destination, go);
 		universe = chart.generateUniverse();
@@ -60,6 +63,8 @@ public class GamePanel extends JPanel
 		save.addActionListener(listener);
 		buyFuel.addActionListener(listener);
 		
+		add(fuelSel);
+                add(buyFuel);
 		add(market);
 		add(chart);
 		add(planet);
@@ -176,4 +181,17 @@ public class GamePanel extends JPanel
 		
 		return buyFuel;
 	}
+
+
+        /**
+        * Returns amount of fuel selected to be bought from spinner
+        * @return fuel amount
+        */
+        public int getFuelBoughtAmount(){
+                return (Integer)fuelSel.getValue();
+        }
+
+        public void fuelSelReset() {
+                fuelSel.setValue(new Integer(0));
+        }
 }

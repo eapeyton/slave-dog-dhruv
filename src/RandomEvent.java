@@ -25,10 +25,11 @@ public class RandomEvent extends JPanel{
 	Boolean exist=true;			//Set to false when random event is over and we return to game panel
 	Player player;
 	
-	public RandomEvent(int nonPlayerType,Player player){
+	public RandomEvent(int nonPlayerType,Player player, ActionListener listener){
 		nptype=nonPlayerType;
 		this.player=player;
 		func1.addActionListener(new FuncListener());
+		func1.addActionListener(listener);
 		attack.addActionListener(new FuncListener());
 		flee.addActionListener(new FuncListener());
 		if(nptype==0)//Pirate
@@ -57,6 +58,14 @@ public class RandomEvent extends JPanel{
 		add(func1);
 		add(attack);
 		add(flee);
+	}
+	
+	/**
+	 * Get the function 1 button
+	 * @return the func1 button
+	 */
+	public JButton getFunc1Button() {
+	        return func1;
 	}
 	
 	/**
@@ -99,6 +108,21 @@ public class RandomEvent extends JPanel{
 					}
 				}
 				
+			}
+			
+			/* Check to see if the player has fleed or the enemy has died */
+			if(fleeState || !exist) {
+			        if(fleeState) {
+			                /* If the flee is successful */
+			                message.setText("You successfully fleed!");
+			                func1.setText("Continue");
+			        }
+			        else if(!exist) {
+			                message.setText("The other ship has been destroyed!");
+			                func1.setText("Continue");
+			        }
+			        attack.setVisible(false);
+			        flee.setVisible(false);
 			}
 			
 		}

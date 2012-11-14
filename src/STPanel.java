@@ -32,6 +32,7 @@ public class STPanel extends JPanel implements ActionListener {
 	private TitlePanel title;
 	private CargoPanel cargo;
 	private FilePanel files;
+	private RandomEvent random;
 	
 	//store the player of the game
 	private Player player;
@@ -42,6 +43,7 @@ public class STPanel extends JPanel implements ActionListener {
 	final static String TITLEPANEL = "Title Panel";
 	final static String CARGOPANEL = "Cargo Panel";
 	final static String FILEPANEL = "File Select Panel";
+	final static String RANDOMPANEL = "Random Event Panel";
 	
 	/**
 	 * Creates a STPanel with a card layout and initializes all the JPanels.
@@ -58,6 +60,7 @@ public class STPanel extends JPanel implements ActionListener {
 		 */
 		game = null;
 		cargo = null;
+		random = null;
 		config = new ConfigPanel(this);
 		title = new TitlePanel(this);
 		files = new FilePanel(this);
@@ -109,7 +112,26 @@ public class STPanel extends JPanel implements ActionListener {
 			 * If the source is the go button, update location information
 			 */
 			if (e.getSource() == game.getGoButton()) {
-				game.update();
+			        /* Chance of a random event is 50/50 */
+			        double chance = Math.random();
+			        /* Create a random event, else update the game */
+			        if(chance < .5) {
+			                random = new RandomEvent(0,player,this);
+			                add(random, RANDOMPANEL);
+			                layout.show(this,RANDOMPANEL);
+			        }
+			        else {
+			                game.update();
+			        }
+			}
+			/**
+			 * If a random event has just been processed, update the game
+			 */
+			if(random != null && e.getSource() == random.getFunc1Button()) {
+			        if(random.getFunc1Button().getText() == "Continue") {
+			                layout.show(this,GAMEPANEL);
+			                game.update();
+			        }
 			}
 			/**
 			 * If the source is the save button, Opens JFileChooser to save the game
@@ -121,9 +143,20 @@ public class STPanel extends JPanel implements ActionListener {
 				
 			}
 			if(e.getSource() == game.getBuyFuelButton())
-			{
-				//TODO Buy Fuel Functionality
-			}
+                        {
+                                int f=game.getFuelBoughtAmount();
+                                if(f > 0) {
+                                        if(player.getMoney()>f*10){
+                                                System.out.println(player.getMoney()+" "+player.getFuel());
+                                                player.setMoney(player.getMoney()-f*10);
+                                                player.setFuel(f);
+                                                game.fuelSelReset();
+                                                System.out.println(player.getMoney()+" "+player.getFuel());
+                                        }
+                                }
+                                game.getChart().repaint();
+                                
+		         }
 		}
 		
 		/**
