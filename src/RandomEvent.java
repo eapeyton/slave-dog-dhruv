@@ -59,7 +59,7 @@ public class RandomEvent extends JPanel{
 			func1.setText("Trade");
 			np=new NonPlayer(2);
 		}
-		ImageIcon pirateIcon = new ImageIcon("img/pirate.jpg","A Space Pirate!");
+		ImageIcon pirateIcon = new ImageIcon("../img/pirate.jpg","A Space Pirate!");
 		add(new JLabel(pirateIcon),BorderLayout.CENTER);
 		message.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(message,BorderLayout.NORTH);
