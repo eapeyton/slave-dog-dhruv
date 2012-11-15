@@ -1,9 +1,14 @@
 import javax.swing.BoxLayout;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -20,13 +25,9 @@ public class GamePanel extends JPanel
 	
 	Player player;
 	StarSystem location;
-	JLabel planet;
-	JLabel destination;
-        JSpinner fuelSel;
-	JButton market;
-	JButton go;
-	JButton save;
-	JButton buyFuel;
+	JLabel planetLbl,destinationLbl,fuelMoneyLbl;
+    JSpinner fuelSel;
+	JButton market,go,save,buyFuel;
 	GalacticChart chart;
 	ArrayList<StarSystem> universe;
 	
@@ -35,43 +36,70 @@ public class GamePanel extends JPanel
 	 * @param listener an action listener
 	 */
 	public GamePanel(ActionListener listener, Player player) {
-		/**
-		 * Set the layout to border layout.
-		 */
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
-		destination = new JLabel("Destination:");
-		save = new JButton("Save");
-		go = new JButton("Go!");
-		buyFuel=new JButton("Buy Fuel");
-		go.setEnabled(false);
-                fuelSel=new JSpinner();
-		
-		chart = new GalacticChart(destination, go);
-		universe = chart.generateUniverse();
-		chart.setPlayer(player);
-		
+		// Set the layout and the player
+		setLayout(new BorderLayout(0,0));
 		this.player = player;
 		Random rand = new Random();
+		
+		
+		/**
+		 * CENTER Section: Contains a new JPanel with the chart and go button
+		 */
+		destinationLbl = new JLabel("Destination Location:");
+		go = new JButton("Go to new planet!");
+		go.setEnabled(false);
+		go.addActionListener(listener);
+		chart = new GalacticChart(destinationLbl, go);
+		
+		// Generate the universe and set the player's location
+		chart.setPlayer(player);
+		universe = chart.generateUniverse();
 		player.setLocation(universe.get(rand.nextInt(universe.size())));
 		
-		planet = new JLabel("Current Location: " + player.getLocation().getName()
-						+ "\n    Tech Level: " + player.getLocation().getTechLevel());
-		market = new JButton("Marketplace");
+		
+		
+		JPanel centerPanel = new JPanel();
+		centerPanel.setBorder(BorderFactory.createTitledBorder("Galactic Chart"));
+		centerPanel.setLayout(new BorderLayout());
+		centerPanel.add(chart, BorderLayout.CENTER);
+		centerPanel.add(go,BorderLayout.SOUTH);
+		add(centerPanel,BorderLayout.CENTER);
+		
+		/**
+		 * SOUTH Section: Various buttons
+		 */
+		JPanel southPanel = new JPanel();
+
+		save = new JButton("Save Game");
+		buyFuel = new JButton("Buy Fuel");
+		market = new JButton("Planet Marketplace");
+		
 		market.addActionListener(listener);
-		go.addActionListener(listener);
 		save.addActionListener(listener);
 		buyFuel.addActionListener(listener);
 		
-		add(fuelSel);
-                add(buyFuel);
-		add(market);
-		add(chart);
-		add(planet);
-		add(destination);
-		add(go);
-		add(save);
-		add(buyFuel);
+		southPanel.add(save);
+		southPanel.add(buyFuel);
+		southPanel.add(market);
+		add(southPanel,BorderLayout.SOUTH);
+
+		/**
+		 * North Section: Information about the player, ship and planet
+		 */
+		JPanel northPanel = new JPanel();
+		northPanel.setBorder(BorderFactory.createTitledBorder("Info"));
+		northPanel.setLayout(new BoxLayout(northPanel,BoxLayout.Y_AXIS));
+		
+		planetLbl = new JLabel("Current Location: " + player.getLocation().getName() + "....Tech Level: " + player.getLocation().getTechLevel());
+		fuelMoneyLbl = new JLabel("Fuel Remaining: " + player.getFuel() + "....Money Remaining: " + player.getMoney());
+		
+		northPanel.add(destinationLbl);
+		northPanel.add(planetLbl);
+		northPanel.add(fuelMoneyLbl);
+		add(northPanel,BorderLayout.NORTH);
+		
+        //fuelSel=new JSpinner();
+
 	}
 	
 	/**
@@ -84,7 +112,7 @@ public class GamePanel extends JPanel
 		 */
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		destination = new JLabel("Destination:");
+		destinationLbl = new JLabel("Destination:");
 		save = new JButton("Save");
 		go = chart.getGoBtn();
 		go.setEnabled(false);
@@ -99,7 +127,7 @@ public class GamePanel extends JPanel
 		
 		this.player = player;
 		
-		planet = new JLabel("Current Location: " + player.getLocation().getName()
+		planetLbl = new JLabel("Current Location: " + player.getLocation().getName()
 						+ "\n    Tech Level: " + player.getLocation().getTechLevel());
 		market = new JButton("Marketplace");
 		market.addActionListener(listener);
@@ -111,8 +139,8 @@ public class GamePanel extends JPanel
                 add(buyFuel);
 		add(market);
 		add(chart);
-		add(planet);
-		add(destination);
+		add(planetLbl);
+		add(destinationLbl);
 		add(go);
 		add(save);
 		add(buyFuel);
@@ -128,8 +156,13 @@ public class GamePanel extends JPanel
 		getPlayer().setFuel(-oldLocation.distanceToStarSystem(newLocation));
 		getChart().setSelected(null);
 		getChart().repaint();
-		planet.setText("Current Location: " + player.getLocation().getName()
-				+ "\n    Tech Level: " + player.getLocation().getTechLevel());
+		planetLbl.setText("Current Location: " + player.getLocation().getName()
+				+ "....Tech Level: " + player.getLocation().getTechLevel());
+		
+	}
+	
+	public void updateInfoLabels() {
+		fuelMoneyLbl.setText("Fuel Remaining: " + player.getFuel() + "....Money Remaining: " + player.getMoney());
 	}
 	
 	/**
@@ -185,19 +218,6 @@ public class GamePanel extends JPanel
 		
 		return buyFuel;
 	}
-
-
-        /**
-        * Returns amount of fuel selected to be bought from spinner
-        * @return fuel amount
-        */
-        public int getFuelBoughtAmount(){
-                return (Integer)fuelSel.getValue();
-        }
-
-        public void fuelSelReset() {
-                fuelSel.setValue(new Integer(0));
-        }
         
         /**
         * Set the go button

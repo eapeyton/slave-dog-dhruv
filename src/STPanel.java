@@ -1,7 +1,11 @@
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -142,20 +146,29 @@ public class STPanel extends JPanel implements ActionListener {
 				layout.show(this,FILEPANEL);
 				
 			}
+			/**
+			 * If the source is the buy fuel button, open a dialog button to buy fuel
+			 */
 			if(e.getSource() == game.getBuyFuelButton())
                         {
-                                int f=game.getFuelBoughtAmount();
-                                if(f > 0) {
-                                        if(player.getMoney()>f*10){
-                                                System.out.println(player.getMoney()+" "+player.getFuel());
-                                                player.setMoney(player.getMoney()-f*10);
-                                                player.setFuel(f);
-                                                game.fuelSelReset();
-                                                System.out.println(player.getMoney()+" "+player.getFuel());
-                                        }
-                                }
-                                game.getChart().repaint();
-                                
+								// Create a new spinner and show it in a dialog box
+								JSpinner fuelSpinner = new JSpinner(new SpinnerNumberModel(0, 0, player.getMoney() / 10, 1));
+								int option = JOptionPane.showOptionDialog(this, fuelSpinner, "How much fuel?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+								if (option == JOptionPane.OK_OPTION) // User hit OK button
+								{
+										// Get the fuel amount and change the player's fuel and money
+										int amount = (Integer)fuelSpinner.getValue();
+										if(amount > 0) {
+	                                        if(player.getMoney()>=amount*10){
+	                                                player.setMoney(player.getMoney()-amount*10);
+	                                                player.setFuel(player.getFuel() + amount);
+	                                        }
+										}
+										// Repaint and upate the galactic chart
+										game.getChart().repaint();
+										game.updateInfoLabels();
+								} 
+								
 		         }
 		}
 		

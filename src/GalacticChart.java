@@ -219,6 +219,7 @@ public class GalacticChart extends JPanel{
 	 * @param g The graphics object to draw the universe
 	 */
 	public void paintComponent(Graphics g){
+		setOpaque(false);
 		drawUniverse(universe, player, g);
 	}
 	
