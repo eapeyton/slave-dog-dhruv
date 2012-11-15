@@ -1,6 +1,11 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -26,6 +31,7 @@ public class RandomEvent extends JPanel{
 	Player player;
 	
 	public RandomEvent(int nonPlayerType,Player player, ActionListener listener){
+		setLayout(new BorderLayout(0,0));
 		nptype=nonPlayerType;
 		this.player=player;
 		func1.addActionListener(new FuncListener());
@@ -34,7 +40,7 @@ public class RandomEvent extends JPanel{
 		flee.addActionListener(new FuncListener());
 		if(nptype==0)//Pirate
 		{
-			message.setText("You have been attacked by a Pirate Ship. What do you want to do?");
+			message.setText("You have been attacked by a Pirate Ship! What do you want to do?");
 			func1.setText("Threaten");
 			np=new NonPlayer(0);
 		}
@@ -53,11 +59,16 @@ public class RandomEvent extends JPanel{
 			func1.setText("Trade");
 			np=new NonPlayer(2);
 		}
+		ImageIcon pirateIcon = new ImageIcon("img/pirate.jpg","A Space Pirate!");
+		add(new JLabel(pirateIcon),BorderLayout.CENTER);
+		message.setAlignmentX(Component.CENTER_ALIGNMENT);
+		add(message,BorderLayout.NORTH);
 		
-		add(message);
-		add(func1);
-		add(attack);
-		add(flee);
+		JPanel buttonSouth = new JPanel();
+		buttonSouth.add(func1);
+		buttonSouth.add(attack);
+		buttonSouth.add(flee);
+		add(buttonSouth,BorderLayout.SOUTH);
 	}
 	
 	/**
