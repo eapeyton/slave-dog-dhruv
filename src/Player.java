@@ -164,17 +164,12 @@ public class Player implements Serializable
 	 * @return true if player is dead=> Game Over?
 	 */
 	public boolean takeDamage(int damage){
-		if(health>0){
-			health=health-damage;
-		}
-		else{
+		if(health-damage<=0){//Dead
 			health=0;
-		}
-		
-		if(health<=0){//Dead
 			return true;
 		}
 		else{//Not Dead
+			health=health-damage;
 			return false;
 		}
 	}
