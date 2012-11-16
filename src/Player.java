@@ -171,7 +171,7 @@ public class Player implements Serializable
 			health=0;
 		}
 		
-		if(health>=0){//Dead
+		if(health<=0){//Dead
 			return true;
 		}
 		else{//Not Dead
