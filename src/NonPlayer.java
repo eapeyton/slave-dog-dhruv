@@ -2,15 +2,28 @@
  * Acts as Pirates, traders and Police
  * @author Dhruv Saksena,Eric Peyton, Eric Slep, Eric Morpheus, Rikin Marfatia
  *
+ * @version $Revision: 1.0 $
  */
 public class NonPlayer {
 
-	int type;
-	Ship ship;
-	int health=100;
+	/**
+	 * Field type.
+	 */
+	public int type;
+	/**
+	 * Field ship.
+	 */
+	public Ship ship;
+	/**
+	 * Field health.
+	 */
+	public int health=100;
 	
+	/**
+	 * Constructor for NonPlayer.
+	 * @param type int
+	 */
 	public NonPlayer(int type) {
-		super();
 		this.type = type;
 		ship=new Ship();
 	}
@@ -18,8 +31,8 @@ public class NonPlayer {
 	/**
 	 * Pass in int that is damage inflicted on it
 	 * @param damage
-	 * @return true if non player is dead
-	 */
+	
+	 * @return true if non player is dead */
 	
 	public boolean takeDamage(int damage)
 	{

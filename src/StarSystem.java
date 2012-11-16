@@ -29,7 +29,6 @@ public class StarSystem implements Serializable
 	 * @param name The name of the star system
 	 */
 	public StarSystem(String name) {
-		super();
 		this.name=name;
 		while (location == null || usedLocations.containsKey(location)) {
 			setRandLocation();

@@ -190,17 +190,17 @@ public class GalacticChart extends JPanel{
 	 */
 	public void drawUniverse(ArrayList<StarSystem> universe, Player player, Graphics g){
 		
-		int p=8;//Planet Circle Size
+		int planetSize=8;//Planet Circle Size
 		g.setColor(Color.GREEN);
 		for(int i=0;i<universe.size();i++){
-			g.fillRect((int)universe.get(i).getLocation().getX() - p/2,(int)universe.get(i).getLocation().getY() - p/2,p,p);
+			g.fillRect((int)universe.get(i).getLocation().getX() - planetSize/2,(int)universe.get(i).getLocation().getY() - planetSize/2,planetSize,planetSize);
 		}
 		g.setColor(Color.BLUE);
-		g.fillRect((int)player.location.getLocation().getX() - p/2, (int)player.location.getLocation().getY() - p/2, p, p);
+		g.fillRect((int)player.location.getLocation().getX() - planetSize/2, (int)player.location.getLocation().getY() - planetSize/2, planetSize, planetSize);
 		g.drawOval((int)player.location.getLocation().getX() - player.getFuel(), (int)player.location.getLocation().getY() - player.getFuel(), 2*player.getFuel(), 2*player.getFuel());
 		if (selected != null) {
 			g.setColor(Color.RED);
-			g.fillRect((int)selected.getLocation().getX() - p/2, (int)selected.getLocation().getY() - p/2, p, p);
+			g.fillRect((int)selected.getLocation().getX() - planetSize/2, (int)selected.getLocation().getY() - planetSize/2, planetSize, planetSize);
 			destination.setText("Destination: " + selected.getName());
 			go.setEnabled(true);
 		}
@@ -210,7 +210,7 @@ public class GalacticChart extends JPanel{
 			go.setEnabled(false);
 		}
 		removeMouseListener(adapter);
-		adapter = new Adapter(p);
+		adapter = new Adapter(planetSize);
 		addMouseListener(adapter);
 	}
 	

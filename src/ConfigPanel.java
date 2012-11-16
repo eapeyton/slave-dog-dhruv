@@ -26,7 +26,7 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 	private JLabel remaining;
 	private JComboBox difficulty;
 	private JButton pConfigDone;
-	boolean pConfigOption;
+	private boolean pConfigOption;
 	
 	//player class to be created
 	private Player player;
