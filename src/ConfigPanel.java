@@ -44,7 +44,10 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 		/**
 		 * Initialize the skills of the player to 0.
 		 */
-		pilotSkill = fighterSkill = traderSkill = engineerSkill = 0;
+		pilotSkill = 0;
+		fighterSkill = 0;
+		traderSkill = 0;
+		engineerSkill = 0;
 		remainingPoints = 16;
 		
 		/**
@@ -146,14 +149,12 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 	 * @param e Event for when the state of a spinner is changed
 	 * @author Eric Slep
 	 */
-	public void stateChanged(ChangeEvent e)
-	{
+	public void stateChanged(ChangeEvent e){
 		/*
 		 * If a spinner is the source of the event, re-calculate the remaining skill points and reset
 		 * the maximum bounds on the spinner values.
 		 */
-		if(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner)
-		{
+		if(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner){
 			remainingPoints = 16-(Integer)pilotSpinner.getValue()-(Integer)fighterSpinner.getValue()-(Integer)traderSpinner.getValue()-(Integer)engineerSpinner.getValue();
 			pilotSpinner.setModel(new SpinnerNumberModel((Number)pilotSpinner.getValue(),(Integer)0,remainingPoints+(Integer)pilotSpinner.getValue(),(Number)1));
 			fighterSpinner.setModel(new SpinnerNumberModel((Number)fighterSpinner.getValue(),(Integer)0,remainingPoints+(Integer)fighterSpinner.getValue(),(Number)1));
@@ -163,12 +164,10 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 		
 		}
 		
-		if(remainingPoints==0&&!nameInput.getText().isEmpty()&&(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner))
-		{
+		if(remainingPoints==0&&!nameInput.getText().isEmpty()&&(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner)){
 			pConfigDone.setEnabled(true);
 		}
-		if(remainingPoints!=0&&(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner))
-		{
+		if(remainingPoints!=0&&(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner)){
 			pConfigDone.setEnabled(false);
 		}
 		
@@ -187,26 +186,20 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 		}
 	}
 	
-	public void keyReleased(KeyEvent e)
-	{
-		if(e.getSource()==nameInput&&!nameInput.getText().isEmpty()&&remainingPoints==0)
-		{
+	public void keyReleased(KeyEvent e){
+		if(e.getSource()==nameInput&&!nameInput.getText().isEmpty()&&remainingPoints==0){
 			pConfigDone.setEnabled(true);
 		}
-		if(e.getSource()==nameInput&&nameInput.getText().isEmpty())
-		{
+		if(e.getSource()==nameInput&&nameInput.getText().isEmpty()){
 			pConfigDone.setEnabled(false);
 		}
 	}
 	
-	public void keyTyped(KeyEvent e)
-	{
-		if(e.getSource()==nameInput&&!nameInput.getText().isEmpty()&&remainingPoints==0)
-		{
+	public void keyTyped(KeyEvent e){
+		if(e.getSource()==nameInput&&!nameInput.getText().isEmpty()&&remainingPoints==0){
 			pConfigDone.setEnabled(true);
 		}
-		if(e.getSource()==nameInput&&nameInput.getText().isEmpty())
-		{
+		if(e.getSource()==nameInput&&nameInput.getText().isEmpty()){
 			pConfigDone.setEnabled(false);
 		}
 	}

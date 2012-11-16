@@ -252,9 +252,9 @@ public class GalacticChart extends JPanel{
 	 * Attached to a galactic chart to update the selected planet based on where the user clicks
 	 */
 	private class Adapter extends MouseAdapter {
-		int mapPlanetSize;
-		HashMap<Point, StarSystem> clickMap;
-		Graphics g;
+		public int mapPlanetSize;
+		public HashMap<Point, StarSystem> clickMap;
+		public Graphics g;
 		
 		/**
 		 * Constructor gets a map of valid click locations

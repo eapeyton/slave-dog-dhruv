@@ -23,13 +23,13 @@ import javax.swing.JSpinner;
 public class GamePanel extends JPanel 
 {
 	
-	Player player;
-	StarSystem location;
-	JLabel planetLbl,destinationLbl,fuelMoneyLbl;
-    JSpinner fuelSel;
-	JButton market,go,save,buyFuel;
-	GalacticChart chart;
-	ArrayList<StarSystem> universe;
+	public Player player;
+	public StarSystem location;
+	public JLabel planetLbl,destinationLbl,fuelMoneyLbl;
+    public JSpinner fuelSel;
+	public JButton market,go,save,buyFuel;
+	public GalacticChart chart;
+	public ArrayList<StarSystem> universe;
 	
 	/**
 	 * Creates a new GamePanel taking in an ActionListener as a parameter.
