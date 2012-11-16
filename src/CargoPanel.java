@@ -232,7 +232,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 		// BUY BUTTON //
 		////////////////
 		
-		if(e.getSource() == buyBtn){
+		if(e.getSource().equals(buyBtn)){
 			//retrieve amount from all the spinners
 			totalQuantity = 0;
 			for(int i = 1; i <= NUM_SUPPLY_TYPE; i++) {
@@ -365,7 +365,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 		// SELL BUTTON //
 		/////////////////
 		
-		if(e.getSource() == sellBtn){
+		if(e.getSource().equals(sellBtn)){
 			//retrieve amount from all the spinners
 			totalQuantity = 0;
 			for(int i = 1; i <= NUM_SUPPLY_TYPE; i++) {

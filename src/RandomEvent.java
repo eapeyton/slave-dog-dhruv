@@ -89,7 +89,7 @@ public class RandomEvent extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			if(e.getSource()==flee){
+			if(e.getSource().equals(flee)){
 				if(nptype==2){//Fleeing from a Tdaer, always successful
 					fleeState=true;
 				}
@@ -101,7 +101,7 @@ public class RandomEvent extends JPanel{
 				
 			}
 			
-			if(e.getSource()==attack){
+			if(e.getSource().equals(attack)){
 				if(np.takeDamage((int)Math.random()*10)){
 					message.setText("You succeeded");
 					exist=false;	//NP is dead get out of Random Event
@@ -123,7 +123,7 @@ public class RandomEvent extends JPanel{
 			}
 			
 			/* If threaten button is pressed */
-			if(e.getSource()==func1) {
+			if(e.getSource().equals(func1)) {
 			        if(Math.random() < .5) {
 			                message.setText("You scared him off!");
 			                exist=false;

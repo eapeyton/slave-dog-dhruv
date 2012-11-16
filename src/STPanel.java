@@ -90,7 +90,7 @@ public class STPanel extends JPanel implements ActionListener {
 		 * the configuration to panel to create a player and assign it to player. Then, create
 		 * a game screen and show it.
 		 */
-		if (e.getSource() == config.getpConfigDone()) {
+		if (e.getSource().equals(config.getpConfigDone())) {
 			//create player
 			player = config.createPlayer();
 			
@@ -105,7 +105,7 @@ public class STPanel extends JPanel implements ActionListener {
 			 * If the source of the action is the Marketplace button on the Game Screen, create a new cargo
 			 * display screen and show it.
 			*/
-			if(e.getSource() == game.getMarketButton())
+			if(e.getSource().equals(game.getMarketButton()))
 			{
 				cargo = new CargoPanel(player,this);
 				add(cargo, CARGOPANEL);
@@ -115,7 +115,7 @@ public class STPanel extends JPanel implements ActionListener {
 			/**
 			 * If the source is the go button, update location information
 			 */
-			if (e.getSource() == game.getGoButton()) {
+			if (e.getSource().equals(game.getGoButton())) {
 			        /* Chance of a random event is 50/50 */
 			        double chance = Math.random();
 			        /* Create a random event, else update the game */
@@ -131,8 +131,8 @@ public class STPanel extends JPanel implements ActionListener {
 			/**
 			 * If a random event has just been processed, update the game
 			 */
-			if(random != null && e.getSource() == random.getFunc1Button()) {
-			        if(random.getFunc1Button().getText() == "Continue") {
+			if(random != null && e.getSource().equals(random.getFunc1Button())) {
+			        if(random.getFunc1Button().getText().equals("Continue")) {
 			                layout.show(this,GAMEPANEL);
 			                game.update();
 			        }
@@ -140,7 +140,7 @@ public class STPanel extends JPanel implements ActionListener {
 			/**
 			 * If the source is the save button, Opens JFileChooser to save the game
 			 */
-			if(e.getSource() == game.getSaveButton())
+			if(e.getSource().equals(game.getSaveButton()))
 			{
 				files.setModeSave();
 				layout.show(this,FILEPANEL);
@@ -149,7 +149,7 @@ public class STPanel extends JPanel implements ActionListener {
 			/**
 			 * If the source is the buy fuel button, open a dialog button to buy fuel
 			 */
-			if(e.getSource() == game.getBuyFuelButton())
+			if(e.getSource().equals(game.getBuyFuelButton()))
                         {
 								// Create a new spinner and show it in a dialog box
 								JSpinner fuelSpinner = new JSpinner(new SpinnerNumberModel(0, 0, player.getMoney() / 10, 1));
@@ -176,7 +176,7 @@ public class STPanel extends JPanel implements ActionListener {
 		 * If the cargo panel is created and source of the action is the back button 
 		 * in the marketplace, then show the game screen again.
 		 */
-		if(cargo!=null&&e.getSource() == cargo.getBackBtn()) {
+		if(cargo!=null&&e.getSource().equals(cargo.getBackBtn())) {
 			layout.show(this, GAMEPANEL);
 		}
 		
@@ -185,14 +185,14 @@ public class STPanel extends JPanel implements ActionListener {
 		 * If the source is the New Game button on the title screen, move on the to the
 		 * configuration panel.
 		 */
-		if (e.getSource() == title.getBtnNewGame()) {
+		if (e.getSource().equals(title.getBtnNewGame())) {
 			layout.show(this,CONFIGPANEL);
 		}
 		
 		/**
 		 * 
 		 */
-		if(e.getSource() == title.getBtnLoadGame())
+		if(e.getSource().equals(title.getBtnLoadGame()))
 		{
 			files.setModeOpen();
 			layout.show(this,FILEPANEL);
@@ -200,7 +200,7 @@ public class STPanel extends JPanel implements ActionListener {
 			
 		}
 		
-		if(e.getSource() == files.getFileChooser())
+		if(e.getSource().equals(files.getFileChooser()))
 		{
 			if(e.getActionCommand().equals("ApproveSelection"))
 			{

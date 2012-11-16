@@ -154,7 +154,7 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 		 * If a spinner is the source of the event, re-calculate the remaining skill points and reset
 		 * the maximum bounds on the spinner values.
 		 */
-		if(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner){
+		if(e.getSource().equals(pilotSpinner)||e.getSource().equals(fighterSpinner)||e.getSource().equals(traderSpinner)||e.getSource().equals(engineerSpinner)){
 			remainingPoints = 16-(Integer)pilotSpinner.getValue()-(Integer)fighterSpinner.getValue()-(Integer)traderSpinner.getValue()-(Integer)engineerSpinner.getValue();
 			pilotSpinner.setModel(new SpinnerNumberModel((Number)pilotSpinner.getValue(),(Integer)0,remainingPoints+(Integer)pilotSpinner.getValue(),(Number)1));
 			fighterSpinner.setModel(new SpinnerNumberModel((Number)fighterSpinner.getValue(),(Integer)0,remainingPoints+(Integer)fighterSpinner.getValue(),(Number)1));
@@ -164,10 +164,10 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 		
 		}
 		
-		if(remainingPoints==0&&!nameInput.getText().isEmpty()&&(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner)){
+		if(remainingPoints==0&&!nameInput.getText().isEmpty()&&(e.getSource().equals(pilotSpinner)||e.getSource().equals(fighterSpinner)||e.getSource().equals(traderSpinner)||e.getSource().equals(engineerSpinner))){
 			pConfigDone.setEnabled(true);
 		}
-		if(remainingPoints!=0&&(e.getSource()==pilotSpinner||e.getSource()==fighterSpinner||e.getSource()==traderSpinner||e.getSource()==engineerSpinner)){
+		if(remainingPoints!=0&&(e.getSource().equals(pilotSpinner)||e.getSource().equals(fighterSpinner)||e.getSource().equals(traderSpinner)||e.getSource().equals(engineerSpinner))){
 			pConfigDone.setEnabled(false);
 		}
 		
@@ -176,11 +176,11 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 	
 	public void keyPressed(KeyEvent e)
 	{
-		if(e.getSource()==nameInput&&!nameInput.getText().isEmpty()&&remainingPoints==0)
+		if(e.getSource().equals(nameInput)&&!nameInput.getText().isEmpty()&&remainingPoints==0)
 		{
 			pConfigDone.setEnabled(true);
 		}
-		if(e.getSource()==nameInput&&nameInput.getText().isEmpty())
+		if(e.getSource().equals(nameInput)&&nameInput.getText().isEmpty())
 		{
 			pConfigDone.setEnabled(false);
 		}

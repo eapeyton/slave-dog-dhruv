@@ -148,7 +148,7 @@ public class StarSystem implements Serializable
 	public HashMap<Point, StarSystem> getClickMap(int mapPlanetSize, int range) {
 		HashMap<Point, StarSystem> clickMap = new HashMap<Point, StarSystem>();
 		for (StarSystem ss : usedLocations.values()) {
-			if (ss != this && distanceToStarSystem(ss) <= range) {
+			if (!ss.equals(this) && distanceToStarSystem(ss) <= range) {
 				for (int i = -mapPlanetSize/2; i <= mapPlanetSize/2; i++) {
 					for (int j = -mapPlanetSize/2; j<= mapPlanetSize/2; j++) {
 						clickMap.put(new Point((int)ss.getLocation().getX() + i, (int)ss.getLocation().getY() + j), ss);
