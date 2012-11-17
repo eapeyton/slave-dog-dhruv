@@ -12,22 +12,56 @@ import javax.swing.JPanel;
  * Panel Class for encounters with non Players
  * @author dhruv
  *
+ * @version $Revision: 1.0 $
  */
 
 public class RandomEvent extends JPanel{
 
-	int nptype;
-	JLabel message=new JLabel();
-	JButton func1=new JButton();
-	JButton attack=new JButton("Attack");
-	JButton flee=new JButton("Flee");
-	NonPlayer np;
-	Boolean fleeState=false;	//True if you were able to flee
-	Boolean exist=true;			//Set to false when random event is over and we return to game panel
-	Player player;
+	/**
+	 * Field nptype.
+	 */
+	public int nptype;
+	/**
+	 * Field message.
+	 */
+	public JLabel message=new JLabel();
+	/**
+	 * Field func1.
+	 */
+	public JButton func1=new JButton();
+	/**
+	 * Field attack.
+	 */
+	public JButton attack=new JButton("Attack");
+	/**
+	 * Field flee.
+	 */
+	public JButton flee=new JButton("Flee");
+	/**
+	 * Field np.
+	 */
+	public NonPlayer np;
+	/**
+	 * Field fleeState.
+	 */
+	public Boolean fleeState=false;	//True if you were able to flee
+	/**
+	 * Field exist.
+	 */
+	public Boolean exist=true;			//Set to false when random event is over and we return to game panel
+	/**
+	 * Field player.
+	 */
+	public Player player;
 	
-	public RandomEvent(int nonPlayerType,Player player, ActionListener listener){
-		setLayout(new BorderLayout(0,0));
+	/**
+	 * Constructor for RandomEvent.
+	 * @param nonPlayerType int
+	 * @param player Player
+	 * @param listener ActionListener
+	 */
+	public RandomEvent(int nonPlayerType, Player player, ActionListener listener){
+		setLayout(new BorderLayout(0, 0));
 		nptype=nonPlayerType;
 		this.player=player;
 		func1.addActionListener(new FuncListener());
@@ -55,22 +89,22 @@ public class RandomEvent extends JPanel{
 			func1.setText("Trade");
 			np=new NonPlayer(2);
 		}
-		ImageIcon pirateIcon = new ImageIcon("../img/pirate.jpg","A Space Pirate!");
-		add(new JLabel(pirateIcon),BorderLayout.CENTER);
+		ImageIcon pirateIcon = new ImageIcon("../img/pirate.jpg", "A Space Pirate!");
+		add(new JLabel(pirateIcon), BorderLayout.CENTER);
 		message.setAlignmentX(Component.CENTER_ALIGNMENT);
-		add(message,BorderLayout.NORTH);
+		add(message, BorderLayout.NORTH);
 		
 		JPanel buttonSouth = new JPanel();
 		buttonSouth.add(func1);
 		buttonSouth.add(attack);
 		buttonSouth.add(flee);
-		add(buttonSouth,BorderLayout.SOUTH);
+		add(buttonSouth, BorderLayout.SOUTH);
 	}
 	
 	/**
 	 * Get the function 1 button
-	 * @return the func1 button
-	 */
+	
+	 * @return the func1 button */
 	public JButton getFunc1Button() {
 	        return func1;
 	}
@@ -82,8 +116,22 @@ public class RandomEvent extends JPanel{
 	 */
 	private class FuncListener implements ActionListener{
 
+		/**
+		 * Method toString.
+		 * @return String
+		 */
+		@Override
+		public String toString(){
+			return "actionListener";
+		}
+		/**
+		 * Method actionPerformed.
+		 * @param e ActionEvent
+		
+		 * @see java.awt.event.ActionListener#actionPerformed(ActionEvent) */
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
 			
 			if(e.getSource().equals(flee)){
 				if(nptype==2){//Fleeing from a Tdaer, always successful
@@ -98,7 +146,7 @@ public class RandomEvent extends JPanel{
 			}
 			
 			if(e.getSource().equals(attack)){
-				if(np.takeDamage((int)Math.random()*10)){
+				if(np.canNpTakeDamage((int) Math.random()*10)){
 					message.setText("You succeeded");
 					exist=false;	//NP is dead get out of Random Event
 				}
@@ -110,7 +158,7 @@ public class RandomEvent extends JPanel{
 					}
 					
 					if(nptype==1||nptype==0){//Police or Pirate Attack back
-						int attack = (int)Math.random()*10;
+						int attack = (int) Math.random()*10;
 						message.setText("You have been attacked back. What do you want to do?");
 						player.takeDamage(attack);
 					}
@@ -126,7 +174,7 @@ public class RandomEvent extends JPanel{
 			        }
 			        else {
 			                message.setText("You have been attacked back, What do you want to do?");
-				        player.takeDamage((int)Math.random()*10);
+				        player.takeDamage((int) Math.random()*10);
 			        }
 			}
 			

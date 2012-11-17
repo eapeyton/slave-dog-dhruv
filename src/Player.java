@@ -13,13 +13,52 @@ public class Player implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	String name;
-	String difficulty;
-	Ship ship;
-	int money,pilotp,fighterp,traderp,enggp,bays,fuel;
-	int[] cargo;
-	int health=100;
-	StarSystem location;
+	/**
+	 * Field name.
+	 */
+	public String name;
+	/**
+	 * Field difficulty.
+	 */
+	public String difficulty;
+	/**
+	 * Field ship.
+	 */
+	public Ship ship;
+	/**
+	 * Field fuel.
+	 */
+	/**
+	 * Field bays.
+	 */
+	/**
+	 * Field enggp.
+	 */
+	/**
+	 * Field traderp.
+	 */
+	/**
+	 * Field fighterp.
+	 */
+	/**
+	 * Field pilotp.
+	 */
+	/**
+	 * Field money.
+	 */
+	public int money, pilotp, fighterp, traderp, enggp, bays, fuel;
+	/**
+	 * Field cargo.
+	 */
+	public int[] cargo;
+	/**
+	 * Field health.
+	 */
+	public int health=100;
+	/**
+	 * Field location.
+	 */
+	public StarSystem location;
 	
 	/**
 	 * 
@@ -51,16 +90,16 @@ public class Player implements Serializable
 	 * by the player.
 	 * 
 	 * @param cargoIndex The type of Cargo
-	 * @return the amount of that type of cargo
-	 */
+	
+	 * @return the amount of that type of cargo */
 	public int getCargo(int cargoIndex)
 	{
 		return cargo[cargoIndex];
 	}
 	
 	/**
-	 * @return Amount of fuel the player currently has
-	 */
+	
+	 * @return Amount of fuel the player currently has */
 	public int getFuel() {
 		return fuel;
 	}
@@ -82,7 +121,8 @@ public class Player implements Serializable
 	/**
 	 * Method is used when travelling, subtracts the amount of fuel that is used to go from
 	 * planet to planet
-	 * @param fuelLoss The amount of fuel to be subtracted
+	
+	 * @param fuelChange int
 	 */
 	public void setFuel(int fuelChange) {
 		fuel += fuelChange;
@@ -91,8 +131,8 @@ public class Player implements Serializable
 	/**
 	 * Getter for the amount of money.
 	 * 
-	 * @return the amount of money held by Player.
-	 */
+	
+	 * @return the amount of money held by Player. */
 	public int getMoney()
 	{
 		return money;
@@ -111,8 +151,8 @@ public class Player implements Serializable
 	/**
 	 * Getter for the amount of bays.
 	 * 
-	 * @return the amount of bays.
-	 */
+	
+	 * @return the amount of bays. */
 	public int getBays()
 	{
 		return bays;
@@ -130,8 +170,8 @@ public class Player implements Serializable
 	
 	/**
 	 * Getter for the current location of the player.
-	 * @return the StarSystem the player is currently at.
-	 */
+	
+	 * @return the StarSystem the player is currently at. */
 	public StarSystem getLocation()
 	{
 		return location;
@@ -139,8 +179,8 @@ public class Player implements Serializable
 	
 	/**
 	 * Gets the player's ship
-	 * @return the ship
-	 */
+	
+	 * @return the ship */
 	public Ship getShip()
 	{
 		return ship;
@@ -148,11 +188,15 @@ public class Player implements Serializable
 	
 	/**
 	 * Rewrote the toString method to return the player's attributes.
+	 * @return String
 	 */
 	public String toString() {
 		return "Player... \nName: " + name + "\nDifficulty: " + difficulty + "\nSkills...\nPilot: " + pilotp + "\nFighter: " + fighterp + "\nTrader: " + traderp + "\nEngineer: " + enggp;
 	}
 	
+	/**
+	 * Method relocate.
+	 */
 	public void relocate()
 	{
 		//TODO this method if player wants to warp to something
@@ -161,16 +205,16 @@ public class Player implements Serializable
 	/**
 	 * Pass in damage player has to take
 	 * @param damage
-	 * @return true if player is dead=> Game Over?
+	
 	 */
-	public boolean takeDamage(int damage){
+	public void takeDamage(int damage){
 		if(health-damage<=0){//Dead
 			health=0;
-			return true;
+			return;
 		}
 		else{//Not Dead
 			health=health-damage;
-			return false;
+			return;
 		}
 	}
 }

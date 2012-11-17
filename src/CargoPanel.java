@@ -20,31 +20,115 @@ import java.awt.GridLayout;
  * @version M7
  *
  */
-public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
-	private static int NUM_SUPPLY_TYPE = 6;
+public class CargoPanel extends JPanel implements ActionListener, ChangeListener{
+	/**
+	 * Field NUM_SUPPLY_TYPE.
+	 * (value is 6)
+	 */
+	private final static int NUM_SUPPLY_TYPE = 6;
 
+	/**
+	 * Field plyrRobots.
+	 */
+	/**
+	 * Field plyrWeps.
+	 */
+	/**
+	 * Field plyrMeds.
+	 */
+	/**
+	 * Field plyrDrugs.
+	 */
+	/**
+	 * Field plyrFood.
+	 */
+	/**
+	 * Field plyrWater.
+	 */
 	private JLabel plyrWater, plyrFood, plyrDrugs, plyrMeds, plyrWeps, plyrRobots; 
 
+	/**
+	 * Field cBays.
+	 */
+	/**
+	 * Field cMoney.
+	 */
+	/**
+	 * Field plRobots.
+	 */
+	/**
+	 * Field plWeps.
+	 */
+	/**
+	 * Field plMeds.
+	 */
+	/**
+	 * Field plDrugs.
+	 */
+	/**
+	 * Field plFood.
+	 */
+	/**
+	 * Field plWater.
+	 */
 	private JLabel plWater, plFood, plDrugs, plMeds, plWeps, plRobots, cMoney, cBays;
 
+	/**
+	 * Field spinners.
+	 */
 	private JSpinner[] spinners;
 
-	private JButton buyBtn,sellBtn,backBtn;
+	/**
+	 * Field backBtn.
+	 */
+	/**
+	 * Field sellBtn.
+	 */
+	/**
+	 * Field buyBtn.
+	 */
+	private JButton buyBtn, sellBtn, backBtn;
 
+	/**
+	 * Field robotCost.
+	 */
+	/**
+	 * Field weaponCost.
+	 */
+	/**
+	 * Field medCost.
+	 */
+	/**
+	 * Field drugCost.
+	 */
+	/**
+	 * Field foodCost.
+	 */
+	/**
+	 * Field waterCost.
+	 */
 	private int waterCost, foodCost, drugCost, medCost, weaponCost, robotCost;
 
+	/**
+	 * Field player.
+	 */
 	private Player player;
 
+	/**
+	 * Field curr.
+	 */
 	private StarSystem curr;
 
 	/**
 	 * Create the panel, using WindowBuilder. Sets the default values.
+	 * @param player Player
+	 * @param listener ActionListener
 	 */
-	public CargoPanel(Player player,ActionListener listener) {
+	public CargoPanel(Player player, ActionListener listener) {
 		
 		this.player = player;
 		curr = player.getLocation();
-		setLayout(new BorderLayout(0,0));
+		setLayout(new BorderLayout(0, 0));
 		
 		/**
 		 * Initialize supply costs
@@ -76,7 +160,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 		northPanel.add(cBays);
 		
 		//add north panel to main panel
-		add(northPanel,BorderLayout.NORTH);
+		add(northPanel, BorderLayout.NORTH);
 		
 		/**
 		 * CENTER Section:
@@ -113,7 +197,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 		//////////////
 		
 		//create array of spinners and add new spinners to it, with minimum value of 0 and no max
-		spinners = new JSpinner[NUM_SUPPLY_TYPE+1];
+		spinners = new JSpinner[7];
 		for(int i=1; i <= NUM_SUPPLY_TYPE; i++) {
 			spinners[i] = new JSpinner(new SpinnerNumberModel(0, 0, null, 1));
 			spinners[i].addChangeListener(this);
@@ -188,7 +272,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 		gridPanel.add(spinners[6]);
 		
 		//add the gridPanel to the main panel
-		add(gridPanel,BorderLayout.CENTER);
+		add(gridPanel, BorderLayout.CENTER);
 		
 		/**
 		 * SOUTH Section:
@@ -214,9 +298,14 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 		southPanel.add(backBtn);
 		
 		//add southPanel to main panel
-		add(southPanel,BorderLayout.SOUTH);
+		add(southPanel, BorderLayout.SOUTH);
 	}
 
+	/**
+	 * Method actionPerformed.
+	 * @param e ActionEvent
+	 * @see java.awt.event.ActionListener#actionPerformed(ActionEvent)
+	 */
 	@Override
 	/**
 	 * Handles the events. Performs the transactions based on which button is pressed and the values
@@ -236,7 +325,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 			//retrieve amount from all the spinners
 			totalQuantity = 0;
 			for(int i = 1; i <= NUM_SUPPLY_TYPE; i++) {
-				totalQuantity += (Integer)spinners[i].getValue();
+				totalQuantity += (Integer) spinners[i].getValue();
 			}
 			
 			//retrieve bays left
@@ -251,7 +340,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 			}
 			else{
 				//check water spinner
-				quant = (Integer)spinners[1].getValue();
+				quant = (Integer) spinners[1].getValue();
 				if(quant > curr.getCargo(1)){
 					JOptionPane.showMessageDialog(null, "Not enough water!");
 				}
@@ -269,7 +358,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 				}
 
 				//check food spinner
-				quant = (Integer)spinners[2].getValue();
+				quant = (Integer) spinners[2].getValue();
 				if(quant > curr.getCargo(2)){
 					JOptionPane.showMessageDialog(null, "Not enough food!");
 				}
@@ -287,7 +376,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 				}
 					
 				//check drug spinner
-				quant = (Integer)spinners[3].getValue();
+				quant = (Integer) spinners[3].getValue();
 				if(quant > curr.getCargo(3)){
 					JOptionPane.showMessageDialog(null, "Not enough of this item!");
 				}
@@ -305,7 +394,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 				}	
 				
 				//check medicine spinner
-				quant = (Integer)spinners[4].getValue();
+				quant = (Integer) spinners[4].getValue();
 				if(quant > curr.getCargo(4)){
 					JOptionPane.showMessageDialog(null, "Not enough drugs!");
 				}
@@ -323,7 +412,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 				}
 				
 				//check weapon spinner
-				quant = (Integer)spinners[5].getValue();
+				quant = (Integer) spinners[5].getValue();
 				if(quant > curr.getCargo(5)){
 					JOptionPane.showMessageDialog(null, "Not enough weapons!");
 				}
@@ -341,7 +430,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 				}
 
 				//check robots spinner
-				quant = (Integer)spinners[6].getValue();
+				quant = (Integer) spinners[6].getValue();
 				if(quant > curr.getCargo(6)){
 					JOptionPane.showMessageDialog(null, "Not enough robots!");
 				}
@@ -369,14 +458,14 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 			//retrieve amount from all the spinners
 			totalQuantity = 0;
 			for(int i = 1; i <= NUM_SUPPLY_TYPE; i++) {
-				totalQuantity += (Integer)spinners[i].getValue();
+				totalQuantity += (Integer) spinners[i].getValue();
 			}
 			
 			//retrieve bays left
 			bays = player.getBays();
 		
 			//check water spinner
-			quant = (Integer)spinners[1].getValue();
+			quant = (Integer) spinners[1].getValue();
 			if(quant > player.getCargo(1)){
 				JOptionPane.showMessageDialog(null, "Not enough water!");
 			}
@@ -389,7 +478,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 			}
 			
 			//check food spinner
-			quant = (Integer)spinners[2].getValue();
+			quant = (Integer) spinners[2].getValue();
 			if(quant > player.getCargo(2)){
 				JOptionPane.showMessageDialog(null, "Not enough food!");
 			}
@@ -402,7 +491,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 			}
 			
 			//check drug spinner
-			quant = (Integer)spinners[3].getValue();
+			quant = (Integer) spinners[3].getValue();
 			if(quant > player.getCargo(3)){
 				JOptionPane.showMessageDialog(null, "Not enough drugs!");
 			}
@@ -415,7 +504,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 			}
 			
 			//check medicine spinner
-			quant = (Integer)spinners[4].getValue();
+			quant = (Integer) spinners[4].getValue();
 			if(quant > player.getCargo(4)){
 				JOptionPane.showMessageDialog(null, "Not enough medicine!");
 			}
@@ -428,7 +517,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 			}
 			
 			//check weapons spinner
-			quant = (Integer)spinners[5].getValue();
+			quant = (Integer) spinners[5].getValue();
 			if(quant > player.getCargo(5)){
 				JOptionPane.showMessageDialog(null, "Not enough weapons!");
 			}
@@ -441,7 +530,7 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 			}
 			
 			//check robots spinner
-			quant = (Integer)spinners[6].getValue();
+			quant = (Integer) spinners[6].getValue();
 			if(quant > player.getCargo(6)){
 				JOptionPane.showMessageDialog(null, "Not enough robots!");
 			}
@@ -460,6 +549,8 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 	/**
 	 * Triggers when a spinner is changed.
 	 * param e Event for when the state of a spinner is change
+	 * @param e ChangeEvent
+	 * @see javax.swing.event.ChangeListener#stateChanged(ChangeEvent)
 	 */
 	public void stateChanged(ChangeEvent e) {
 		
@@ -500,10 +591,18 @@ public class CargoPanel extends JPanel implements ActionListener,ChangeListener{
 		cBays.setText("" + player.getBays());
 	}
 
+	/**
+	 * Method getBackBtn.
+	 * @return JButton
+	 */
 	public JButton getBackBtn() {
 		return backBtn;
 	}
 
+	/**
+	 * Method setBackBtn.
+	 * @param backBtn JButton
+	 */
 	public void setBackBtn(JButton backBtn) {
 		this.backBtn = backBtn;
 	}

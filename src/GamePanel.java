@@ -1,9 +1,9 @@
 import javax.swing.BoxLayout;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Point;
+
+
+
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
@@ -19,25 +19,63 @@ import javax.swing.JSpinner;
  * The GamePanel first appears after a player is created in the configuration screen.
  * @author Eric Peyton, Rikin Marfatia, Eric Morphis
  *
+ * @version $Revision: 1.0 $
  */
 public class GamePanel extends JPanel 
 {
 	
+	/**
+	 * Field player.
+	 */
 	public Player player;
+	/**
+	 * Field location.
+	 */
 	public StarSystem location;
-	public JLabel planetLbl,destinationLbl,fuelMoneyLbl;
+	/**
+	 * Field fuelMoneyLbl.
+	 */
+	/**
+	 * Field destinationLbl.
+	 */
+	/**
+	 * Field planetLbl.
+	 */
+	public JLabel planetLbl, destinationLbl, fuelMoneyLbl;
+    /**
+     * Field fuelSel.
+     */
     public JSpinner fuelSel;
-	public JButton market,go,save,buyFuel;
+	/**
+	 * Field buyFuel.
+	 */
+	/**
+	 * Field save.
+	 */
+	/**
+	 * Field go.
+	 */
+	/**
+	 * Field market.
+	 */
+	public JButton market, go, save, buyFuel;
+	/**
+	 * Field chart.
+	 */
 	public GalacticChart chart;
+	/**
+	 * Field universe.
+	 */
 	public ArrayList<StarSystem> universe;
 	
 	/**
 	 * Creates a new GamePanel taking in an ActionListener as a parameter.
 	 * @param listener an action listener
+	 * @param player Player
 	 */
 	public GamePanel(ActionListener listener, Player player) {
 		// Set the layout and the player
-		setLayout(new BorderLayout(0,0));
+		setLayout(new BorderLayout(0, 0));
 		this.player = player;
 		Random rand = new Random();
 		
@@ -62,8 +100,8 @@ public class GamePanel extends JPanel
 		centerPanel.setBorder(BorderFactory.createTitledBorder("Galactic Chart"));
 		centerPanel.setLayout(new BorderLayout());
 		centerPanel.add(chart, BorderLayout.CENTER);
-		centerPanel.add(go,BorderLayout.SOUTH);
-		add(centerPanel,BorderLayout.CENTER);
+		centerPanel.add(go, BorderLayout.SOUTH);
+		add(centerPanel, BorderLayout.CENTER);
 		
 		/**
 		 * SOUTH Section: Various buttons
@@ -81,14 +119,14 @@ public class GamePanel extends JPanel
 		southPanel.add(save);
 		southPanel.add(buyFuel);
 		southPanel.add(market);
-		add(southPanel,BorderLayout.SOUTH);
+		add(southPanel, BorderLayout.SOUTH);
 
 		/**
 		 * North Section: Information about the player, ship and planet
 		 */
 		JPanel northPanel = new JPanel();
 		northPanel.setBorder(BorderFactory.createTitledBorder("Info"));
-		northPanel.setLayout(new BoxLayout(northPanel,BoxLayout.Y_AXIS));
+		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
 		
 		planetLbl = new JLabel("Current Location: " + player.getLocation().getName() + "....Tech Level: " + player.getLocation().getTechLevel());
 		fuelMoneyLbl = new JLabel("Fuel Remaining: " + player.getFuel() + "....Money Remaining: " + player.getMoney());
@@ -96,7 +134,7 @@ public class GamePanel extends JPanel
 		northPanel.add(destinationLbl);
 		northPanel.add(planetLbl);
 		northPanel.add(fuelMoneyLbl);
-		add(northPanel,BorderLayout.NORTH);
+		add(northPanel, BorderLayout.NORTH);
 		
         //fuelSel=new JSpinner();
 
@@ -105,6 +143,8 @@ public class GamePanel extends JPanel
 	/**
 	 * Creates a new GamePanel from a save file.
 	 * @param listener an action listener
+	 * @param player Player
+	 * @param chart GalacticChart
 	 */
 	public GamePanel(ActionListener listener, Player player, GalacticChart chart) {
 		/**
@@ -161,14 +201,17 @@ public class GamePanel extends JPanel
 		
 	}
 	
+	/**
+	 * Method updateInfoLabels.
+	 */
 	public void updateInfoLabels() {
 		fuelMoneyLbl.setText("Fuel Remaining: " + player.getFuel() + "....Money Remaining: " + player.getMoney());
 	}
 	
 	/**
 	 * Gets the current location as given from the player
-	 * @return the current location
-	 */
+	
+	 * @return the current location */
 	public StarSystem getCurrentLocation()
 	{
 		return player.getLocation();
@@ -176,7 +219,8 @@ public class GamePanel extends JPanel
 	
 	/**
 	 * Gets the "market" button, essentially seeing if it was pressed.
-	 * @return
+	
+	 * @return JButton
 	 */
 	public JButton getMarketButton()
 	{
@@ -184,36 +228,40 @@ public class GamePanel extends JPanel
 	}
 	
 	/**
-	 * @return The go button
-	 */
+	
+	 * @return The go button */
 	public JButton getGoButton()
 	{
 		return go;
 	}
 	
+	/**
+	 * Method getSaveButton.
+	 * @return JButton
+	 */
 	public JButton getSaveButton()
 	{
 		return save;
 	}
 	
 	/**
-	 * @return The player
-	 */
+	
+	 * @return The player */
 	public Player getPlayer() {
 		return player;
 	}
 	
 	/**
-	 * @return The chart
-	 */
+	
+	 * @return The chart */
 	public GalacticChart getChart() {
 		return chart;
 	}
 
 	/**
 	 * Getter for buyFuel JButton
-	 * @return buyFuel JButton
-	 */
+	
+	 * @return buyFuel JButton */
 	public Object getBuyFuelButton() {
 		
 		return buyFuel;
@@ -221,16 +269,17 @@ public class GamePanel extends JPanel
         
         /**
         * Set the go button
-        * @param the new go button
-        */
+       
+        * @param newGoBtn JButton
+         */
         public void setGoBtn(JButton newGoBtn) {
                 go = newGoBtn;
         }
         
         /**
         * Get the go button
-        * @return the go button
-        */
+       
+        * @return the go button */
         public JButton getGoBtn() {
                 return go;
         }

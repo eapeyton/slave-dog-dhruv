@@ -15,16 +15,27 @@ import java.awt.event.ActionListener;
  * This screen is the first to open up when the game is run.
  * @author Eric Peyton
  *
+ * @version $Revision: 1.0 $
  */
 public class TitlePanel extends JPanel {
 	
+	/**
+	 * Field btnNewGame.
+	 */
 	private JButton btnNewGame;
+	/**
+	 * Field btnLoadGame.
+	 */
 	private JButton btnLoadGame;
+	/**
+	 * Field btnSettings.
+	 */
 	private JButton btnSettings;
 	
 	/**
-	 * Creates the title panel with a border layout. There is a bunch of GUI crap 
+	 * Creates the title panel with a border layout. There is a bunch of GUI stuff 
 	 * in the constructor but you shouldn't have to mess with it much anyways.
+	 * @param listener ActionListener
 	 */
 	public TitlePanel(ActionListener listener) {
 		setLayout(new BorderLayout(0, 0));
@@ -75,8 +86,8 @@ public class TitlePanel extends JPanel {
 	}
 
 	/**
-	 * @return the btnNewGame
-	 */
+	
+	 * @return the btnNewGame */
 	public JButton getBtnNewGame() {
 		return btnNewGame;
 	}
@@ -90,8 +101,8 @@ public class TitlePanel extends JPanel {
 	
 	/**
 	 * 
-	 * @return the btnLoadGame
-	 */
+	
+	 * @return the btnLoadGame */
 	public JButton getBtnLoadGame()
 	{
 		return btnLoadGame;

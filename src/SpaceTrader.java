@@ -5,6 +5,7 @@ import javax.swing.JFrame;
  * and runs the SpaceTrader game.
  * @author Eric Peyton,Eric Slep, Eric Morphis, Rikin Marfatia, Dhruv Saksena
  *
+ * @version $Revision: 1.0 $
  */
 public class SpaceTrader {
 	/**
@@ -18,6 +19,15 @@ public class SpaceTrader {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
+	}
+	
+	/**
+	 * Method toString.
+	 * @return String
+	 */
+	@Override
+	public String toString(){
+		return "SpaceTrader";
 	}
 	
 }

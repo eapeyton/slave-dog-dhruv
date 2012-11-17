@@ -10,22 +10,52 @@ import javax.swing.*;
 /**
  * Creates and draws a universe
  * @author Dhruv Saksena, Eric Morphis
+ * @version $Revision: 1.0 $
  */
 public class GalacticChart extends JPanel{
 	
+	/**
+	 * Field universe.
+	 */
 	private ArrayList<StarSystem> universe;
+	/**
+	 * Field player.
+	 */
 	private Player player;
+	/**
+	 * Field selected.
+	 */
 	private StarSystem selected;
+	/**
+	 * Field destination.
+	 */
 	private JLabel destination;
+	/**
+	 * Field go.
+	 */
 	private JButton go;
+	/**
+	 * Field adapter.
+	 */
 	private Adapter adapter;
 	
+	/**
+	 * Constructor for GalacticChart.
+	 * @param destination JLabel
+	 * @param go JButton
+	 */
 	public GalacticChart(JLabel destination, JButton go)
 	{
 		this.destination = destination;
 		this.go = go;
 	}
 	
+	/**
+	 * Constructor for GalacticChart.
+	 * @param destination JLabel
+	 * @param go JButton
+	 * @param universe ArrayList<StarSystem>
+	 */
 	public GalacticChart(JLabel destination, JButton go, ArrayList<StarSystem> universe)
 	{
 		this.destination = destination;
@@ -35,8 +65,8 @@ public class GalacticChart extends JPanel{
 	
 	/**
 	 * Generates and returns a universe with star systems named according to a pre-allocated library of names
-	 * @return Newly generated universe
-	 */
+	
+	 * @return Newly generated universe */
 	public ArrayList<StarSystem> generateUniverse(){
 		
 		
@@ -177,7 +207,8 @@ public class GalacticChart extends JPanel{
 	}
 	
 	/**
-	 * @param The player currently existing within this galactic chart's universe
+	
+	 * @param player Player
 	 */
 	public void setPlayer(Player player) {
 		this.player = player;
@@ -186,21 +217,23 @@ public class GalacticChart extends JPanel{
 	/**
 	 * Draws universe using the designated graphics object
 	 * @param universe The universe to be drawn
-	 * @param g The graphics object to draw the universe
+	
+	 * @param player Player
+	 * @param graphicPanel Graphics
 	 */
 	public void drawUniverse(ArrayList<StarSystem> universe, Player player, Graphics graphicPanel){
 		
 		int planetSize=8;//Planet Circle Size
 		graphicPanel.setColor(Color.GREEN);
 		for(int i=0;i<universe.size();i++){
-			graphicPanel.fillRect((int)universe.get(i).getLocation().getX() - planetSize/2,(int)universe.get(i).getLocation().getY() - planetSize/2,planetSize,planetSize);
+			graphicPanel.fillRect((int) universe.get(i).getLocation().getX() - planetSize/2 ,(int) universe.get(i).getLocation().getY() - planetSize/ 2,planetSize,planetSize);
 		}
 		graphicPanel.setColor(Color.BLUE);
-		graphicPanel.fillRect((int)player.location.getLocation().getX() - planetSize/2, (int)player.location.getLocation().getY() - planetSize/2, planetSize, planetSize);
-		graphicPanel.drawOval((int)player.location.getLocation().getX() - player.getFuel(), (int)player.location.getLocation().getY() - player.getFuel(), 2*player.getFuel(), 2*player.getFuel());
+		graphicPanel.fillRect((int) player.location.getLocation().getX() - planetSize/2, (int) player.location.getLocation().getY() - planetSize/2, planetSize, planetSize);
+		graphicPanel.drawOval((int) player.location.getLocation().getX() - player.getFuel(), (int) player.location.getLocation().getY() - player.getFuel(), 2*player.getFuel(), 2*player.getFuel());
 		if (selected != null) {
 			graphicPanel.setColor(Color.RED);
-			graphicPanel.fillRect((int)selected.getLocation().getX() - planetSize/2, (int)selected.getLocation().getY() - planetSize/2, planetSize, planetSize);
+			graphicPanel.fillRect((int) selected.getLocation().getX() - planetSize/2, (int) selected.getLocation().getY() - planetSize/2, planetSize, planetSize);
 			destination.setText("Destination: " + selected.getName());
 			go.setEnabled(true);
 		}
@@ -216,7 +249,8 @@ public class GalacticChart extends JPanel{
 	
 	/**
 	 * Draws a newly generated universe using the designated graphics object
-	 * @param g The graphics object to draw the universe
+	
+	 * @param graphicPanel Graphics
 	 */
 	public void paintComponent(Graphics graphicPanel){
 		setOpaque(false);
@@ -224,14 +258,15 @@ public class GalacticChart extends JPanel{
 	}
 	
 	/**
-	 * @return The currently selected star system
-	 */
+	
+	 * @return The currently selected star system */
 	public StarSystem getSelected() {
 		return selected;
 	}
 	
 	/**
 	 * param selected The currently selected star system
+	 * @param selected StarSystem
 	 */
 	public void setSelected(StarSystem selected) {
 		this.selected = selected;
@@ -239,8 +274,8 @@ public class GalacticChart extends JPanel{
 	
 	/**
 	 * Get the universe
-	 * @return universe
-	 */
+	
+	 * @return universe */
 	public ArrayList<StarSystem> getUniverse()
 	{
 		return universe;
@@ -252,8 +287,17 @@ public class GalacticChart extends JPanel{
 	 * Attached to a galactic chart to update the selected planet based on where the user clicks
 	 */
 	private class Adapter extends MouseAdapter {
+		/**
+		 * Field mapPlanetSize.
+		 */
 		public int mapPlanetSize;
+		/**
+		 * Field clickMap.
+		 */
 		public HashMap<Point, StarSystem> clickMap;
+		/**
+		 * Field graphicPanel.
+		 */
 		public Graphics graphicPanel;
 		
 		/**
@@ -268,8 +312,10 @@ public class GalacticChart extends JPanel{
 		
 		/**
 		 * Determines whether or not a valid selection was made, and if so, selects new planet
-		 * @param The mouse event causing this method to be called
-		 */
+		
+		 * @param me MouseEvent
+		
+		 * @see java.awt.event.MouseListener#mouseReleased(MouseEvent) */
 		public void mouseReleased(MouseEvent me) {
 			if (clickMap.containsKey(me.getPoint())) {
 				selected = clickMap.get(me.getPoint());
@@ -280,17 +326,26 @@ public class GalacticChart extends JPanel{
 	
 	/**
         * Set the go button
-        * @param the new go button
-        */
+       
+        * @param newGoBtn JButton
+	 */
         public void setGoBtn(JButton newGoBtn) {
                 go = newGoBtn;
         }
         
         /**
         * Get the go button
-        * @return the go button
-        */
+       
+        * @return the go button */
         public JButton getGoBtn() {
                 return go;
+        }
+        
+        /**
+         * Method toString.
+         * @return String
+         */
+        public String toString(){
+        	return "GalacticChart";
         }
 }

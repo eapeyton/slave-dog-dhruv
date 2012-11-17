@@ -11,23 +11,66 @@ import java.awt.event.KeyListener;
  * The configuration panel that displays when a new game is created.
  * @author Eric Peyton,Eric Slep, Eric Morphis, Rikin Marfatia, Dhruv Saksena
  *
+ * @version $Revision: 1.0 $
  */
-public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
+public class ConfigPanel extends JPanel implements ChangeListener, KeyListener {
 	
 	
 	//player attributes
-	private int pilotSkill,fighterSkill,traderSkill, engineerSkill;
+	/**
+	 * Field engineerSkill.
+	 */
+	/**
+	 * Field traderSkill.
+	 */
+	/**
+	 * Field fighterSkill.
+	 */
+	/**
+	 * Field pilotSkill.
+	 */
+	private int pilotSkill, fighterSkill, traderSkill, engineerSkill;
+	/**
+	 * Field remainingPoints.
+	 */
 	private int remainingPoints;
 	
 	//GUI components
+	/**
+	 * Field nameInput.
+	 */
 	private JTextField nameInput;
-	private JSpinner pilotSpinner,fighterSpinner,traderSpinner,engineerSpinner;
+	/**
+	 * Field engineerSpinner.
+	 */
+	/**
+	 * Field traderSpinner.
+	 */
+	/**
+	 * Field fighterSpinner.
+	 */
+	/**
+	 * Field pilotSpinner.
+	 */
+	private JSpinner pilotSpinner, fighterSpinner, traderSpinner, engineerSpinner;
+	/**
+	 * Field remaining.
+	 */
 	private JLabel remaining;
+	/**
+	 * Field difficulty.
+	 */
 	private JComboBox difficulty;
+	/**
+	 * Field pConfigDone.
+	 */
 	private JButton pConfigDone;
-	private boolean pConfigOption;
+	
 	
 	//player class to be created
+	/**
+	 * Field player.
+	 */
 	private Player player;
 	
 	/**
@@ -63,7 +106,7 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 		northPanel.add(title, BorderLayout.CENTER);
 		
 		//adding a little space between the title and top of window
-		northPanel.add(Box.createRigidArea(new Dimension(300, 10)),BorderLayout.NORTH);
+		northPanel.add(Box.createRigidArea(new Dimension(300, 10)), BorderLayout.NORTH);
 		
 		//Coded by E. Slep
 		JPanel namePanel = new JPanel();
@@ -74,7 +117,7 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 		namePanel.add(new JLabel("Name: "));
 		namePanel.add(nameInput);
 		northPanel.add(namePanel, BorderLayout.NORTH);
-		String[] diffs = {"Easy","Medium","Hard"};
+		String[] diffs = {"Easy", "Medium", "Hard"};
 		difficulty = new JComboBox(diffs);
 		northPanel.add(difficulty, BorderLayout.SOUTH);
 		
@@ -87,8 +130,8 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 		 */
 		//Coded by E. Slep
 		JPanel skillsPanel = new JPanel();
-		skillsPanel.setLayout(new GridLayout(5,2));
-		skillsPanel.setPreferredSize(new Dimension(200,100));
+		skillsPanel.setLayout(new GridLayout(5, 2));
+		skillsPanel.setPreferredSize(new Dimension(200, 100));
 		
 		//set up Spinners and JLabel to show remaining skill points
 		pilotSpinner = new JSpinner(new SpinnerNumberModel());
@@ -99,7 +142,7 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 		fighterSpinner.addChangeListener(this);
 		traderSpinner.addChangeListener(this);
 		engineerSpinner.addChangeListener(this);
-		remaining = new JLabel(((Integer)remainingPoints).toString());
+		remaining = new JLabel(((Integer) remainingPoints).toString());
 		
 		//adds all the components to the skillsPanel
 		skillsPanel.add(new JLabel("Remaining skill points: "));
@@ -118,7 +161,7 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 		 * Create GUI struts to control the width and height of the window.
 		 */
 		//a rigid area in the south panel that can be adjusted to control the width of the entire window
-		Component southWidth = Box.createRigidArea(new Dimension(500, 50));
+		//Component southWidth = Box.createRigidArea(new Dimension(500, 50));
 		pConfigDone= new JButton("Let's Play!");
 		pConfigDone.setEnabled(false);
 		//adding STPanel as action listener
@@ -126,8 +169,8 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 		add(pConfigDone, BorderLayout.SOUTH);
 		
 		//adding empty space to both sides of the window that can be adjusted to control the height of the entire window
-		add(Box.createRigidArea(new Dimension(20, 200)),BorderLayout.WEST);
-		add(Box.createRigidArea(new Dimension(20, 200)),BorderLayout.EAST);
+		add(Box.createRigidArea(new Dimension(20, 200)) ,BorderLayout.WEST);
+		add(Box.createRigidArea(new Dimension(20, 200)) ,BorderLayout.EAST);
 		
 		
 	}
@@ -137,16 +180,17 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 	 * When activated, this method creates the player from the input fields. The STPanel
 	 * activates this method so that only one listener is listening to the pConfigDone button
 	 * instead of two.
-	 * @return the created player
-	 */
+	
+	 * @return the created player */
 	public Player createPlayer() {
-		player= new Player(nameInput.getText(),(Integer)pilotSpinner.getValue(),(Integer)fighterSpinner.getValue(),(Integer)traderSpinner.getValue(),(Integer)engineerSpinner.getValue(),(String)difficulty.getSelectedItem());
+		player= new Player(nameInput.getText() ,(Integer) pilotSpinner.getValue( ),(Integer) fighterSpinner.getValue (),(Integer) traderSpinner.getValue(),(Integer) engineerSpinner.getValue(),(String) difficulty.getSelectedItem());
 		return player;
 	}
 	
 	/**
 	 * @param e Event for when the state of a spinner is changed
-	 * @author Eric Slep
+	
+	 * @see javax.swing.event.ChangeListener#stateChanged(ChangeEvent)
 	 */
 	public void stateChanged(ChangeEvent e){
 		/*
@@ -154,12 +198,12 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 		 * the maximum bounds on the spinner values.
 		 */
 		if(e.getSource().equals(pilotSpinner)||e.getSource().equals(fighterSpinner)||e.getSource().equals(traderSpinner)||e.getSource().equals(engineerSpinner)){
-			remainingPoints = 16-(Integer)pilotSpinner.getValue()-(Integer)fighterSpinner.getValue()-(Integer)traderSpinner.getValue()-(Integer)engineerSpinner.getValue();
-			pilotSpinner.setModel(new SpinnerNumberModel((Number)pilotSpinner.getValue(),(Integer)0,remainingPoints+(Integer)pilotSpinner.getValue(),(Number)1));
-			fighterSpinner.setModel(new SpinnerNumberModel((Number)fighterSpinner.getValue(),(Integer)0,remainingPoints+(Integer)fighterSpinner.getValue(),(Number)1));
-			traderSpinner.setModel(new SpinnerNumberModel((Number)traderSpinner.getValue(),(Integer)0,remainingPoints+(Integer)traderSpinner.getValue(),(Number)1));
+			remainingPoints = 16-(Integer) pilotSpinner.getValue()-(Integer) fighterSpinner.getValue()-(Integer) traderSpinner.getValue()-(Integer) engineerSpinner.getValue();
+			pilotSpinner.setModel(new SpinnerNumberModel((Number) pilotSpinner. getValue(), (Integer) 0,remainingPoints+(Integer) pilotSpinner.getValue(),(Number) 1));
+			fighterSpinner.setModel(new SpinnerNumberModel((Number) fighterSpinner.getValue(),(Integer) 0,remainingPoints+(Integer) fighterSpinner.getValue(),(Number) 1));
+			traderSpinner.setModel(new SpinnerNumberModel((Number) traderSpinner.getValue(),(Integer) 0,remainingPoints+(Integer)traderSpinner.getValue(),(Number)1));
 			engineerSpinner.setModel(new SpinnerNumberModel((Number)engineerSpinner.getValue(),(Integer)0,remainingPoints+(Integer)engineerSpinner.getValue(),(Number)1));
-			remaining.setText(remainingPoints);
+			remaining.setText(remainingPoints+"");
 		
 		}
 		
@@ -173,6 +217,11 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 	}
 	
 	
+	/**
+	 * Method keyPressed.
+	 * @param e KeyEvent
+	 * @see java.awt.event.KeyListener#keyPressed(KeyEvent)
+	 */
 	public void keyPressed(KeyEvent e)
 	{
 		if(e.getSource().equals(nameInput)&&!nameInput.getText().isEmpty()&&remainingPoints==0)
@@ -185,30 +234,52 @@ public class ConfigPanel extends JPanel implements ChangeListener,KeyListener {
 		}
 	}
 	
+	/**
+	 * Method keyReleased.
+	 * @param e KeyEvent
+	 * @see java.awt.event.KeyListener#keyReleased(KeyEvent)
+	 */
 	public void keyReleased(KeyEvent e){
-		if(e.getSource()==nameInput&&!nameInput.getText().isEmpty()&&remainingPoints==0){
+		if(e.getSource().equals(nameInput)&&!nameInput.getText().isEmpty()&&remainingPoints==0){
 			pConfigDone.setEnabled(true);
 		}
-		if(e.getSource()==nameInput&&nameInput.getText().isEmpty()){
+		if(e.getSource().equals(nameInput)&&nameInput.getText().isEmpty()){
 			pConfigDone.setEnabled(false);
 		}
 	}
 	
+	/**
+	 * Method keyTyped.
+	 * @param e KeyEvent
+	 * @see java.awt.event.KeyListener#keyTyped(KeyEvent)
+	 */
 	public void keyTyped(KeyEvent e){
-		if(e.getSource()==nameInput&&!nameInput.getText().isEmpty()&&remainingPoints==0){
+		if(e.getSource().equals(nameInput)&&!nameInput.getText().isEmpty()&&remainingPoints==0){
 			pConfigDone.setEnabled(true);
 		}
-		if(e.getSource()==nameInput&&nameInput.getText().isEmpty()){
+		if(e.getSource().equals(nameInput)&&nameInput.getText().isEmpty()){
 			pConfigDone.setEnabled(false);
 		}
 	}
 	
+	/**
+	 * Method getPlayer.
+	 * @return Player
+	 */
 	public Player getPlayer() {
 		return player;
 	}
+	/**
+	 * Method getpConfigDone.
+	 * @return JButton
+	 */
 	public JButton getpConfigDone() {
 		return pConfigDone;
 	}
+	/**
+	 * Method setpConfigDone.
+	 * @param pConfigDone JButton
+	 */
 	public void setpConfigDone(JButton pConfigDone) {
 		this.pConfigDone = pConfigDone;
 	}

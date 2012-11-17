@@ -27,26 +27,74 @@ public class STPanel extends JPanel implements ActionListener {
 	
 
 	//store the layout
+	/**
+	 * Field layout.
+	 */
 	private CardLayout layout;
 	
 	//store the various screens
+	/**
+	 * Field game.
+	 */
 	private GamePanel game;
+	/**
+	 * Field config.
+	 */
 	private ConfigPanel config;
-	private GalacticChart chart;
+	
+	/**
+	 * Field title.
+	 */
 	private TitlePanel title;
+	/**
+	 * Field cargo.
+	 */
 	private CargoPanel cargo;
+	/**
+	 * Field files.
+	 */
 	private FilePanel files;
+	/**
+	 * Field random.
+	 */
 	private RandomEvent random;
 	
 	//store the player of the game
+	/**
+	 * Field player.
+	 */
 	private Player player;
 	
 	//store the strings to reference screens in the card layout
+	/**
+	 * Field GAMEPANEL.
+	 * (value is ""Main Game Panel"")
+	 */
 	final static String GAMEPANEL = "Main Game Panel";
+	/**
+	 * Field CONFIGPANEL.
+	 * (value is ""Player Configuration Panel"")
+	 */
 	final static String CONFIGPANEL = "Player Configuration Panel";
+	/**
+	 * Field TITLEPANEL.
+	 * (value is ""Title Panel"")
+	 */
 	final static String TITLEPANEL = "Title Panel";
+	/**
+	 * Field CARGOPANEL.
+	 * (value is ""Cargo Panel"")
+	 */
 	final static String CARGOPANEL = "Cargo Panel";
+	/**
+	 * Field FILEPANEL.
+	 * (value is ""File Select Panel"")
+	 */
 	final static String FILEPANEL = "File Select Panel";
+	/**
+	 * Field RANDOMPANEL.
+	 * (value is ""Random Event Panel"")
+	 */
 	final static String RANDOMPANEL = "Random Event Panel";
 	
 	/**
@@ -57,7 +105,7 @@ public class STPanel extends JPanel implements ActionListener {
 		 * Set the layout to a card layout and store the layout for use later.
 		 */
 		setLayout(new CardLayout(0, 0));
-		layout = (CardLayout)getLayout();
+		layout = (CardLayout) getLayout();
 		
 		/**
 		 * Create the various panels or "screens' and pass in STPanel as an Action Listener.
@@ -77,12 +125,14 @@ public class STPanel extends JPanel implements ActionListener {
 		add(title, TITLEPANEL);
 		add(files, FILEPANEL);
 		
-		layout.show(this,TITLEPANEL);
+		layout.show(this ,TITLEPANEL);
 		
 	}
 	
 	/**
 	 * The listener for various GUI elements all over the game
+	 * @param e ActionEvent
+	 * @see java.awt.event.ActionListener#actionPerformed(ActionEvent)
 	 */
 	public void actionPerformed(ActionEvent e) {
 		/**
@@ -97,7 +147,7 @@ public class STPanel extends JPanel implements ActionListener {
 			//create game panel and show
 			game = new GamePanel(this, player);
 			add(game, GAMEPANEL);
-			layout.show(this,GAMEPANEL);
+			layout.show(this ,GAMEPANEL);
 		}
 		if(game != null)
 		{
@@ -107,7 +157,7 @@ public class STPanel extends JPanel implements ActionListener {
 			*/
 			if(e.getSource().equals(game.getMarketButton()))
 			{
-				cargo = new CargoPanel(player,this);
+				cargo = new CargoPanel(player ,this);
 				add(cargo, CARGOPANEL);
 				layout.show(this, CARGOPANEL);
 			}
@@ -120,9 +170,9 @@ public class STPanel extends JPanel implements ActionListener {
 			        double chance = Math.random();
 			        /* Create a random event, else update the game */
 			        if(chance < .5) {
-			                random = new RandomEvent(0,player,this);
+			                random = new RandomEvent(0 ,player ,this);
 			                add(random, RANDOMPANEL);
-			                layout.show(this,RANDOMPANEL);
+			                layout.show(this ,RANDOMPANEL);
 			        }
 			        else {
 			                game.update();
@@ -133,7 +183,7 @@ public class STPanel extends JPanel implements ActionListener {
 			 */
 			if(random != null && e.getSource().equals(random.getFunc1Button())) {
 			        if(random.getFunc1Button().getText().equals("Continue")) {
-			                layout.show(this,GAMEPANEL);
+			                layout.show(this ,GAMEPANEL);
 			                game.update();
 			        }
 			}
@@ -143,7 +193,7 @@ public class STPanel extends JPanel implements ActionListener {
 			if(e.getSource().equals(game.getSaveButton()))
 			{
 				files.setModeSave();
-				layout.show(this,FILEPANEL);
+				layout.show(this ,FILEPANEL);
 				
 			}
 			/**
@@ -157,7 +207,7 @@ public class STPanel extends JPanel implements ActionListener {
 								if (option == JOptionPane.OK_OPTION) // User hit OK button
 								{
 										// Get the fuel amount and change the player's fuel and money
-										int amount = (Integer)fuelSpinner.getValue();
+										int amount = (Integer) fuelSpinner.getValue();
 										if(amount > 0) {
 	                                        if(player.getMoney()>=amount*10){
 	                                                player.setMoney(player.getMoney()-amount*10);
@@ -229,19 +279,21 @@ public class STPanel extends JPanel implements ActionListener {
 					}
 					try
 					{
-						Player player = (Player)OIStream.readObject();
-						ArrayList<StarSystem> universe = (ArrayList<StarSystem>)OIStream.readObject();
-						HashMap<Point, StarSystem> usedLocations = (HashMap<Point, StarSystem>)OIStream.readObject();
+						Player player = (Player) OIStream.readObject();
+						ArrayList<StarSystem> universe = (ArrayList<StarSystem>) OIStream.readObject();
+						HashMap<Point, StarSystem> usedLocations = (HashMap<Point, StarSystem>) OIStream.readObject();
 						StarSystem.setUsedLocations(usedLocations);
-						StarSystem selected = (StarSystem)OIStream.readObject();
+						StarSystem selected = (StarSystem) OIStream.readObject();
 						JLabel destination = new JLabel("Destination:");
 						JButton newGo = new JButton("Go!");
-						GalacticChart chart = new GalacticChart(destination,newGo,universe);
+						GalacticChart chart = new GalacticChart(destination, newGo,universe);
 						chart.setPlayer(player);
 						chart.setSelected(selected);
 						game = new GamePanel(this, player, chart);
 						newGo.setEnabled(true);
 						this.player = player;
+						FIStream.close();
+						
 					}
 					catch (ClassNotFoundException e1) {
 						// TODO Auto-generated catch block
@@ -301,10 +353,12 @@ public class STPanel extends JPanel implements ActionListener {
 			}
 			else if(e.getActionCommand().equals("CancelSelection"))
 			{
-				if(files.getFileChooser().getDialogType()==JFileChooser.OPEN_DIALOG)
+				if(files.getFileChooser().getDialogType()==JFileChooser.OPEN_DIALOG){
 					layout.show(this, TITLEPANEL);
-				else if(files.getFileChooser().getDialogType()==JFileChooser.SAVE_DIALOG)
+				}
+				else if(files.getFileChooser().getDialogType()==JFileChooser.SAVE_DIALOG){
 					layout.show(this, GAMEPANEL);
+				}
 			}
 		}
 	}

@@ -5,6 +5,7 @@ import java.io.Serializable;
  * 
  * @author Rikin Marfatia
  *
+ * @version $Revision: 1.0 $
  */
 public class Ship implements Serializable
 {
@@ -12,9 +13,21 @@ public class Ship implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 2L;
+	/**
+	 * Field bays.
+	 */
 	int bays;
+	/**
+	 * Field health.
+	 */
 	int health;
+	/**
+	 * Field sheild.
+	 */
 	int sheild;
+	/**
+	 * Field type.
+	 */
 	String type;
 	
 	// Add specificities for each type of ship, type will be chosen dependent on the number entered into the constructor
@@ -30,14 +43,30 @@ public class Ship implements Serializable
 		type = "Gnat";
 	}
 	
+	/**
+	 * Method setBays.
+	 * @param bays int
+	 */
 	public void setBays(int bays)
 	{
 		this.bays = bays;
 	}
 	
+	/**
+	 * Method getBays.
+	
+	 * @return int */
 	public int getBays()
 	{
 		return bays;
+	}
+	
+	/**
+	 * Method toString.
+	 * @return String
+	 */
+	public String toString(){
+		return ""+type;
 	}
 	
 }
