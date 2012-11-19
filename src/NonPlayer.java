@@ -6,6 +6,11 @@
  * @version $Revision: 1.0 $
  */
 public class NonPlayer {
+	/**
+	 * Field INITIAL_HEALTH.
+	 * (value is 100)
+	 */
+	private static final int INITIAL_HEALTH = 100;
 
 	/**
 	 * Field type.
@@ -18,7 +23,7 @@ public class NonPlayer {
 	/**
 	 * Field health.
 	 */
-	public int health = 100;
+	public int health;
 
 	/**
 	 * Constructor for NonPlayer.
@@ -27,6 +32,7 @@ public class NonPlayer {
 	 *            int
 	 */
 	public NonPlayer(int type) {
+		this.health = INITIAL_HEALTH;
 		this.type = type;
 		ship = new Ship();
 	}
@@ -36,8 +42,8 @@ public class NonPlayer {
 	 * 
 	 * @param damage
 	 * 
-	 * @return true if non player is dead
-	 */
+	
+	 * @return true if non player is dead */
 
 	public boolean canNpTakeDamage(int damage) {
 		if (health - damage <= 0) {// Dead
@@ -52,8 +58,8 @@ public class NonPlayer {
 	/**
 	 * Method toString.
 	 * 
-	 * @return String
-	 */
+	
+	 * @return String */
 	public String toString() {
 		return type + "";
 	}

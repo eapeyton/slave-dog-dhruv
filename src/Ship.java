@@ -33,6 +33,16 @@ public class Ship implements Serializable {
 	 * Field type.
 	 */
 	private final String type;
+	
+	/**
+	 * Field INITIAL_SHIELD.
+	 * (value is 0)
+	 */
+	/**
+	 * Field INITIAL_HEALTH.
+	 * (value is 100)
+	 */
+	private static final int INITIAL_HEALTH = 100, INITIAL_SHIELD = 0;
 
 	// Add specificities for each type of ship, type will be chosen dependent on
 	// the number entered into the constructor
@@ -40,9 +50,9 @@ public class Ship implements Serializable {
 	 * Default Constructor, for now Sets up the base stats of the ship.
 	 */
 	public Ship(/* int type */) {
-		bays = 12;
-		health = 100;
-		sheild = 0;
+		bays = Player.INITIAL_BAYS;
+		health = INITIAL_HEALTH;
+		sheild = INITIAL_SHIELD;
 		type = "Gnat";
 	}
 
@@ -59,8 +69,8 @@ public class Ship implements Serializable {
 	/**
 	 * Method getBays.
 	 * 
-	 * @return int
-	 */
+	
+	 * @return int */
 	public int getBays() {
 		return bays;
 	}
@@ -68,8 +78,8 @@ public class Ship implements Serializable {
 	/**
 	 * Method toString.
 	 * 
-	 * @return String
-	 */
+	
+	 * @return String */
 	public String toString() {
 		return "" + type;
 	}

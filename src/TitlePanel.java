@@ -35,6 +35,35 @@ public class TitlePanel extends JPanel {
 	 * Field btnSettings.
 	 */
 	private final JButton btnSettings;
+	
+	/**
+	 * Field TITLE_FONT.
+	 */
+	private static final Font TITLE_FONT = new Font("Ubuntu", Font.BOLD, 38);
+	/**
+	 * Field MENU_FONT.
+	 */
+	private static final Font MENU_FONT = new Font("Purisa", Font.BOLD, 20);
+	/**
+	 * Field TITLE_STRUT.
+	 */
+	private static final Component TITLE_STRUT = Box.createVerticalStrut(40);
+	/**
+	 * Field MENU_STRUT.
+	 */
+	private static final Component MENU_STRUT = Box.createVerticalStrut(15);
+	/**
+	 * Field MENU_STRUT_2.
+	 */
+	private static final Component MENU_STRUT_2 = Box.createVerticalStrut(15);
+	/**
+	 * Field SIDE_AREA.
+	 */
+	private static final Component SIDE_AREA = Box.createRigidArea(new Dimension(50, 200));
+	/**
+	 * Field SOUTH_AREA.
+	 */
+	private static final Component SOUTH_AREA = Box.createRigidArea(new Dimension(500, 20));
 
 	/**
 	 * Creates the title panel with a border layout. There is a bunch of GUI
@@ -50,55 +79,45 @@ public class TitlePanel extends JPanel {
 		final JLabel lblSpaceTraderRevamped = new JLabel(
 				"Space Trader Revamped");
 		lblSpaceTraderRevamped.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSpaceTraderRevamped.setFont(new Font("Ubuntu", Font.BOLD, 38));
+		lblSpaceTraderRevamped.setFont(TITLE_FONT);
 		add(lblSpaceTraderRevamped, BorderLayout.NORTH);
 
 		final JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-		final Component verticalStrut_2 = Box.createVerticalStrut(40);
-		panel.add(verticalStrut_2);
+		panel.add(TITLE_STRUT);
 
 		btnNewGame = new JButton("NEW GAME");
-		btnNewGame.setFont(new Font("Purisa", Font.BOLD, 20));
+		btnNewGame.setFont(MENU_FONT);
 		btnNewGame.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnNewGame.addActionListener(listener);
 		panel.add(btnNewGame);
 
-		final Component verticalStrut = Box.createVerticalStrut(15);
-		panel.add(verticalStrut);
+		panel.add(MENU_STRUT);
 
 		btnLoadGame = new JButton("LOAD GAME");
-		btnLoadGame.setFont(new Font("Purisa", Font.BOLD, 20));
+		btnLoadGame.setFont(MENU_FONT);
 		btnLoadGame.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnLoadGame.addActionListener(listener);
 		panel.add(btnLoadGame);
 
-		final Component verticalStrut_1 = Box.createVerticalStrut(15);
-		panel.add(verticalStrut_1);
+		panel.add(MENU_STRUT_2);
 
 		btnSettings = new JButton("SETTINGS");
-		btnSettings.setFont(new Font("Purisa", Font.BOLD, 20));
+		btnSettings.setFont(MENU_FONT);
 		btnSettings.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel.add(btnSettings);
 
-		final Component rigidArea = Box.createRigidArea(new Dimension(50, 200));
-		add(rigidArea, BorderLayout.WEST);
-
-		final Component rigidArea_1 = Box
-				.createRigidArea(new Dimension(50, 200));
-		add(rigidArea_1, BorderLayout.EAST);
-
-		final Component rigidArea_2 = Box
-				.createRigidArea(new Dimension(500, 20));
-		add(rigidArea_2, BorderLayout.SOUTH);
+		add(SIDE_AREA, BorderLayout.WEST);
+		add(SIDE_AREA, BorderLayout.EAST);
+		add(SOUTH_AREA, BorderLayout.SOUTH);
 	}
 
 	/**
 	 * 
-	 * @return the btnNewGame
-	 */
+	
+	 * @return the btnNewGame */
 	public JButton getBtnNewGame() {
 		return btnNewGame;
 	}
@@ -114,8 +133,8 @@ public class TitlePanel extends JPanel {
 	/**
 	 * 
 	 * 
-	 * @return the btnLoadGame
-	 */
+	
+	 * @return the btnLoadGame */
 	public JButton getBtnLoadGame() {
 		return btnLoadGame;
 	}
