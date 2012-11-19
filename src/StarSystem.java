@@ -32,7 +32,7 @@ public class StarSystem implements Serializable
 	/**
 	 * Field techLevel.
 	 */
-	private int techLevel, resources, govt;	//planet attributes
+	private final int techLevel, resources, govt;	//planet attributes
 	/**
 	 * Field usedLocations.
 	 */
@@ -50,7 +50,7 @@ public class StarSystem implements Serializable
 	/**
 	 * Field cargo.
 	 */
-	private int[] cargo;
+	private final int[] cargo;
 	// more cargo can be added
 	
 	/**
@@ -177,7 +177,7 @@ public class StarSystem implements Serializable
 	
 	 * @return A hashmap mapping points on the map to star systems */
 	public HashMap<Point, StarSystem> getClickMap(int mapPlanetSize, int range) {
-		HashMap<Point, StarSystem> clickMap = new HashMap<Point, StarSystem>();
+		final HashMap<Point, StarSystem> clickMap = new HashMap<Point, StarSystem>();
 		for (StarSystem ss : UsedLocations.values()) {
 			if (!ss.equals(this) && distanceToStarSystem(ss) <= range) {
 				for (int i = -mapPlanetSize/2; i <= mapPlanetSize/2; i++) {

@@ -12,7 +12,7 @@ public class STFrame extends JFrame {
 	/**
 	 * Field panel.
 	 */
-	private STPanel panel;
+	private final STPanel panel;
 	
 	/**
 	 * Creates the STFrame using the JFrame constructor. Adds the corresponding panel, STPanel.

@@ -89,12 +89,12 @@ public class RandomEvent extends JPanel{
 			func1.setText("Trade");
 			np=new NonPlayer(2);
 		}
-		ImageIcon pirateIcon = new ImageIcon("../img/pirate.jpg", "A Space Pirate!");
+		final ImageIcon pirateIcon = new ImageIcon("../img/pirate.jpg", "A Space Pirate!");
 		add(new JLabel(pirateIcon), BorderLayout.CENTER);
 		message.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(message, BorderLayout.NORTH);
 		
-		JPanel buttonSouth = new JPanel();
+		final JPanel buttonSouth = new JPanel();
 		buttonSouth.add(func1);
 		buttonSouth.add(attack);
 		buttonSouth.add(flee);
@@ -158,7 +158,7 @@ public class RandomEvent extends JPanel{
 					}
 					
 					if(nptype==1||nptype==0){//Police or Pirate Attack back
-						int attack = (int) Math.random()*10;
+						final int attack = (int) Math.random()*10;
 						message.setText("You have been attacked back. What do you want to do?");
 						player.takeDamage(attack);
 					}

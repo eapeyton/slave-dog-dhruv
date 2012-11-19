@@ -1,11 +1,16 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.event.*;
 import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
-import javax.swing.*;
 
 /**
  * Creates and draws a universe
@@ -17,7 +22,7 @@ public class GalacticChart extends JPanel{
 	/**
 	 * Field universe.
 	 */
-	private ArrayList<StarSystem> universe;
+	private List<StarSystem> universe;
 	/**
 	 * Field player.
 	 */
@@ -56,7 +61,7 @@ public class GalacticChart extends JPanel{
 	 * @param go JButton
 	 * @param universe ArrayList<StarSystem>
 	 */
-	public GalacticChart(JLabel destination, JButton go, ArrayList<StarSystem> universe)
+	public GalacticChart(JLabel destination, JButton go, List<StarSystem> universe)
 	{
 		this.destination = destination;
 		this.go = go;
@@ -67,10 +72,10 @@ public class GalacticChart extends JPanel{
 	 * Generates and returns a universe with star systems named according to a pre-allocated library of names
 	
 	 * @return Newly generated universe */
-	public ArrayList<StarSystem> generateUniverse(){
+	public List<StarSystem> generateUniverse(){
 		
 		
-		String[] SolarSystemName=
+		final String[] solarSystemName=
 			{
 			    "Acamar",
 			    "Adahn",		// The alternate personality for The Nameless One in "Planescape: Torment"
@@ -194,10 +199,10 @@ public class GalacticChart extends JPanel{
 			    "Zuul"			// From the first Ghostbusters movie
 			};
 		
-		ArrayList<StarSystem> universe=new ArrayList<StarSystem>();
+		final List<StarSystem> universe=new ArrayList<StarSystem>();
 		
-		for(int i=0;i<SolarSystemName.length;i++){
-			universe.add(new StarSystem(SolarSystemName[i]));
+		for(int i=0;i<solarSystemName.length;i++){
+			universe.add(new StarSystem(solarSystemName[i]));
 		}
 		//TODO Add check so that Star Systems dont get generated on top of each other
 		
@@ -221,19 +226,19 @@ public class GalacticChart extends JPanel{
 	 * @param player Player
 	 * @param graphicPanel Graphics
 	 */
-	public void drawUniverse(ArrayList<StarSystem> universe, Player player, Graphics graphicPanel){
+	public void drawUniverse(List<StarSystem> universe, Player player, Graphics graphicPanel){
 		
-		int planetSize=8;//Planet Circle Size
+		final int planetSize=8;//Planet Circle Size
 		graphicPanel.setColor(Color.GREEN);
 		for(int i=0;i<universe.size();i++){
-			graphicPanel.fillRect((int) universe.get(i).getLocation().getX() - planetSize/2 ,(int) universe.get(i).getLocation().getY() - planetSize/ 2,planetSize,planetSize);
+			graphicPanel.fillRect((int) universe.get(i).getLocation().getX() - (planetSize >> 1) ,(int) universe.get(i).getLocation().getY() - (planetSize >> 1),planetSize,planetSize);
 		}
 		graphicPanel.setColor(Color.BLUE);
-		graphicPanel.fillRect((int) player.location.getLocation().getX() - planetSize/2, (int) player.location.getLocation().getY() - planetSize/2, planetSize, planetSize);
+		graphicPanel.fillRect((int) player.location.getLocation().getX() - (planetSize >> 1), (int) player.location.getLocation().getY() - (planetSize >> 1), planetSize, planetSize);
 		graphicPanel.drawOval((int) player.location.getLocation().getX() - player.getFuel(), (int) player.location.getLocation().getY() - player.getFuel(), 2*player.getFuel(), 2*player.getFuel());
 		if (selected != null) {
 			graphicPanel.setColor(Color.RED);
-			graphicPanel.fillRect((int) selected.getLocation().getX() - planetSize/2, (int) selected.getLocation().getY() - planetSize/2, planetSize, planetSize);
+			graphicPanel.fillRect((int) selected.getLocation().getX() - (planetSize >> 1), (int) selected.getLocation().getY() - (planetSize >> 1), planetSize, planetSize);
 			destination.setText("Destination: " + selected.getName());
 			go.setEnabled(true);
 		}
@@ -252,6 +257,7 @@ public class GalacticChart extends JPanel{
 	
 	 * @param graphicPanel Graphics
 	 */
+	@Override
 	public void paintComponent(Graphics graphicPanel){
 		setOpaque(false);
 		drawUniverse(universe, player, graphicPanel);
@@ -276,7 +282,7 @@ public class GalacticChart extends JPanel{
 	 * Get the universe
 	
 	 * @return universe */
-	public ArrayList<StarSystem> getUniverse()
+	public List<StarSystem> getUniverse()
 	{
 		return universe;
 	}
@@ -294,7 +300,7 @@ public class GalacticChart extends JPanel{
 		/**
 		 * Field clickMap.
 		 */
-		public HashMap<Point, StarSystem> clickMap;
+		public Map<Point,StarSystem> clickMap;
 		/**
 		 * Field graphicPanel.
 		 */
@@ -304,7 +310,7 @@ public class GalacticChart extends JPanel{
 		 * Constructor gets a map of valid click locations
 		 * @param mapPlanetSize The size of the planets on the map
 		 */
-		public Adapter(int mapPlanetSize) {
+		private Adapter(int mapPlanetSize) {
 			this.mapPlanetSize = mapPlanetSize;
 			clickMap = player.location.getClickMap(mapPlanetSize, player.getFuel());
 			graphicPanel = getGraphics();
@@ -321,6 +327,11 @@ public class GalacticChart extends JPanel{
 				selected = clickMap.get(me.getPoint());
 				paintComponent(getGraphics());
 			}
+		}
+		
+		@Override
+		public String toString() {
+			return "Adapter of size " + mapPlanetSize;
 		}
 	}
 	
@@ -345,6 +356,7 @@ public class GalacticChart extends JPanel{
          * Method toString.
          * @return String
          */
+        @Override
         public String toString(){
         	return "GalacticChart";
         }

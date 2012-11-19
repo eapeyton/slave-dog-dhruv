@@ -15,7 +15,7 @@ public class SpaceTrader {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		STFrame frame = new STFrame("Space Trader Revamped");
+		final STFrame frame = new STFrame("Space Trader Revamped");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);

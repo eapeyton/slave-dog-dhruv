@@ -26,11 +26,11 @@ public class TitlePanel extends JPanel {
 	/**
 	 * Field btnLoadGame.
 	 */
-	private JButton btnLoadGame;
+	private final JButton btnLoadGame;
 	/**
 	 * Field btnSettings.
 	 */
-	private JButton btnSettings;
+	private final JButton btnSettings;
 	
 	/**
 	 * Creates the title panel with a border layout. There is a bunch of GUI stuff 
@@ -40,16 +40,16 @@ public class TitlePanel extends JPanel {
 	public TitlePanel(ActionListener listener) {
 		setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblSpaceTraderRevamped = new JLabel("Space Trader Revamped");
+		final JLabel lblSpaceTraderRevamped = new JLabel("Space Trader Revamped");
 		lblSpaceTraderRevamped.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSpaceTraderRevamped.setFont(new Font("Ubuntu", Font.BOLD, 38));
 		add(lblSpaceTraderRevamped, BorderLayout.NORTH);
 		
-		JPanel panel = new JPanel();
+		final JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
-		Component verticalStrut_2 = Box.createVerticalStrut(40);
+		final Component verticalStrut_2 = Box.createVerticalStrut(40);
 		panel.add(verticalStrut_2);
 		
 		btnNewGame = new JButton("NEW GAME");
@@ -58,7 +58,7 @@ public class TitlePanel extends JPanel {
 		btnNewGame.addActionListener(listener);
 		panel.add(btnNewGame);
 		
-		Component verticalStrut = Box.createVerticalStrut(15);
+		final Component verticalStrut = Box.createVerticalStrut(15);
 		panel.add(verticalStrut);
 		
 		btnLoadGame = new JButton("LOAD GAME");
@@ -67,7 +67,7 @@ public class TitlePanel extends JPanel {
 		btnLoadGame.addActionListener(listener);
 		panel.add(btnLoadGame);
 		
-		Component verticalStrut_1 = Box.createVerticalStrut(15);
+		final Component verticalStrut_1 = Box.createVerticalStrut(15);
 		panel.add(verticalStrut_1);
 		
 		btnSettings = new JButton("SETTINGS");
@@ -75,13 +75,13 @@ public class TitlePanel extends JPanel {
 		btnSettings.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel.add(btnSettings);
 		
-		Component rigidArea = Box.createRigidArea(new Dimension(50, 200));
+		final Component rigidArea = Box.createRigidArea(new Dimension(50, 200));
 		add(rigidArea, BorderLayout.WEST);
 		
-		Component rigidArea_1 = Box.createRigidArea(new Dimension(50, 200));
+		final Component rigidArea_1 = Box.createRigidArea(new Dimension(50, 200));
 		add(rigidArea_1, BorderLayout.EAST);
 		
-		Component rigidArea_2 = Box.createRigidArea(new Dimension(500, 20));
+		final Component rigidArea_2 = Box.createRigidArea(new Dimension(500, 20));
 		add(rigidArea_2, BorderLayout.SOUTH);
 	}
 

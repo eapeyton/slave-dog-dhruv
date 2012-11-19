@@ -77,7 +77,7 @@ public class GamePanel extends JPanel
 		// Set the layout and the player
 		setLayout(new BorderLayout(0, 0));
 		this.player = player;
-		Random rand = new Random();
+		final Random rand = new Random();
 		
 		
 		/**
@@ -91,12 +91,12 @@ public class GamePanel extends JPanel
 		
 		// Generate the universe and set the player's location
 		chart.setPlayer(player);
-		universe = chart.generateUniverse();
+		universe = (ArrayList<StarSystem>) chart.generateUniverse();
 		player.setLocation(universe.get(rand.nextInt(universe.size())));
 		
 		
 		
-		JPanel centerPanel = new JPanel();
+		final JPanel centerPanel = new JPanel();
 		centerPanel.setBorder(BorderFactory.createTitledBorder("Galactic Chart"));
 		centerPanel.setLayout(new BorderLayout());
 		centerPanel.add(chart, BorderLayout.CENTER);
@@ -106,7 +106,7 @@ public class GamePanel extends JPanel
 		/**
 		 * SOUTH Section: Various buttons
 		 */
-		JPanel southPanel = new JPanel();
+		final JPanel southPanel = new JPanel();
 
 		save = new JButton("Save Game");
 		buyFuel = new JButton("Buy Fuel");
@@ -124,7 +124,7 @@ public class GamePanel extends JPanel
 		/**
 		 * North Section: Information about the player, ship and planet
 		 */
-		JPanel northPanel = new JPanel();
+		final JPanel northPanel = new JPanel();
 		northPanel.setBorder(BorderFactory.createTitledBorder("Info"));
 		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
 		
@@ -143,7 +143,7 @@ public class GamePanel extends JPanel
 	/**
 	 * Creates a new GamePanel from a save file.
 	 * @param listener an action listener
-	 * @param player Player
+	 * @param player Player6
 	 * @param chart GalacticChart
 	 */
 	public GamePanel(ActionListener listener, Player player, GalacticChart chart) {
@@ -162,7 +162,7 @@ public class GamePanel extends JPanel
 		
 		
 		this.chart = chart;
-		universe = chart.getUniverse();
+		universe = (ArrayList<StarSystem>) chart.getUniverse();
 		this.chart.setPlayer(player);
 		
 		this.player = player;
@@ -190,8 +190,8 @@ public class GamePanel extends JPanel
 	 * updates fields when location changes
 	 */
 	public void update() {
-		StarSystem oldLocation = getPlayer().getLocation();
-		StarSystem newLocation = getChart().getSelected();
+		final StarSystem oldLocation = getPlayer().getLocation();
+		final StarSystem newLocation = getChart().getSelected();
 		getPlayer().setLocation(newLocation);
 		getPlayer().setFuel(-oldLocation.distanceToStarSystem(newLocation));
 		getChart().setSelected(null);

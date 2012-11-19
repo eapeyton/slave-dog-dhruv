@@ -1,8 +1,20 @@
-import javax.swing.*;
+/* ConfigPanel.java */
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -29,7 +41,8 @@ public class ConfigPanel extends JPanel implements ChangeListener, KeyListener {
 	/**
 	 * Field pilotSkill.
 	 */
-	private int pilotSkill, fighterSkill, traderSkill, engineerSkill;
+	private final int pilotSkill, fighterSkill, traderSkill, engineerSkill;
+
 	/**
 	 * Field remainingPoints.
 	 */
@@ -39,35 +52,28 @@ public class ConfigPanel extends JPanel implements ChangeListener, KeyListener {
 	/**
 	 * Field nameInput.
 	 */
-	private JTextField nameInput;
-	/**
-	 * Field engineerSpinner.
-	 */
-	/**
-	 * Field traderSpinner.
-	 */
-	/**
-	 * Field fighterSpinner.
-	 */
+	private final JTextField nameInput;
+
 	/**
 	 * Field pilotSpinner.
 	 */
-	private JSpinner pilotSpinner, fighterSpinner, traderSpinner, engineerSpinner;
+	private final JSpinner pilotSpinner, fighterSpinner, traderSpinner, engineerSpinner;
+
 	/**
 	 * Field remaining.
 	 */
-	private JLabel remaining;
+	private final JLabel remaining;
+
 	/**
 	 * Field difficulty.
 	 */
-	private JComboBox difficulty;
+	private final JComboBox difficulty;
+
 	/**
 	 * Field pConfigDone.
 	 */
 	private JButton pConfigDone;
-	
-	
-	//player class to be created
+
 	/**
 	 * Field player.
 	 */
@@ -96,11 +102,11 @@ public class ConfigPanel extends JPanel implements ChangeListener, KeyListener {
 		 * Create the north panel to hold both title and player name field.
 		 */
 		//creating north panel
-		JPanel northPanel = new JPanel();
+		final JPanel northPanel = new JPanel();
 		northPanel.setLayout(new BorderLayout(0, 0));
 		
 		//creating and adding title
-		JLabel title = new JLabel("Player Configuration");
+		final JLabel title = new JLabel("Player Configuration");
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setFont(new Font("Rockwell", Font.BOLD, 30));
 		northPanel.add(title, BorderLayout.CENTER);
@@ -109,7 +115,7 @@ public class ConfigPanel extends JPanel implements ChangeListener, KeyListener {
 		northPanel.add(Box.createRigidArea(new Dimension(300, 10)), BorderLayout.NORTH);
 		
 		//Coded by E. Slep
-		JPanel namePanel = new JPanel();
+		final JPanel namePanel = new JPanel();
 		nameInput = new JTextField();
 		nameInput.setPreferredSize(new Dimension(100, 20));
 		//nameInput.addActionListener(this);
@@ -117,7 +123,7 @@ public class ConfigPanel extends JPanel implements ChangeListener, KeyListener {
 		namePanel.add(new JLabel("Name: "));
 		namePanel.add(nameInput);
 		northPanel.add(namePanel, BorderLayout.NORTH);
-		String[] diffs = {"Easy", "Medium", "Hard"};
+		final String[] diffs = {"Easy", "Medium", "Hard"};
 		difficulty = new JComboBox(diffs);
 		northPanel.add(difficulty, BorderLayout.SOUTH);
 		
@@ -129,7 +135,7 @@ public class ConfigPanel extends JPanel implements ChangeListener, KeyListener {
 		 * that sits in the CENTER section of the layout.
 		 */
 		//Coded by E. Slep
-		JPanel skillsPanel = new JPanel();
+		final JPanel skillsPanel = new JPanel();
 		skillsPanel.setLayout(new GridLayout(5, 2));
 		skillsPanel.setPreferredSize(new Dimension(200, 100));
 		
@@ -174,7 +180,6 @@ public class ConfigPanel extends JPanel implements ChangeListener, KeyListener {
 		
 		
 	}
-	
 
 	/**
 	 * When activated, this method creates the player from the input fields. The STPanel
@@ -199,10 +204,10 @@ public class ConfigPanel extends JPanel implements ChangeListener, KeyListener {
 		 */
 		if(e.getSource().equals(pilotSpinner)||e.getSource().equals(fighterSpinner)||e.getSource().equals(traderSpinner)||e.getSource().equals(engineerSpinner)){
 			remainingPoints = 16-(Integer) pilotSpinner.getValue()-(Integer) fighterSpinner.getValue()-(Integer) traderSpinner.getValue()-(Integer) engineerSpinner.getValue();
-			pilotSpinner.setModel(new SpinnerNumberModel((Number) pilotSpinner. getValue(), (Integer) 0,remainingPoints+(Integer) pilotSpinner.getValue(),(Number) 1));
+			pilotSpinner.setModel(new SpinnerNumberModel((Number) pilotSpinner.getValue(), (Integer) 0,remainingPoints+(Integer) pilotSpinner.getValue(),(Number) 1));
 			fighterSpinner.setModel(new SpinnerNumberModel((Number) fighterSpinner.getValue(),(Integer) 0,remainingPoints+(Integer) fighterSpinner.getValue(),(Number) 1));
-			traderSpinner.setModel(new SpinnerNumberModel((Number) traderSpinner.getValue(),(Integer) 0,remainingPoints+(Integer)traderSpinner.getValue(),(Number)1));
-			engineerSpinner.setModel(new SpinnerNumberModel((Number)engineerSpinner.getValue(),(Integer)0,remainingPoints+(Integer)engineerSpinner.getValue(),(Number)1));
+			traderSpinner.setModel(new SpinnerNumberModel((Number) traderSpinner.getValue(),(Integer) 0,remainingPoints+(Integer) traderSpinner.getValue(),(Number) 1));
+			engineerSpinner.setModel(new SpinnerNumberModel((Number) engineerSpinner.getValue(),(Integer) 0,remainingPoints+(Integer) engineerSpinner.getValue(),(Number) 1));
 			remaining.setText(remainingPoints+"");
 		
 		}
@@ -213,23 +218,18 @@ public class ConfigPanel extends JPanel implements ChangeListener, KeyListener {
 		if(remainingPoints!=0&&(e.getSource().equals(pilotSpinner)||e.getSource().equals(fighterSpinner)||e.getSource().equals(traderSpinner)||e.getSource().equals(engineerSpinner))){
 			pConfigDone.setEnabled(false);
 		}
-		
 	}
-	
 	
 	/**
 	 * Method keyPressed.
 	 * @param e KeyEvent
 	 * @see java.awt.event.KeyListener#keyPressed(KeyEvent)
 	 */
-	public void keyPressed(KeyEvent e)
-	{
-		if(e.getSource().equals(nameInput)&&!nameInput.getText().isEmpty()&&remainingPoints==0)
-		{
+	public void keyPressed(KeyEvent e) {
+		if(e.getSource().equals(nameInput)&&!nameInput.getText().isEmpty()&&remainingPoints==0) {
 			pConfigDone.setEnabled(true);
 		}
-		if(e.getSource().equals(nameInput)&&nameInput.getText().isEmpty())
-		{
+		if(e.getSource().equals(nameInput)&&nameInput.getText().isEmpty()) {
 			pConfigDone.setEnabled(false);
 		}
 	}
@@ -269,6 +269,7 @@ public class ConfigPanel extends JPanel implements ChangeListener, KeyListener {
 	public Player getPlayer() {
 		return player;
 	}
+	
 	/**
 	 * Method getpConfigDone.
 	 * @return JButton
@@ -276,6 +277,7 @@ public class ConfigPanel extends JPanel implements ChangeListener, KeyListener {
 	public JButton getpConfigDone() {
 		return pConfigDone;
 	}
+	
 	/**
 	 * Method setpConfigDone.
 	 * @param pConfigDone JButton

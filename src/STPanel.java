@@ -30,7 +30,7 @@ public class STPanel extends JPanel implements ActionListener {
 	/**
 	 * Field layout.
 	 */
-	private CardLayout layout;
+	private final CardLayout layout;
 	
 	//store the various screens
 	/**
@@ -40,12 +40,12 @@ public class STPanel extends JPanel implements ActionListener {
 	/**
 	 * Field config.
 	 */
-	private ConfigPanel config;
+	private final ConfigPanel config;
 	
 	/**
 	 * Field title.
 	 */
-	private TitlePanel title;
+	private final TitlePanel title;
 	/**
 	 * Field cargo.
 	 */
@@ -53,7 +53,7 @@ public class STPanel extends JPanel implements ActionListener {
 	/**
 	 * Field files.
 	 */
-	private FilePanel files;
+	private final FilePanel files;
 	/**
 	 * Field random.
 	 */
@@ -167,7 +167,7 @@ public class STPanel extends JPanel implements ActionListener {
 			 */
 			if (e.getSource().equals(game.getGoButton())) {
 			        /* Chance of a random event is 50/50 */
-			        double chance = Math.random();
+			        final double chance = Math.random();
 			        /* Create a random event, else update the game */
 			        if(chance < .5) {
 			                random = new RandomEvent(0 ,player ,this);
@@ -192,7 +192,7 @@ public class STPanel extends JPanel implements ActionListener {
 			 */
 			if(e.getSource().equals(game.getSaveButton()))
 			{
-				files.setModeSave();
+				files.saveMode();
 				layout.show(this ,FILEPANEL);
 				
 			}
@@ -202,12 +202,12 @@ public class STPanel extends JPanel implements ActionListener {
 			if(e.getSource().equals(game.getBuyFuelButton()))
                         {
 								// Create a new spinner and show it in a dialog box
-								JSpinner fuelSpinner = new JSpinner(new SpinnerNumberModel(0, 0, player.getMoney() / 10, 1));
-								int option = JOptionPane.showOptionDialog(this, fuelSpinner, "How much fuel?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+								final JSpinner fuelSpinner = new JSpinner(new SpinnerNumberModel(0, 0, player.getMoney() / 10, 1));
+								final int option = JOptionPane.showOptionDialog(this, fuelSpinner, "How much fuel?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 								if (option == JOptionPane.OK_OPTION) // User hit OK button
 								{
 										// Get the fuel amount and change the player's fuel and money
-										int amount = (Integer) fuelSpinner.getValue();
+										final int amount = (Integer) fuelSpinner.getValue();
 										if(amount > 0) {
 	                                        if(player.getMoney()>=amount*10){
 	                                                player.setMoney(player.getMoney()-amount*10);
@@ -244,7 +244,7 @@ public class STPanel extends JPanel implements ActionListener {
 		 */
 		if(e.getSource().equals(title.getBtnLoadGame()))
 		{
-			files.setModeOpen();
+			files.openMode();
 			layout.show(this,FILEPANEL);
 			
 			
@@ -256,7 +256,7 @@ public class STPanel extends JPanel implements ActionListener {
 			{
 				if(files.getFileChooser().getDialogType()==JFileChooser.OPEN_DIALOG)
 				{
-					File savefile = files.getFileChooser().getSelectedFile();
+					final File savefile = files.getFileChooser().getSelectedFile();
 					FileInputStream FIStream = null;
 					ObjectInputStream OIStream = null;
 					try
@@ -279,14 +279,14 @@ public class STPanel extends JPanel implements ActionListener {
 					}
 					try
 					{
-						Player player = (Player) OIStream.readObject();
-						ArrayList<StarSystem> universe = (ArrayList<StarSystem>) OIStream.readObject();
-						HashMap<Point, StarSystem> usedLocations = (HashMap<Point, StarSystem>) OIStream.readObject();
+						final Player player = (Player) OIStream.readObject();
+						final ArrayList<StarSystem> universe = (ArrayList<StarSystem>) OIStream.readObject();
+						final HashMap<Point, StarSystem> usedLocations = (HashMap<Point, StarSystem>) OIStream.readObject();
 						StarSystem.setUsedLocations(usedLocations);
-						StarSystem selected = (StarSystem) OIStream.readObject();
-						JLabel destination = new JLabel("Destination:");
-						JButton newGo = new JButton("Go!");
-						GalacticChart chart = new GalacticChart(destination, newGo,universe);
+						final StarSystem selected = (StarSystem) OIStream.readObject();
+						final JLabel destination = new JLabel("Destination:");
+						final JButton newGo = new JButton("Go!");
+						final GalacticChart chart = new GalacticChart(destination, newGo,universe);
 						chart.setPlayer(player);
 						chart.setSelected(selected);
 						game = new GamePanel(this, player, chart);
@@ -314,7 +314,7 @@ public class STPanel extends JPanel implements ActionListener {
 				}
 				else if(files.getFileChooser().getDialogType()==JFileChooser.SAVE_DIALOG)
 				{
-					File savefile = files.getFileChooser().getSelectedFile();
+					final File savefile = files.getFileChooser().getSelectedFile();
 					FileOutputStream FOStream = null;
 					ObjectOutputStream OOStream = null;
 					try
