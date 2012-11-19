@@ -229,7 +229,7 @@ public class GalacticChart extends JPanel {
 				- (planetSize >> 1), planetSize, planetSize);
 		graphicPanel.drawOval((int) player.location.getLocation().getX()
 				- player.getFuel(), (int) player.location.getLocation().getY()
-				- player.getFuel(),  (player.getFuel() <<1 ), (player.getFuel() << 1));
+				- player.getFuel(),  (player.getFuel() << 1 ), (player.getFuel() << 1));
 		if (selected != null) {
 			graphicPanel.setColor(Color.RED);
 			graphicPanel.fillRect((int) selected.getLocation().getX()

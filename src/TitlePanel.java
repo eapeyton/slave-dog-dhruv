@@ -59,11 +59,13 @@ public class TitlePanel extends JPanel {
 	/**
 	 * Field SIDE_AREA.
 	 */
-	private static final Component SIDE_AREA = Box.createRigidArea(new Dimension(50, 200));
+	private static final Component SIDE_AREA =
+			Box.createRigidArea(new Dimension(50, 200));
 	/**
 	 * Field SOUTH_AREA.
 	 */
-	private static final Component SOUTH_AREA = Box.createRigidArea(new Dimension(500, 20));
+	private static final Component SOUTH_AREA =
+			Box.createRigidArea(new Dimension(500, 20));
 
 	/**
 	 * Creates the title panel with a border layout. There is a bunch of GUI

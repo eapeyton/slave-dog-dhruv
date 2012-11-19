@@ -47,7 +47,7 @@ public class StarSystem implements Serializable {
 	/**
 	 * Field screenHeight. (value is 200)
 	 */
-	private static final int SCREEN_WIDTH = 450,SCREEN_HEIGHT = 200;
+	private static final int SCREEN_WIDTH = 450, SCREEN_HEIGHT = 200;
 	
 	/**
 	 * Field TWO.
@@ -65,7 +65,8 @@ public class StarSystem implements Serializable {
 	 * Field TECH_RANDOM.
 	 * (value is 8)
 	 */
-	private static final int TECH_RANDOM = 8,RESOURCE_RANDOM = 13, GOVT_RANDOM = 18, TWO = 2;
+	private static final int TECH_RANDOM = 8, 
+			RESOURCE_RANDOM = 13, GOVT_RANDOM = 18, TWO = 2;
 	
 	/**
 	 * Field ROBOT_GENER.
@@ -87,7 +88,8 @@ public class StarSystem implements Serializable {
 	 * Field WATER_GENER.
 	 * (value is 31)
 	 */
-	private static final int WATER_GENER = 31, DRUGS_GENER = 26, MEDS_GENER = 21, WEPS_GENER = 16, ROBOT_GENER = 11;
+	private static final int WATER_GENER = 31, DRUGS_GENER = 26,
+			MEDS_GENER = 21, WEPS_GENER = 16, ROBOT_GENER = 11;
 	
 	/**
 	 * Field TECH_LEVEL_6.
@@ -234,7 +236,8 @@ public class StarSystem implements Serializable {
 	
 	 * @return A hashmap mapping points on the map to star systems */
 	public HashMap<MapPoint, StarSystem> getClickMap(int mapPlanetSize, int range) {
-		final HashMap<MapPoint, StarSystem> clickMap = new HashMap<MapPoint, StarSystem>();
+		final HashMap<MapPoint, StarSystem> clickMap =
+				new HashMap<MapPoint, StarSystem>();
 		for (StarSystem ss : UsedLocations.values()) {
 			if (!ss.equals(this) && distanceToStarSystem(ss) <= range) {
 				for (int i = -(mapPlanetSize >> 1); i <= (mapPlanetSize >> 1); i++) {

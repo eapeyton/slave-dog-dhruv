@@ -22,7 +22,8 @@ public class Player implements Serializable {
 	 * Field INITIAL_HEALTH.
 	 * (value is 100)
 	 */
-	private static final int INITIAL_HEALTH = 100, INITIAL_MONEY = 1000, INITIAL_FUEL = 50;
+	private static final int INITIAL_HEALTH = 100,
+			INITIAL_MONEY = 1000, INITIAL_FUEL = 50;
 	/**
 	 * Field INITIAL_BAYS.
 	 * (value is 12)

@@ -60,26 +60,21 @@ public class RandomEvent extends JPanel {
 	 */
 	public Player player;
 	/**
-	 * Field TRADER.
-	 * (value is 2)
+	 * Field TRADER. (value is 2)
 	 */
 	/**
-	 * Field POLICE.
-	 * (value is 1)
+	 * Field POLICE. (value is 1)
 	 */
 	/**
-	 * Field PIRATE.
-	 * (value is 0)
+	 * Field PIRATE. (value is 0)
 	 */
 	private static final int PIRATE = 0, POLICE = 1, TRADER = 2;
 	/**
-	 * Field ESCAPE_CHANCE.
-	 * (value is 0.5)
+	 * Field ESCAPE_CHANCE. (value is 0.5)
 	 */
 	private static final double ESCAPE_CHANCE = .5;
 	/**
-	 * Field ATTACK_MAX.
-	 * (value is 10)
+	 * Field ATTACK_MAX. (value is 10)
 	 */
 	private static final int ATTACK_MAX = 10;
 
@@ -96,33 +91,34 @@ public class RandomEvent extends JPanel {
 	public RandomEvent(double chance, Player player, ActionListener listener) {
 		setLayout(new BorderLayout(0, 0));
 		// Assign non-player type based on random value
-		if(chance > TRADER) { 
-			nptype = TRADER; }
-		else if(chance > POLICE) { 
-			nptype = POLICE; }
-		else { 
-			nptype = PIRATE; }
+		if (chance > TRADER) {
+			nptype = TRADER;
+		} else if (chance > POLICE) {
+			nptype = POLICE;
+		} else {
+			nptype = PIRATE;
+		}
 		this.player = player;
 		func1.addActionListener(new FuncListener());
 		func1.addActionListener(listener);
 		attack.addActionListener(new FuncListener());
 		flee.addActionListener(new FuncListener());
 		if (nptype == PIRATE) {// Pirate
-			message.setText("You have been attacked by a Pirate!" +
-					" What do you want to do?");
+			message.setText("You have been attacked by a Pirate!"
+					+ " What do you want to do?");
 			func1.setText("Threaten");
 			np = new NonPlayer(PIRATE);
 		}
 
-		if (nptype == POLICE){// Police
-			message.setText("A Police Ship wants to inspect your ship." +
-					" What do you want to do?");
+		if (nptype == POLICE) {// Police
+			message.setText("A Police Ship wants to inspect your ship."
+					+ " What do you want to do?");
 			func1.setText("Submit for Inspection");
 			np = new NonPlayer(POLICE);
 
 		}
 
-		if (nptype == TRADER){// Trader
+		if (nptype == TRADER) {// Trader
 			message.setText("A friendly Trader Wishes to Trade. What do you want to do?");
 			func1.setText("Trade");
 			np = new NonPlayer(PIRATE);
@@ -143,8 +139,9 @@ public class RandomEvent extends JPanel {
 	/**
 	 * Get the function 1 button
 	 * 
-	
-	 * @return the func1 button */
+	 * 
+	 * @return the func1 button
+	 */
 	public JButton getFunc1Button() {
 		return func1;
 	}
@@ -160,8 +157,9 @@ public class RandomEvent extends JPanel {
 		/**
 		 * Method toString.
 		 * 
-		
-		 * @return String */
+		 * 
+		 * @return String
+		 */
 		@Override
 		public String toString() {
 			return "actionListener";
@@ -173,17 +171,19 @@ public class RandomEvent extends JPanel {
 		 * @param e
 		 *            ActionEvent
 		 * 
-		
-		 * @see java.awt.event.ActionListener#actionPerformed(ActionEvent) */
+		 * 
+		 * @see java.awt.event.ActionListener#actionPerformed(ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
 			if (e.getSource().equals(flee)) {
-				if (nptype == TRADER) {// Fleeing from a Tdaer, always successful
+				if (nptype == TRADER) {// Fleeing from a Tdaer, always
+										// successful
 					fleeState = true;
 				} else {
 					if (Math.random() > ESCAPE_CHANCE) {// Police or Pirate 50 %
-													// chance of Escaping
+						// chance of Escaping
 						fleeState = true;
 					}
 				}
@@ -201,11 +201,12 @@ public class RandomEvent extends JPanel {
 						exist = false;
 					}
 
-					if (nptype == POLICE || nptype == PIRATE) {// Police or Pirate Attack
-														// back
+					if (nptype == POLICE || nptype == PIRATE) {// Police or
+																// Pirate Attack
+						// back
 						final int attack = (int) Math.random() * ATTACK_MAX;
-						message.setText("You have been attacked back." +
-								" What do you want to do?");
+						message.setText("You have been attacked back."
+								+ " What do you want to do?");
 						player.takeDamage(attack);
 					}
 				}
@@ -218,8 +219,8 @@ public class RandomEvent extends JPanel {
 					message.setText("You scared him off!");
 					exist = false;
 				} else {
-					message.setText("You have been attacked back," +
-							" What do you want to do?");
+					message.setText("You have been attacked back,"
+							+ " What do you want to do?");
 					player.takeDamage((int) Math.random() * ATTACK_MAX);
 				}
 			}
