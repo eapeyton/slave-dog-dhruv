@@ -1,3 +1,6 @@
+/**
+ * File Comment
+ */
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -209,8 +212,7 @@ public class STPanel extends JPanel implements ActionListener {
 						fuelSpinner, "How much fuel?",
 						JOptionPane.OK_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, null, null);
-				if (option == JOptionPane.OK_OPTION) // User hit OK button
-				{
+				if (option == JOptionPane.OK_OPTION){ // User hit OK button
 					// Get the fuel amount and change the player's fuel and
 					// money
 					final int amount = (Integer) fuelSpinner.getValue();
@@ -274,9 +276,11 @@ public class STPanel extends JPanel implements ActionListener {
 					}
 					try {
 						final Player player = (Player) oIStream.readObject();
-						final ArrayList<StarSystem> universe = (ArrayList<StarSystem>) oIStream
+						final ArrayList<StarSystem> universe =
+								(ArrayList<StarSystem>) oIStream
 								.readObject();
-						final HashMap<Point, StarSystem> usedLocations = (HashMap<Point, StarSystem>) oIStream
+						final HashMap<Point, StarSystem> usedLocations =
+								(HashMap<Point, StarSystem>) oIStream
 								.readObject();
 						StarSystem.setUsedLocations(usedLocations);
 						final StarSystem selected = (StarSystem) oIStream
@@ -304,7 +308,8 @@ public class STPanel extends JPanel implements ActionListener {
 					} else {
 						layout.show(this, TITLEPANEL);
 					}
-				} else if (files.getFileChooser().getDialogType() == JFileChooser.SAVE_DIALOG) {
+				} else if (files.getFileChooser().getDialogType() ==
+						JFileChooser.SAVE_DIALOG) {
 					final File savefile = files.getFileChooser()
 							.getSelectedFile();
 					FileOutputStream fOStream = null;
@@ -336,7 +341,8 @@ public class STPanel extends JPanel implements ActionListener {
 			} else if (e.getActionCommand().equals("CancelSelection")) {
 				if (files.getFileChooser().getDialogType() == JFileChooser.OPEN_DIALOG) {
 					layout.show(this, TITLEPANEL);
-				} else if (files.getFileChooser().getDialogType() == JFileChooser.SAVE_DIALOG) {
+				} else if (files.getFileChooser().getDialogType() ==
+						JFileChooser.SAVE_DIALOG) {
 					layout.show(this, GAMEPANEL);
 				}
 			}

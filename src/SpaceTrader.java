@@ -1,3 +1,7 @@
+/**
+ * File Comment
+ */
+
 import javax.swing.JFrame;
 
 /**

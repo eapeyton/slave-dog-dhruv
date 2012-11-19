@@ -95,7 +95,8 @@ public class CargoPanel extends JPanel implements ActionListener{
 	 * Field WATER_COST.
 	 * (value is 10)
 	 */
-	private static final int WATER_COST=10, FOOD_COST=50, DRUGS_COST=70, MEDS_COST=100, WEAPONS_COST=200, ROBOTS_COST=500;
+	private static final int WATER_COST=10, FOOD_COST=50, DRUGS_COST=70, 
+			MEDS_COST=100, WEAPONS_COST=200, ROBOTS_COST=500;
 
 	/**
 	 * Field plyrRobots.
@@ -454,7 +455,7 @@ public class CargoPanel extends JPanel implements ActionListener{
 						curr.setCargo(DRUGS, -quant);
 						spinners[DRUGS].setValue(0);
 					}
-				}	
+				}
 				//check medicine spinner
 				quant = (Integer) spinners[MEDS].getValue();
 				if(quant > curr.getCargo(MEDS)){

@@ -1,3 +1,6 @@
+/**
+ * File Comment
+ */
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -36,7 +39,8 @@ public class StarSystem implements Serializable {
 	/**
 	 * Field usedLocations.
 	 */
-	private static HashMap<Point, StarSystem> UsedLocations = new HashMap<Point, StarSystem>();
+	private static HashMap<Point, StarSystem> UsedLocations =
+			new HashMap<Point, StarSystem>();
 	/**
 	 * Field screenWidth. (value is 450)
 	 */

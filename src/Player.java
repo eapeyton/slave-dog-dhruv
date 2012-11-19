@@ -1,3 +1,6 @@
+/**
+ * File Comment
+ */
 import java.io.Serializable;
 
 /**

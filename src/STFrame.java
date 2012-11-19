@@ -1,3 +1,6 @@
+/**
+ * File Comment
+ */
 import javax.swing.JFrame;
 
 
@@ -15,7 +18,8 @@ public class STFrame extends JFrame {
 	private final STPanel panel;
 	
 	/**
-	 * Creates the STFrame using the JFrame constructor. Adds the corresponding panel, STPanel.
+	 * Creates the STFrame using the JFrame constructor. 
+	 * Adds the corresponding panel, STPanel.
 	 * @param header the text to be displayed on the top of the window
 	 */
 	public STFrame(String header) {
