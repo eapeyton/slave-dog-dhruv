@@ -2,9 +2,13 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 import java.awt.GridLayout;
 
@@ -20,12 +24,12 @@ import java.awt.GridLayout;
  * @version M7
  *
  */
-public class CargoPanel extends JPanel implements ActionListener, ChangeListener{
+public class CargoPanel extends JPanel implements ActionListener{
 	/**
 	 * Field NUM_SUPPLY_TYPE.
 	 * (value is 6)
 	 */
-	private final static int NUM_SUPPLY_TYPE = 6;
+	private static final int NUM_SUPPLY_TYPE = 6;
 
 	/**
 	 * Field plyrRobots.
@@ -45,7 +49,7 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 	/**
 	 * Field plyrWater.
 	 */
-	private JLabel plyrWater, plyrFood, plyrDrugs, plyrMeds, plyrWeps, plyrRobots; 
+	private final JLabel plyrWater, plyrFood, plyrDrugs, plyrMeds, plyrWeps, plyrRobots; 
 
 	/**
 	 * Field cBays.
@@ -59,6 +63,8 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 	/**
 	 * Field plWeps.
 	 */
+	private final JLabel plWater, plFood, plDrugs;
+	
 	/**
 	 * Field plMeds.
 	 */
@@ -71,12 +77,12 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 	/**
 	 * Field plWater.
 	 */
-	private JLabel plWater, plFood, plDrugs, plMeds, plWeps, plRobots, cMoney, cBays;
-
+	private final JLabel plMeds, plWeps, plRobots, cMoney, cBays;
+	
 	/**
 	 * Field spinners.
 	 */
-	private JSpinner[] spinners;
+	private final JSpinner[] spinners;
 
 	/**
 	 * Field backBtn.
@@ -107,7 +113,7 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 	/**
 	 * Field waterCost.
 	 */
-	private int waterCost, foodCost, drugCost, medCost, weaponCost, robotCost;
+	private final int waterCost, foodCost, drugCost, medCost, weaponCost, robotCost;
 
 	/**
 	 * Field player.
@@ -117,7 +123,7 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 	/**
 	 * Field curr.
 	 */
-	private StarSystem curr;
+	private final StarSystem curr;
 
 	/**
 	 * Create the panel, using WindowBuilder. Sets the default values.
@@ -147,13 +153,13 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 		 */
 		
 		//create components
-		JLabel lblMoney = new JLabel("Money: ");
+		final JLabel lblMoney = new JLabel("Money: ");
 		cMoney = new JLabel("" + player.getMoney());
-		JLabel lblBays = new JLabel("Bays: ");
+		final JLabel lblBays = new JLabel("Bays: ");
 		cBays = new JLabel("" + player.getBays());
 		
 		//add components to northPanel
-		JPanel northPanel = new JPanel();
+		final JPanel northPanel = new JPanel();
 		northPanel.add(lblMoney);
 		northPanel.add(cMoney);
 		northPanel.add(lblBays);
@@ -169,7 +175,7 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 		 */
 		
 		//create panel
-		JPanel gridPanel = new JPanel();
+		final JPanel gridPanel = new JPanel();
 		gridPanel.setLayout(new GridLayout(7, 6, 0, 0));
 		
 		////////////
@@ -200,7 +206,7 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 		spinners = new JSpinner[7];
 		for(int i=1; i <= NUM_SUPPLY_TYPE; i++) {
 			spinners[i] = new JSpinner(new SpinnerNumberModel(0, 0, null, 1));
-			spinners[i].addChangeListener(this);
+			//spinners[i].addChangeListener(this);
 		}
 		/**
 		waterSpin = new JSpinner();
@@ -226,49 +232,49 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 		//water
 		gridPanel.add(new JLabel("Water: "));
 		gridPanel.add(plyrWater);
-		gridPanel.add(new JLabel(""+waterCost/2));
+		gridPanel.add(new JLabel("" + (waterCost >> 1)));
 		gridPanel.add(plWater);
-		gridPanel.add(new JLabel(""+waterCost));
+		gridPanel.add(new JLabel("" + waterCost));
 		gridPanel.add(spinners[1]);
 
 		//food
 		gridPanel.add(new JLabel("Food: "));
 		gridPanel.add(plyrFood);
-		gridPanel.add(new JLabel(""+foodCost/2));
+		gridPanel.add(new JLabel("" + (foodCost >> 1)));
 		gridPanel.add(plFood);
-		gridPanel.add(new JLabel(""+foodCost));
+		gridPanel.add(new JLabel("" + foodCost));
 		gridPanel.add(spinners[2]);
 
 		//drugs
 		gridPanel.add(new JLabel("Drugs: "));
 		gridPanel.add(plyrDrugs);
-		gridPanel.add(new JLabel(""+drugCost/2));
+		gridPanel.add(new JLabel("" + (drugCost >> 1)));
 		gridPanel.add(plDrugs);
-		gridPanel.add(new JLabel(""+drugCost));
+		gridPanel.add(new JLabel("" + drugCost));
 		gridPanel.add(spinners[3]);
 		
 		//medicine
 		gridPanel.add(new JLabel("Medicine: "));
 		gridPanel.add(plyrMeds);
-		gridPanel.add(new JLabel(""+medCost/2));
+		gridPanel.add(new JLabel("" + (medCost >> 1)));
 		gridPanel.add(plMeds);
-		gridPanel.add(new JLabel(""+medCost));
+		gridPanel.add(new JLabel("" + medCost));
 		gridPanel.add(spinners[4]);
 		
 		//weapons
 		gridPanel.add(new JLabel("Weapons: "));
 		gridPanel.add(plyrWeps);
-		gridPanel.add(new JLabel(""+weaponCost/2));
+		gridPanel.add(new JLabel("" + (weaponCost >> 1)));
 		gridPanel.add(plWeps);
-		gridPanel.add(new JLabel(""+weaponCost));
+		gridPanel.add(new JLabel("" + weaponCost));
 		gridPanel.add(spinners[5]);
 		
 		//robots
 		gridPanel.add(new JLabel("Robots: "));
 		gridPanel.add(plyrRobots);
-		gridPanel.add(new JLabel(""+robotCost/2));
+		gridPanel.add(new JLabel("" + (robotCost >> 1)));
 		gridPanel.add(plRobots);
-		gridPanel.add(new JLabel(""+robotCost));
+		gridPanel.add(new JLabel("" + robotCost));
 		gridPanel.add(spinners[6]);
 		
 		//add the gridPanel to the main panel
@@ -280,7 +286,7 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 		 */
 		
 		//create panel
-		JPanel southPanel = new JPanel();
+		final JPanel southPanel = new JPanel();
 		
 		//create and add buy button
 		buyBtn = new JButton("Buy");
@@ -308,7 +314,8 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 	 */
 	@Override
 	/**
-	 * Handles the events. Performs the transactions based on which button is pressed and the values
+	 * Handles the events. Performs the transactions based on which 
+	 * button is pressed and the values
 	 * that are currently set.
 	 */
 	public void actionPerformed(ActionEvent e) {
@@ -351,12 +358,11 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 					}
 					else{
 						player.setCargo(1, quant);
-						player.setMoney(player.getMoney()-totalCost);
+						player.setMoney(player.getMoney() - totalCost);
 						curr.setCargo(1, -quant);
 						spinners[1].setValue(0);
 					}
 				}
-
 				//check food spinner
 				quant = (Integer) spinners[2].getValue();
 				if(quant > curr.getCargo(2)){
@@ -369,12 +375,11 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 					}
 					else{
 						player.setCargo(2, quant);
-						player.setMoney(player.getMoney()-totalCost);
+						player.setMoney(player.getMoney() - totalCost);
 						curr.setCargo(2, -quant);
 						spinners[2].setValue(0);
 					}
 				}
-					
 				//check drug spinner
 				quant = (Integer) spinners[3].getValue();
 				if(quant > curr.getCargo(3)){
@@ -387,12 +392,11 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 					}
 					else{
 						player.setCargo(3, quant);
-						player.setMoney(player.getMoney()-totalCost);
+						player.setMoney(player.getMoney() - totalCost);
 						curr.setCargo(3, -quant);
 						spinners[3].setValue(0);
 					}
 				}	
-				
 				//check medicine spinner
 				quant = (Integer) spinners[4].getValue();
 				if(quant > curr.getCargo(4)){
@@ -405,7 +409,7 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 					}
 					else{
 						player.setCargo(4, quant);
-						player.setMoney(player.getMoney()-totalCost);
+						player.setMoney(player.getMoney() - totalCost);
 						curr.setCargo(4, -quant);
 						spinners[4].setValue(0);
 					}
@@ -423,12 +427,11 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 					}
 					else{
 						player.setCargo(5, quant);
-						player.setMoney(player.getMoney()-totalCost);
+						player.setMoney(player.getMoney() - totalCost);
 						curr.setCargo(5, -quant);
 						spinners[5].setValue(0);
 					}
 				}
-
 				//check robots spinner
 				quant = (Integer) spinners[6].getValue();
 				if(quant > curr.getCargo(6)){
@@ -441,10 +444,10 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 					}
 					else{
 						player.setCargo(6, quant);
-						player.setMoney(player.getMoney()-totalCost);
+						player.setMoney(player.getMoney() - totalCost);
 						curr.setCargo(6, -quant);
 						spinners[6].setValue(0);
-					}	
+						}
 				}
 			}
 			updateValues();
@@ -470,9 +473,9 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 				JOptionPane.showMessageDialog(null, "Not enough water!");
 			}
 			else{
-				totalCost = (waterCost / 2) * quant;
+				totalCost = (waterCost >> 1) * quant;
 				player.setCargo(1, -quant);
-				player.setMoney(player.getMoney()+totalCost);
+				player.setMoney(player.getMoney() + totalCost);
 				curr.setCargo(1, quant);
 				spinners[1].setValue(0);
 			}
@@ -483,9 +486,9 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 				JOptionPane.showMessageDialog(null, "Not enough food!");
 			}
 			else{
-				totalCost = (foodCost / 2) * quant;
+				totalCost = (foodCost >> 1) * quant;
 				player.setCargo(2, -quant);
-				player.setMoney(player.getMoney()+totalCost);
+				player.setMoney(player.getMoney() + totalCost);
 				curr.setCargo(2, quant);
 				spinners[2].setValue(0);
 			}
@@ -496,9 +499,9 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 				JOptionPane.showMessageDialog(null, "Not enough drugs!");
 			}
 			else{
-				totalCost = (drugCost / 2) * quant;
+				totalCost = (drugCost >> 1) * quant;
 				player.setCargo(3, -quant);
-				player.setMoney(player.getMoney()+totalCost);
+				player.setMoney(player.getMoney() + totalCost);
 				curr.setCargo(3, quant);
 				spinners[3].setValue(0);
 			}
@@ -509,9 +512,9 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 				JOptionPane.showMessageDialog(null, "Not enough medicine!");
 			}
 			else{
-				totalCost = (medCost / 2) * quant;
+				totalCost = (medCost >> 1) * quant;
 				player.setCargo(4, -quant);
-				player.setMoney(player.getMoney()+totalCost);
+				player.setMoney(player.getMoney() + totalCost);
 				curr.setCargo(4, quant);
 				spinners[4].setValue(0);
 			}
@@ -522,9 +525,9 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 				JOptionPane.showMessageDialog(null, "Not enough weapons!");
 			}
 			else{
-				totalCost = (weaponCost / 2) * quant;
+				totalCost = (weaponCost >> 1) * quant;
 				player.setCargo(5, -quant);
-				player.setMoney(player.getMoney()+totalCost);
+				player.setMoney(player.getMoney() + totalCost);
 				curr.setCargo(5, quant);
 				spinners[5].setValue(0);
 			}
@@ -535,9 +538,9 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 				JOptionPane.showMessageDialog(null, "Not enough robots!");
 			}
 			else{
-				totalCost = (robotCost / 2) * quant;
+				totalCost = (robotCost >> 1) * quant;
 				player.setCargo(6, -quant);
-				player.setMoney(player.getMoney()+totalCost);
+				player.setMoney(player.getMoney() + totalCost);
 				curr.setCargo(6, quant);
 				spinners[6].setValue(0);
 			}
@@ -547,21 +550,10 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 	}
 	
 	/**
-	 * Triggers when a spinner is changed.
-	 * param e Event for when the state of a spinner is change
-	 * @param e ChangeEvent
-	 * @see javax.swing.event.ChangeListener#stateChanged(ChangeEvent)
+	 * Updates the values held by the player 
+	 * and the current StarSystem after transactions
 	 */
-	public void stateChanged(ChangeEvent e) {
-		
-	}
-	
-	/**
-	 * Updates the values held by the player and the current StarSystem after transactions.
-	 * 
-	 */
-	public void updateValues()
-	{
+	public void updateValues() {
 		plyrWater.setText("" + player.getCargo(1));
 		
 		plyrFood.setText("" + player.getCargo(2));
@@ -605,5 +597,33 @@ public class CargoPanel extends JPanel implements ActionListener, ChangeListener
 	 */
 	public void setBackBtn(JButton backBtn) {
 		this.backBtn = backBtn;
+	}
+
+	/**
+	 * @return the buyBtn
+	 */
+	public JButton getBuyBtn() {
+		return buyBtn;
+	}
+
+	/**
+	 * @param buyBtn the buyBtn to set
+	 */
+	public void setBuyBtn(JButton buyBtn) {
+		this.buyBtn = buyBtn;
+	}
+
+	/**
+	 * @return the sellBtn
+	 */
+	public JButton getSellBtn() {
+		return sellBtn;
+	}
+
+	/**
+	 * @param sellBtn the sellBtn to set
+	 */
+	public void setSellBtn(JButton sellBtn) {
+		this.sellBtn = sellBtn;
 	}
 }
