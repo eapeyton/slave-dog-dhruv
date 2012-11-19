@@ -46,6 +46,12 @@ public class GalacticChart extends JPanel {
 	 * Field adapter.
 	 */
 	private Adapter adapter;
+	
+	/**
+	 * Field PLANET_CIRCLE_SIZE.
+	 * (value is 8)
+	 */
+	private static final int PLANET_CIRCLE_SIZE = 8;
 
 	/**
 	 * Constructor for GalacticChart.
@@ -81,8 +87,8 @@ public class GalacticChart extends JPanel {
 	 * Generates and returns a universe with star systems named according to a
 	 * pre-allocated library of names
 	 * 
-	 * @return Newly generated universe
-	 */
+	
+	 * @return Newly generated universe */
 	public List<StarSystem> generateUniverse() {
 
 		final String[] solarSystemName = { "Acamar",
@@ -209,7 +215,7 @@ public class GalacticChart extends JPanel {
 	public void drawUniverse(List<StarSystem> universe, Player player,
 			Graphics graphicPanel) {
 
-		final int planetSize = 8;// Planet Circle Size
+		final int planetSize = PLANET_CIRCLE_SIZE;// Planet Circle Size
 		graphicPanel.setColor(Color.GREEN);
 		for (int i = 0; i < universe.size(); i++) {
 			graphicPanel.fillRect((int) universe.get(i).getLocation().getX()
@@ -223,7 +229,7 @@ public class GalacticChart extends JPanel {
 				- (planetSize >> 1), planetSize, planetSize);
 		graphicPanel.drawOval((int) player.location.getLocation().getX()
 				- player.getFuel(), (int) player.location.getLocation().getY()
-				- player.getFuel(), 2 * player.getFuel(), 2 * player.getFuel());
+				- player.getFuel(),  (player.getFuel() <<1 ), (player.getFuel() << 1));
 		if (selected != null) {
 			graphicPanel.setColor(Color.RED);
 			graphicPanel.fillRect((int) selected.getLocation().getX()
@@ -254,8 +260,8 @@ public class GalacticChart extends JPanel {
 
 	/**
 	 * 
-	 * @return The currently selected star system
-	 */
+	
+	 * @return The currently selected star system */
 	public StarSystem getSelected() {
 		return selected;
 	}
@@ -273,8 +279,8 @@ public class GalacticChart extends JPanel {
 	/**
 	 * Get the universe
 	 * 
-	 * @return universe
-	 */
+	
+	 * @return universe */
 	public List<StarSystem> getUniverse() {
 		return universe;
 	}
@@ -318,8 +324,8 @@ public class GalacticChart extends JPanel {
 		 * @param me
 		 *            MouseEvent
 		 * 
-		 * @see java.awt.event.MouseListener#mouseReleased(MouseEvent)
-		 */
+		
+		 * @see java.awt.event.MouseListener#mouseReleased(MouseEvent) */
 		@Override
 		public void mouseReleased(MouseEvent me) {
 			if (clickMap.containsKey(me.getPoint())) {
@@ -331,8 +337,8 @@ public class GalacticChart extends JPanel {
 		/**
 		 * Method toString.
 		 * 
-		 * @return String
-		 */
+		
+		 * @return String */
 		@Override
 		public String toString() {
 			return "Adapter of size " + mapPlanetSize;
@@ -352,8 +358,8 @@ public class GalacticChart extends JPanel {
 	/**
 	 * Get the go button
 	 * 
-	 * @return the go button
-	 */
+	
+	 * @return the go button */
 	public JButton getGoBtn() {
 		return go;
 	}
@@ -361,8 +367,8 @@ public class GalacticChart extends JPanel {
 	/**
 	 * Method toString.
 	 * 
-	 * @return String
-	 */
+	
+	 * @return String */
 	@Override
 	public String toString() {
 		return "GalacticChart";
