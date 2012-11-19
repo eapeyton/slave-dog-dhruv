@@ -294,13 +294,21 @@ public class STPanel extends JPanel implements ActionListener {
 						game = new GamePanel(this, player, chart);
 						newGo.setEnabled(true);
 						this.player = player;
-						fIStream.close();
+						
 
 					} catch (ClassNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (IOException e1) {
 						e1.printStackTrace();
+					}
+					finally{
+						try{
+							fIStream.close();
+						}
+						catch (Exception y){
+							
+						}
 					}
 					if (game != null) {
 						add(game, GAMEPANEL);
