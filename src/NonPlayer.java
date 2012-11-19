@@ -36,12 +36,12 @@ public class NonPlayer {
 	
 	public boolean canNpTakeDamage(int damage)
 	{
-		if(health-damage<=0){//Dead
+		if(health - damage <= 0){//Dead
 			health=0;
 			return true;
 		}
 		else{//Not Dead
-			health=health-damage;
+			health=health - damage;
 			return false;
 		}
 	}
@@ -51,7 +51,7 @@ public class NonPlayer {
 	 * @return String
 	 */
 	public String toString(){
-		return type+"";
+		return type + "";
 	}
 	
 }

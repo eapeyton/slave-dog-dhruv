@@ -200,7 +200,7 @@ public class GalacticChart extends JPanel{
 		
 		final List<StarSystem> universe=new ArrayList<StarSystem>();
 		
-		for(int i=0;i<solarSystemName.length;i++){
+		for(int i=0;i < solarSystemName.length;i++){
 			universe.add(new StarSystem(solarSystemName[i]));
 		}
 		//TODO Add check so that Star Systems dont get generated on top of each other
@@ -229,12 +229,12 @@ public class GalacticChart extends JPanel{
 		
 		final int planetSize=8;//Planet Circle Size
 		graphicPanel.setColor(Color.GREEN);
-		for(int i=0;i<universe.size();i++){
+		for(int i=0;i < universe.size();i++){
 			graphicPanel.fillRect((int) universe.get(i).getLocation().getX() - (planetSize >> 1) ,(int) universe.get(i).getLocation().getY() - (planetSize >> 1),planetSize,planetSize);
 		}
 		graphicPanel.setColor(Color.BLUE);
 		graphicPanel.fillRect((int) player.location.getLocation().getX() - (planetSize >> 1), (int) player.location.getLocation().getY() - (planetSize >> 1), planetSize, planetSize);
-		graphicPanel.drawOval((int) player.location.getLocation().getX() - player.getFuel(), (int) player.location.getLocation().getY() - player.getFuel(), 2*player.getFuel(), 2*player.getFuel());
+		graphicPanel.drawOval((int) player.location.getLocation().getX() - player.getFuel(), (int) player.location.getLocation().getY() - player.getFuel(), 2 * player.getFuel(), 2 * player.getFuel());
 		if (selected != null) {
 			graphicPanel.setColor(Color.RED);
 			graphicPanel.fillRect((int) selected.getLocation().getX() - (planetSize >> 1), (int) selected.getLocation().getY() - (planetSize >> 1), planetSize, planetSize);

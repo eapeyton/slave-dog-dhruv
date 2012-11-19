@@ -201,12 +201,12 @@ public class Player implements Serializable
 	
 	 */
 	public void takeDamage(int damage){
-		if(health-damage<=0){//Dead
+		if(health - damage <= 0){//Dead
 			health=0;
 			return;
 		}
 		else{//Not Dead
-			health=health-damage;
+			health=health - damage;
 			return;
 		}
 	}

@@ -216,8 +216,8 @@ public class STPanel extends JPanel implements ActionListener {
 										// Get the fuel amount and change the player's fuel and money
 										final int amount = (Integer) fuelSpinner.getValue();
 										if(amount > 0) {
-	                                        if(player.getMoney()>=amount*10){
-	                                                player.setMoney(player.getMoney()-amount*10);
+	                                        if(player.getMoney() >= amount * 10){
+	                                                player.setMoney(player.getMoney() - amount * 10);
 	                                                player.setFuel(player.getFuel() + amount);
 	                                        }
 										}
@@ -233,7 +233,7 @@ public class STPanel extends JPanel implements ActionListener {
 		 * If the cargo panel is created and source of the action is the back button 
 		 * in the marketplace, then show the game screen again.
 		 */
-		if(cargo!=null&&e.getSource().equals(cargo.getBackBtn())) {
+		if(cargo != null && e.getSource().equals(cargo.getBackBtn())) {
 			layout.show(this, GAMEPANEL);
 		}
 		
@@ -261,7 +261,7 @@ public class STPanel extends JPanel implements ActionListener {
 		{
 			if(e.getActionCommand().equals("ApproveSelection"))
 			{
-				if(files.getFileChooser().getDialogType()==JFileChooser.OPEN_DIALOG)
+				if(files.getFileChooser().getDialogType() == JFileChooser.OPEN_DIALOG)
 				{
 					final File savefile = files.getFileChooser().getSelectedFile();
 					FileInputStream FIStream = null;
@@ -309,7 +309,7 @@ public class STPanel extends JPanel implements ActionListener {
 					catch (IOException e1) {
 						e1.printStackTrace();
 					}
-					if(game!=null)
+					if(game != null)
 					{
 						add(game, GAMEPANEL);
 						layout.show(this, GAMEPANEL);
@@ -319,7 +319,7 @@ public class STPanel extends JPanel implements ActionListener {
 						layout.show(this, TITLEPANEL);
 					}
 				}
-				else if(files.getFileChooser().getDialogType()==JFileChooser.SAVE_DIALOG)
+				else if(files.getFileChooser().getDialogType() == JFileChooser.SAVE_DIALOG)
 				{
 					final File savefile = files.getFileChooser().getSelectedFile();
 					FileOutputStream FOStream = null;
@@ -360,7 +360,7 @@ public class STPanel extends JPanel implements ActionListener {
 			}
 			else if(e.getActionCommand().equals("CancelSelection"))
 			{
-				if(files.getFileChooser().getDialogType()==JFileChooser.OPEN_DIALOG){
+				if(files.getFileChooser().getDialogType() == JFileChooser.OPEN_DIALOG){
 					layout.show(this, TITLEPANEL);
 				}
 				else if(files.getFileChooser().getDialogType()==JFileChooser.SAVE_DIALOG){

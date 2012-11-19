@@ -66,9 +66,9 @@ public class StarSystem implements Serializable
 		 * Initialize tech, resources, government, and empty cargo.
 		 */
 		UsedLocations.put(location, this);
-		techLevel=(int) (Math.random()*8);
-		resources=(int) ((Math.random()*13)*(Math.floor(Math.random()*2)));
-		govt=(int) (Math.random()*18);
+		techLevel=(int) (Math.random() * 8);
+		resources=(int) ((Math.random() * 13) * (Math.floor(Math.random() * 2)));
+		govt=(int) (Math.random() * 18);
 		cargo = new int[7]; //0 excluded, six supply items
 		
 		//generate the cargo
@@ -80,7 +80,7 @@ public class StarSystem implements Serializable
 	 * Randomly selects a location for the star system
 	 */
 	public void setRandLocation(){//Incase 2 StarSystems overlap
-		location = new Point((int) (Math.random()*SCREEN_WIDTH), (int) (Math.random()*SCREEN_HEIGHT));
+		location = new Point((int) (Math.random() * SCREEN_WIDTH), (int) (Math.random() * SCREEN_HEIGHT));
 	}
 	
 	/**
@@ -180,8 +180,8 @@ public class StarSystem implements Serializable
 		final HashMap<Point, StarSystem> clickMap = new HashMap<Point, StarSystem>();
 		for (StarSystem ss : UsedLocations.values()) {
 			if (!ss.equals(this) && distanceToStarSystem(ss) <= range) {
-				for (int i = -(mapPlanetSize>>1); i <= (mapPlanetSize>>1); i++) {
-					for (int j = -(mapPlanetSize>>1); j<= (mapPlanetSize>>1); j++) {
+				for (int i = -(mapPlanetSize >> 1); i <= (mapPlanetSize >> 1); i++) {
+					for (int j = -(mapPlanetSize >> 1); j<= (mapPlanetSize>>1); j++) {
 						clickMap.put(new Point((int) ss.getLocation().getX() + i, (int) ss.getLocation().getY() + j), ss);
 					}
 				}

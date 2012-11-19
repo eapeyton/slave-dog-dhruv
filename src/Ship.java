@@ -66,7 +66,7 @@ public class Ship implements Serializable
 	 * @return String
 	 */
 	public String toString(){
-		return ""+type;
+		return "" + type;
 	}
 	
 }

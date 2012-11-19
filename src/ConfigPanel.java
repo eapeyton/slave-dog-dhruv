@@ -202,11 +202,11 @@ public class ConfigPanel extends JPanel implements ChangeListener, KeyListener {
 		 * If a spinner is the source of the event, re-calculate the remaining skill points and reset
 		 * the maximum bounds on the spinner values.
 		 */
-		if(e.getSource().equals(pilotSpinner)||e.getSource().equals(fighterSpinner)||e.getSource().equals(traderSpinner)||e.getSource().equals(engineerSpinner)){
-			remainingPoints = 16-(Integer) pilotSpinner.getValue()-(Integer) fighterSpinner.getValue()-(Integer) traderSpinner.getValue()-(Integer) engineerSpinner.getValue();
-			pilotSpinner.setModel(new SpinnerNumberModel((Number) pilotSpinner.getValue(), (Integer) 0,remainingPoints+(Integer) pilotSpinner.getValue(),(Number) 1));
-			fighterSpinner.setModel(new SpinnerNumberModel((Number) fighterSpinner.getValue(),(Integer) 0,remainingPoints+(Integer) fighterSpinner.getValue(),(Number) 1));
-			traderSpinner.setModel(new SpinnerNumberModel((Number) traderSpinner.getValue(),(Integer) 0,remainingPoints+(Integer) traderSpinner.getValue(),(Number) 1));
+		if(e.getSource().equals(pilotSpinner) || e.getSource().equals(fighterSpinner) || e.getSource().equals(traderSpinner) || e.getSource().equals(engineerSpinner)){
+			remainingPoints = 16 - (Integer) pilotSpinner.getValue() - (Integer) fighterSpinner.getValue() - (Integer) traderSpinner.getValue() - (Integer) engineerSpinner.getValue();
+			pilotSpinner.setModel(new SpinnerNumberModel((Number) pilotSpinner.getValue(), (Integer) 0,remainingPoints + (Integer) pilotSpinner.getValue(),(Number) 1));
+			fighterSpinner.setModel(new SpinnerNumberModel((Number) fighterSpinner.getValue(),(Integer) 0,remainingPoints + (Integer) fighterSpinner.getValue(),(Number) 1));
+			traderSpinner.setModel(new SpinnerNumberModel((Number) traderSpinner.getValue(),(Integer) 0,remainingPoints + (Integer) traderSpinner.getValue(),(Number) 1));
 			engineerSpinner.setModel(new SpinnerNumberModel((Number) engineerSpinner.getValue(),(Integer) 0,remainingPoints+(Integer) engineerSpinner.getValue(),(Number) 1));
 			remaining.setText(remainingPoints+"");
 		

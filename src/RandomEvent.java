@@ -68,14 +68,14 @@ public class RandomEvent extends JPanel{
 		func1.addActionListener(listener);
 		attack.addActionListener(new FuncListener());
 		flee.addActionListener(new FuncListener());
-		if(nptype==0)//Pirate
+		if(nptype == 0)//Pirate
 		{
 			message.setText("You have been attacked by a Pirate Ship! What do you want to do?");
 			func1.setText("Threaten");
 			np=new NonPlayer(0);
 		}
 		
-		if(nptype==1)//Police
+		if(nptype == 1)//Police
 		{
 			message.setText("A Police Ship wants to inspect your ship. What do you want to do?");
 			func1.setText("Submit for Inspection");
@@ -83,7 +83,7 @@ public class RandomEvent extends JPanel{
 			
 		}
 		
-		if(nptype==2)//Trader
+		if(nptype == 2)//Trader
 		{
 			message.setText("A friendly Trader Wishes to Trade. What do you want to do?");
 			func1.setText("Trade");
@@ -134,11 +134,11 @@ public class RandomEvent extends JPanel{
 			
 			
 			if(e.getSource().equals(flee)){
-				if(nptype==2){//Fleeing from a Tdaer, always successful
+				if(nptype == 2){//Fleeing from a Tdaer, always successful
 					fleeState=true;
 				}
 				else{
-					if(Math.random()*100>50){//Police or Pirate 50 % chance of Escaping
+					if(Math.random() * 100 > 50){//Police or Pirate 50 % chance of Escaping
 						fleeState=true;
 					}
 				}
@@ -146,18 +146,18 @@ public class RandomEvent extends JPanel{
 			}
 			
 			if(e.getSource().equals(attack)){
-				if(np.canNpTakeDamage((int) Math.random()*10)){
+				if(np.canNpTakeDamage((int) Math.random() * 10)){
 					message.setText("You succeeded");
 					exist=false;	//NP is dead get out of Random Event
 				}
 				else{
 					
-					if(nptype==2){//Trader Flees on Attack
+					if(nptype == 2){//Trader Flees on Attack
 						message.setText("The Trader Flees");
 						exist=false;
 					}
 					
-					if(nptype==1||nptype==0){//Police or Pirate Attack back
+					if(nptype == 1 || nptype==0){//Police or Pirate Attack back
 						final int attack = (int) Math.random()*10;
 						message.setText("You have been attacked back. What do you want to do?");
 						player.takeDamage(attack);
