@@ -44,7 +44,7 @@ public class CargoPanel extends JPanel implements ActionListener{
 	 * Field NUM_ARRAY_SUPPLY.
 	 * (value is NUM_SUPPLY_TYPE + 1)
 	 */
-	private static final int NUM_ARRAY_SUPPLY = NUM_SUPPLY_TYPE + 1;
+	public static final int NUM_ARRAY_SUPPLY = NUM_SUPPLY_TYPE + 1;
 	/**
 	 * Field ROBOTS.
 	 * (value is 6)
@@ -69,7 +69,7 @@ public class CargoPanel extends JPanel implements ActionListener{
 	 * Field WATER.
 	 * (value is 1)
 	 */
-	private static final int WATER=1, FOOD=2, DRUGS=3, MEDS=4, WEAPONS=5, ROBOTS=6;
+	public static final int WATER=1, FOOD=2, DRUGS=3, MEDS=4, WEAPONS=5, ROBOTS=6;
 	
 	/**
 	 * Field ROBOTS_COST.

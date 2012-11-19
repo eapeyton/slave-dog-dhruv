@@ -25,7 +25,7 @@ public class StarSystem implements Serializable {
 	/**
 	 * Field location.
 	 */
-	private Point location; // location of star system
+	private MapPoint location; // location of star system
 	/**
 	 * Field govt.
 	 */
@@ -39,16 +39,69 @@ public class StarSystem implements Serializable {
 	/**
 	 * Field usedLocations.
 	 */
-	private static HashMap<Point, StarSystem> UsedLocations =
-			new HashMap<Point, StarSystem>();
+	private static HashMap<MapPoint, StarSystem> UsedLocations =
+			new HashMap<MapPoint, StarSystem>();
 	/**
 	 * Field screenWidth. (value is 450)
 	 */
-	private static final int SCREEN_WIDTH = 450;
 	/**
 	 * Field screenHeight. (value is 200)
 	 */
-	private static final int SCREEN_HEIGHT = 200;
+	private static final int SCREEN_WIDTH = 450,SCREEN_HEIGHT = 200;
+	
+	/**
+	 * Field TWO.
+	 * (value is 2)
+	 */
+	/**
+	 * Field GOVT_RANDOM.
+	 * (value is 18)
+	 */
+	/**
+	 * Field RESOURCE_RANDOM.
+	 * (value is 13)
+	 */
+	/**
+	 * Field TECH_RANDOM.
+	 * (value is 8)
+	 */
+	private static final int TECH_RANDOM = 8,RESOURCE_RANDOM = 13, GOVT_RANDOM = 18, TWO = 2;
+	
+	/**
+	 * Field ROBOT_GENER.
+	 * (value is 11)
+	 */
+	/**
+	 * Field WEPS_GENER.
+	 * (value is 16)
+	 */
+	/**
+	 * Field MEDS_GENER.
+	 * (value is 21)
+	 */
+	/**
+	 * Field DRUGS_GENER.
+	 * (value is 26)
+	 */
+	/**
+	 * Field WATER_GENER.
+	 * (value is 31)
+	 */
+	private static final int WATER_GENER = 31, DRUGS_GENER = 26, MEDS_GENER = 21, WEPS_GENER = 16, ROBOT_GENER = 11;
+	
+	/**
+	 * Field TECH_LEVEL_6.
+	 * (value is 6)
+	 */
+	/**
+	 * Field TECH_LEVEL_4.
+	 * (value is 4)
+	 */
+	/**
+	 * Field TECH_LEVEL_3.
+	 * (value is 3)
+	 */
+	private static final int TECH_LEVEL_3 = 3, TECH_LEVEL_4 = 4, TECH_LEVEL_6 = 6;
 	/**
 	 * Field cargo.
 	 */
@@ -71,11 +124,11 @@ public class StarSystem implements Serializable {
 		 * Initialize tech, resources, government, and empty cargo.
 		 */
 		UsedLocations.put(location, this);
-		techLevel = (int) (Math.random() * 8);
-		resources = (int) ((Math.random() * 13) * (Math
-				.floor(Math.random() * 2)));
-		govt = (int) (Math.random() * 18);
-		cargo = new int[7]; // 0 excluded, six supply items
+		techLevel = (int) (Math.random() * TECH_RANDOM);
+		resources = (int) ((Math.random() * RESOURCE_RANDOM) * (Math
+				.floor(Math.random() * TWO)));
+		govt = (int) (Math.random() * GOVT_RANDOM);
+		cargo = new int[CargoPanel.NUM_ARRAY_SUPPLY]; // 0 excluded, six supply items
 
 		// generate the cargo
 		generateCargo();
@@ -86,15 +139,15 @@ public class StarSystem implements Serializable {
 	 * Randomly selects a location for the star system
 	 */
 	public void setRandLocation() {// Incase 2 StarSystems overlap
-		location = new Point((int) (Math.random() * SCREEN_WIDTH),
+		location = new MapPoint((int) (Math.random() * SCREEN_WIDTH),
 				(int) (Math.random() * SCREEN_HEIGHT));
 	}
 
 	/**
 	 * Getter for the name of the StarSystem
 	 * 
-	 * @return String
-	 */
+	
+	 * @return String */
 	public String getName() {
 		return name;
 	}
@@ -102,8 +155,8 @@ public class StarSystem implements Serializable {
 	/**
 	 * Getter for the tech level of the StarSystem
 	 * 
-	 * @return int
-	 */
+	
+	 * @return int */
 	public int getTechLevel() {
 		return techLevel;
 	}
@@ -114,32 +167,32 @@ public class StarSystem implements Serializable {
 	public void generateCargo() {
 		// water
 		if (techLevel >= 0) {
-			cargo[1] = (int) (Math.random() * 31);
+			cargo[CargoPanel.WATER] = (int) (Math.random() * WATER_GENER);
 		}
 
 		// food
 		if (techLevel >= 1) {
-			cargo[2] = (int) (Math.random() * 31);
+			cargo[CargoPanel.FOOD] = (int) (Math.random() * WATER_GENER);
 		}
 
 		// drugs
-		if (techLevel >= 3) {
-			cargo[3] = (int) (Math.random() * 26);
+		if (techLevel >= TECH_LEVEL_3) {
+			cargo[CargoPanel.DRUGS] = (int) (Math.random() * DRUGS_GENER);
 		}
 
 		// medicine
-		if (techLevel >= 4) {
-			cargo[4] = (int) (Math.random() * 21);
+		if (techLevel >= TECH_LEVEL_4) {
+			cargo[CargoPanel.MEDS] = (int) (Math.random() * MEDS_GENER);
 		}
 
 		// weapons
-		if (techLevel >= 4) {
-			cargo[5] = (int) (Math.random() * 16);
+		if (techLevel >= TECH_LEVEL_4) {
+			cargo[CargoPanel.WEAPONS] = (int) (Math.random() * WEPS_GENER);
 		}
 
 		// robots
-		if (techLevel >= 6) {
-			cargo[6] = (int) (Math.random() * 11);
+		if (techLevel >= TECH_LEVEL_6) {
+			cargo[CargoPanel.ROBOTS] = (int) (Math.random() * ROBOT_GENER);
 		}
 	}
 
@@ -150,8 +203,8 @@ public class StarSystem implements Serializable {
 	 * @param cargoIndex
 	 *            The type of supply
 	 * 
-	 * @return the amount of that type of cargo
-	 */
+	
+	 * @return the amount of that type of cargo */
 	public int getCargo(int cargoIndex) {
 		return cargo[cargoIndex];
 	}
@@ -178,15 +231,15 @@ public class StarSystem implements Serializable {
 	 * @param range
 	 *            The distance the player is capable of flying
 	 * 
-	 * @return A hashmap mapping points on the map to star systems
-	 */
-	public HashMap<Point, StarSystem> getClickMap(int mapPlanetSize, int range) {
-		final HashMap<Point, StarSystem> clickMap = new HashMap<Point, StarSystem>();
+	
+	 * @return A hashmap mapping points on the map to star systems */
+	public HashMap<MapPoint, StarSystem> getClickMap(int mapPlanetSize, int range) {
+		final HashMap<MapPoint, StarSystem> clickMap = new HashMap<MapPoint, StarSystem>();
 		for (StarSystem ss : UsedLocations.values()) {
 			if (!ss.equals(this) && distanceToStarSystem(ss) <= range) {
 				for (int i = -(mapPlanetSize >> 1); i <= (mapPlanetSize >> 1); i++) {
 					for (int j = -(mapPlanetSize >> 1); j <= (mapPlanetSize >> 1); j++) {
-						clickMap.put(new Point((int) ss.getLocation().getX()
+						clickMap.put(new MapPoint((int) ss.getLocation().getX()
 								+ i, (int) ss.getLocation().getY() + j), ss);
 					}
 				}
@@ -199,18 +252,18 @@ public class StarSystem implements Serializable {
 	 * 
 	 * @param ss
 	 *            StarSystem
-	 * @return the distance between this star system and another
-	 */
+	
+	 * @return the distance between this star system and another */
 	public int distanceToStarSystem(StarSystem ss) {
 		return (int) Math.sqrt(Math.pow(
-				ss.getLocation().getX() - location.getX(), 2)
-				+ Math.pow(ss.getLocation().getY() - location.getY(), 2));
+				ss.getLocation().getX() - location.getX(), TWO)
+				+ Math.pow(ss.getLocation().getY() - location.getY(), TWO));
 	}
 
 	/**
 	 * 
-	 * @return The star system's name and attributes as a string
-	 */
+	
+	 * @return The star system's name and attributes as a string */
 	public String toString() {
 
 		String str = "";
@@ -226,9 +279,9 @@ public class StarSystem implements Serializable {
 
 	/**
 	 * 
-	 * @return the location
-	 */
-	public Point getLocation() {
+	
+	 * @return the location */
+	public MapPoint getLocation() {
 		return location;
 	}
 
@@ -236,15 +289,15 @@ public class StarSystem implements Serializable {
 	 * @param location
 	 *            the location to set
 	 */
-	public void setLocation(Point location) {
+	public void setLocation(MapPoint location) {
 		this.location = location;
 	}
 
 	/**
 	 * 
-	 * @return The locations already occupied by StarSystems
-	 */
-	public static HashMap<Point, StarSystem> getUsedLocations() {
+	
+	 * @return The locations already occupied by StarSystems */
+	public static HashMap<MapPoint, StarSystem> getUsedLocations() {
 		return UsedLocations;
 	}
 
@@ -253,7 +306,9 @@ public class StarSystem implements Serializable {
 	 *            The locations already occupied by StarSystems; used when
 	 *            loading game from file
 	 */
-	public static void setUsedLocations(HashMap<Point, StarSystem> uL) {
+	public static void setUsedLocations(HashMap<MapPoint, StarSystem> uL) {
 		UsedLocations = uL;
 	}
+	
+	
 }

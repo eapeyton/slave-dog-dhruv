@@ -99,6 +99,20 @@ public class STPanel extends JPanel implements ActionListener {
 	 * Field RANDOMPANEL. (value is ""Random Event Panel"")
 	 */
 	private static final String RANDOMPANEL = "Random Event Panel";
+	/**
+	 * Field RANDOM_EVENT_CHANCE.
+	 * (value is 0.5)
+	 */
+	private static final double RANDOM_EVENT_CHANCE = .5;
+	/**
+	 * Field FUEL_COST.
+	 * (value is 10)
+	 */
+	/**
+	 * Field NUM_NONPLAYERS.
+	 * (value is 3)
+	 */
+	private static final int NUM_NONPLAYERS = 3, FUEL_COST = 10;
 
 	/**
 	 * Creates a STPanel with a card layout and initializes all the JPanels.
@@ -138,8 +152,8 @@ public class STPanel extends JPanel implements ActionListener {
 	 * 
 	 * @param e
 	 *            ActionEvent
-	 * @see java.awt.event.ActionListener#actionPerformed(ActionEvent)
-	 */
+	
+	 * @see java.awt.event.ActionListener#actionPerformed(ActionEvent) */
 	public void actionPerformed(ActionEvent e) {
 		/**
 		 * If the source of the action is the Let's Play button in the
@@ -172,10 +186,11 @@ public class STPanel extends JPanel implements ActionListener {
 			 */
 			if (e.getSource().equals(game.getGoButton())) {
 				/* Chance of a random event is 50/50 */
-				final double chance = Math.random();
+				double chance = Math.random();
 				/* Create a random event, else update the game */
-				if (chance < .5) {
-					random = new RandomEvent(0, player, this);
+				if (chance < RANDOM_EVENT_CHANCE) {
+					chance *= NUM_NONPLAYERS;	//chance is in the range of [0,3)
+					random = new RandomEvent(chance, player, this);
 					add(random, RANDOMPANEL);
 					layout.show(this, RANDOMPANEL);
 				} else {
@@ -207,7 +222,7 @@ public class STPanel extends JPanel implements ActionListener {
 			if (e.getSource().equals(game.getBuyFuelButton())) {
 				// Create a new spinner and show it in a dialog box
 				final JSpinner fuelSpinner = new JSpinner(
-						new SpinnerNumberModel(0, 0, player.getMoney() / 10, 1));
+						new SpinnerNumberModel(0, 0, player.getMoney() / FUEL_COST, 1));
 				final int option = JOptionPane.showOptionDialog(this,
 						fuelSpinner, "How much fuel?",
 						JOptionPane.OK_CANCEL_OPTION,
@@ -217,8 +232,8 @@ public class STPanel extends JPanel implements ActionListener {
 					// money
 					final int amount = (Integer) fuelSpinner.getValue();
 					if (amount > 0) {
-						if (player.getMoney() >= amount * 10) {
-							player.setMoney(player.getMoney() - amount * 10);
+						if (player.getMoney() >= amount * FUEL_COST) {
+							player.setMoney(player.getMoney() - amount * FUEL_COST);
 							player.setFuel(player.getFuel() + amount);
 						}
 					}
@@ -279,8 +294,8 @@ public class STPanel extends JPanel implements ActionListener {
 						final ArrayList<StarSystem> universe =
 								(ArrayList<StarSystem>) oIStream
 								.readObject();
-						final HashMap<Point, StarSystem> usedLocations =
-								(HashMap<Point, StarSystem>) oIStream
+						final HashMap<MapPoint, StarSystem> usedLocations =
+								(HashMap<MapPoint, StarSystem>) oIStream
 								.readObject();
 						StarSystem.setUsedLocations(usedLocations);
 						final StarSystem selected = (StarSystem) oIStream
