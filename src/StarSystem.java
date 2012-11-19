@@ -25,7 +25,7 @@ public class StarSystem implements Serializable {
 	/**
 	 * Field location.
 	 */
-	private Point location; // location of star system
+	private MapPoint location; // location of star system
 	/**
 	 * Field govt.
 	 */
@@ -39,8 +39,8 @@ public class StarSystem implements Serializable {
 	/**
 	 * Field usedLocations.
 	 */
-	private static HashMap<Point, StarSystem> UsedLocations =
-			new HashMap<Point, StarSystem>();
+	private static HashMap<MapPoint, StarSystem> UsedLocations =
+			new HashMap<MapPoint, StarSystem>();
 	/**
 	 * Field screenWidth. (value is 450)
 	 */
@@ -139,7 +139,7 @@ public class StarSystem implements Serializable {
 	 * Randomly selects a location for the star system
 	 */
 	public void setRandLocation() {// Incase 2 StarSystems overlap
-		location = new Point((int) (Math.random() * SCREEN_WIDTH),
+		location = new MapPoint((int) (Math.random() * SCREEN_WIDTH),
 				(int) (Math.random() * SCREEN_HEIGHT));
 	}
 
@@ -233,13 +233,13 @@ public class StarSystem implements Serializable {
 	 * 
 	
 	 * @return A hashmap mapping points on the map to star systems */
-	public HashMap<Point, StarSystem> getClickMap(int mapPlanetSize, int range) {
-		final HashMap<Point, StarSystem> clickMap = new HashMap<Point, StarSystem>();
+	public HashMap<MapPoint, StarSystem> getClickMap(int mapPlanetSize, int range) {
+		final HashMap<MapPoint, StarSystem> clickMap = new HashMap<MapPoint, StarSystem>();
 		for (StarSystem ss : UsedLocations.values()) {
 			if (!ss.equals(this) && distanceToStarSystem(ss) <= range) {
 				for (int i = -(mapPlanetSize >> 1); i <= (mapPlanetSize >> 1); i++) {
 					for (int j = -(mapPlanetSize >> 1); j <= (mapPlanetSize >> 1); j++) {
-						clickMap.put(new Point((int) ss.getLocation().getX()
+						clickMap.put(new MapPoint((int) ss.getLocation().getX()
 								+ i, (int) ss.getLocation().getY() + j), ss);
 					}
 				}
@@ -281,7 +281,7 @@ public class StarSystem implements Serializable {
 	 * 
 	
 	 * @return the location */
-	public Point getLocation() {
+	public MapPoint getLocation() {
 		return location;
 	}
 
@@ -289,7 +289,7 @@ public class StarSystem implements Serializable {
 	 * @param location
 	 *            the location to set
 	 */
-	public void setLocation(Point location) {
+	public void setLocation(MapPoint location) {
 		this.location = location;
 	}
 
@@ -297,7 +297,7 @@ public class StarSystem implements Serializable {
 	 * 
 	
 	 * @return The locations already occupied by StarSystems */
-	public static HashMap<Point, StarSystem> getUsedLocations() {
+	public static HashMap<MapPoint, StarSystem> getUsedLocations() {
 		return UsedLocations;
 	}
 
@@ -306,7 +306,9 @@ public class StarSystem implements Serializable {
 	 *            The locations already occupied by StarSystems; used when
 	 *            loading game from file
 	 */
-	public static void setUsedLocations(HashMap<Point, StarSystem> uL) {
+	public static void setUsedLocations(HashMap<MapPoint, StarSystem> uL) {
 		UsedLocations = uL;
 	}
+	
+	
 }

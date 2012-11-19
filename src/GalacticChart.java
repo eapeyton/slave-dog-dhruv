@@ -298,7 +298,7 @@ public class GalacticChart extends JPanel {
 		/**
 		 * Field clickMap.
 		 */
-		public Map<Point, StarSystem> clickMap;
+		public Map<MapPoint, StarSystem> clickMap;
 		/**
 		 * Field graphicPanel.
 		 */
@@ -328,8 +328,8 @@ public class GalacticChart extends JPanel {
 		 * @see java.awt.event.MouseListener#mouseReleased(MouseEvent) */
 		@Override
 		public void mouseReleased(MouseEvent me) {
-			if (clickMap.containsKey(me.getPoint())) {
-				selected = clickMap.get(me.getPoint());
+			if (clickMap.containsKey(new MapPoint(me.getPoint()))) {
+				selected = clickMap.get(new MapPoint(me.getPoint()));
 				paintComponent(getGraphics());
 			}
 		}

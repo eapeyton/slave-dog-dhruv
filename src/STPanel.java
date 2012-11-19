@@ -294,8 +294,8 @@ public class STPanel extends JPanel implements ActionListener {
 						final ArrayList<StarSystem> universe =
 								(ArrayList<StarSystem>) oIStream
 								.readObject();
-						final HashMap<Point, StarSystem> usedLocations =
-								(HashMap<Point, StarSystem>) oIStream
+						final HashMap<MapPoint, StarSystem> usedLocations =
+								(HashMap<MapPoint, StarSystem>) oIStream
 								.readObject();
 						StarSystem.setUsedLocations(usedLocations);
 						final StarSystem selected = (StarSystem) oIStream
