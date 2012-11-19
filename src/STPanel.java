@@ -264,11 +264,11 @@ public class STPanel extends JPanel implements ActionListener {
 				if(files.getFileChooser().getDialogType() == JFileChooser.OPEN_DIALOG)
 				{
 					final File savefile = files.getFileChooser().getSelectedFile();
-					FileInputStream FIStream = null;
-					ObjectInputStream OIStream = null;
+					FileInputStream fIStream = null;
+					ObjectInputStream oIStream = null;
 					try
 					{
-						FIStream = new FileInputStream(savefile);
+						fIStream = new FileInputStream(savefile);
 					}
 					catch (FileNotFoundException e1)
 					{
@@ -277,7 +277,7 @@ public class STPanel extends JPanel implements ActionListener {
 					}
 					try
 					{
-						OIStream = new ObjectInputStream(FIStream);
+						oIStream = new ObjectInputStream(fIStream);
 					}
 					catch (IOException e1)
 					{
@@ -286,11 +286,11 @@ public class STPanel extends JPanel implements ActionListener {
 					}
 					try
 					{
-						final Player player = (Player) OIStream.readObject();
-						final ArrayList<StarSystem> universe = (ArrayList<StarSystem>) OIStream.readObject();
-						final HashMap<Point, StarSystem> usedLocations = (HashMap<Point, StarSystem>) OIStream.readObject();
+						final Player player = (Player) oIStream.readObject();
+						final ArrayList<StarSystem> universe = (ArrayList<StarSystem>) oIStream.readObject();
+						final HashMap<Point, StarSystem> usedLocations = (HashMap<Point, StarSystem>) oIStream.readObject();
 						StarSystem.setUsedLocations(usedLocations);
-						final StarSystem selected = (StarSystem) OIStream.readObject();
+						final StarSystem selected = (StarSystem) oIStream.readObject();
 						final JLabel destination = new JLabel("Destination:");
 						final JButton newGo = new JButton("Go!");
 						final GalacticChart chart = new GalacticChart(destination, newGo,universe);
@@ -299,7 +299,7 @@ public class STPanel extends JPanel implements ActionListener {
 						game = new GamePanel(this, player, chart);
 						newGo.setEnabled(true);
 						this.player = player;
-						FIStream.close();
+						fIStream.close();
 						
 					}
 					catch (ClassNotFoundException e1) {
@@ -322,11 +322,11 @@ public class STPanel extends JPanel implements ActionListener {
 				else if(files.getFileChooser().getDialogType() == JFileChooser.SAVE_DIALOG)
 				{
 					final File savefile = files.getFileChooser().getSelectedFile();
-					FileOutputStream FOStream = null;
-					ObjectOutputStream OOStream = null;
+					FileOutputStream fOStream = null;
+					ObjectOutputStream oOStream = null;
 					try
 					{
-						FOStream = new FileOutputStream(savefile);
+						fOStream = new FileOutputStream(savefile);
 					}
 					catch (FileNotFoundException e1)
 					{
@@ -335,7 +335,7 @@ public class STPanel extends JPanel implements ActionListener {
 					}
 					try
 					{
-						OOStream = new ObjectOutputStream(FOStream);
+						oOStream = new ObjectOutputStream(fOStream);
 					}
 					catch (IOException e1)
 					{
@@ -344,10 +344,10 @@ public class STPanel extends JPanel implements ActionListener {
 					}
 					try
 					{
-						OOStream.writeObject(game.getPlayer());
-						OOStream.writeObject(game.getChart().getUniverse());
-						OOStream.writeObject(StarSystem.getUsedLocations());
-						OOStream.writeObject(game.getChart().getSelected());
+						oOStream.writeObject(game.getPlayer());
+						oOStream.writeObject(game.getChart().getUniverse());
+						oOStream.writeObject(StarSystem.getUsedLocations());
+						oOStream.writeObject(game.getChart().getSelected());
 					}
 					catch (IOException e1)
 					{
