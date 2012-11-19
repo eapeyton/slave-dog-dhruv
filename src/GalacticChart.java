@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
 
 /**
  * Creates and draws a universe
@@ -322,6 +321,7 @@ public class GalacticChart extends JPanel{
 		 * @param me MouseEvent
 		
 		 * @see java.awt.event.MouseListener#mouseReleased(MouseEvent) */
+		@Override
 		public void mouseReleased(MouseEvent me) {
 			if (clickMap.containsKey(me.getPoint())) {
 				selected = clickMap.get(me.getPoint());
@@ -329,6 +329,10 @@ public class GalacticChart extends JPanel{
 			}
 		}
 		
+		/**
+		 * Method toString.
+		 * @return String
+		 */
 		@Override
 		public String toString() {
 			return "Adapter of size " + mapPlanetSize;
@@ -354,8 +358,8 @@ public class GalacticChart extends JPanel{
         
         /**
          * Method toString.
-         * @return String
-         */
+        
+         * @return String */
         @Override
         public String toString(){
         	return "GalacticChart";

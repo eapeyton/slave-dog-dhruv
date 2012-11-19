@@ -194,13 +194,6 @@ public class Player implements Serializable
 		return "Player... \nName: " + name + "\nDifficulty: " + difficulty + "\nSkills...\nPilot: " + pilotp + "\nFighter: " + fighterp + "\nTrader: " + traderp + "\nEngineer: " + enggp;
 	}
 	
-	/**
-	 * Method relocate.
-	 */
-	public void relocate()
-	{
-		//TODO this method if player wants to warp to something
-	}
 	
 	/**
 	 * Pass in damage player has to take

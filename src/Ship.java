@@ -16,19 +16,19 @@ public class Ship implements Serializable
 	/**
 	 * Field bays.
 	 */
-	int bays;
+	private int bays;
 	/**
 	 * Field health.
 	 */
-	int health;
+	private final int health;
 	/**
 	 * Field sheild.
 	 */
-	int sheild;
+	private final int sheild;
 	/**
 	 * Field type.
 	 */
-	String type;
+	private final String type;
 	
 	// Add specificities for each type of ship, type will be chosen dependent on the number entered into the constructor
 	/**

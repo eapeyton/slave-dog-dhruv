@@ -26,10 +26,76 @@ import java.awt.GridLayout;
  */
 public class CargoPanel extends JPanel implements ActionListener{
 	/**
+	 * Field GRID_LAYOUT_WIDTH.
+	 * (value is 7)
+	 */
+	private static final int GRID_LAYOUT_WIDTH = 7;
+	/**
+	 * Field GRID_LAYOUT_HEIGHT.
+	 * (value is 6)
+	 */
+	private static final int GRID_LAYOUT_HEIGHT = 6;
+	/**
 	 * Field NUM_SUPPLY_TYPE.
 	 * (value is 6)
 	 */
 	private static final int NUM_SUPPLY_TYPE = 6;
+	/**
+	 * Field NUM_ARRAY_SUPPLY.
+	 * (value is NUM_SUPPLY_TYPE + 1)
+	 */
+	private static final int NUM_ARRAY_SUPPLY = NUM_SUPPLY_TYPE + 1;
+	/**
+	 * Field ROBOTS.
+	 * (value is 6)
+	 */
+	/**
+	 * Field WEAPONS.
+	 * (value is 5)
+	 */
+	/**
+	 * Field MEDS.
+	 * (value is 4)
+	 */
+	/**
+	 * Field DRUGS.
+	 * (value is 3)
+	 */
+	/**
+	 * Field FOOD.
+	 * (value is 2)
+	 */
+	/**
+	 * Field WATER.
+	 * (value is 1)
+	 */
+	private static final int WATER=1, FOOD=2, DRUGS=3, MEDS=4, WEAPONS=5, ROBOTS=6;
+	
+	/**
+	 * Field ROBOTS_COST.
+	 * (value is 500)
+	 */
+	/**
+	 * Field WEAPONS_COST.
+	 * (value is 200)
+	 */
+	/**
+	 * Field MEDS_COST.
+	 * (value is 100)
+	 */
+	/**
+	 * Field DRUGS_COST.
+	 * (value is 70)
+	 */
+	/**
+	 * Field FOOD_COST.
+	 * (value is 50)
+	 */
+	/**
+	 * Field WATER_COST.
+	 * (value is 10)
+	 */
+	private static final int WATER_COST=10, FOOD_COST=50, DRUGS_COST=70, MEDS_COST=100, WEAPONS_COST=200, ROBOTS_COST=500;
 
 	/**
 	 * Field plyrRobots.
@@ -118,7 +184,7 @@ public class CargoPanel extends JPanel implements ActionListener{
 	/**
 	 * Field player.
 	 */
-	private Player player;
+	private Player player = null;
 
 	/**
 	 * Field curr.
@@ -139,12 +205,12 @@ public class CargoPanel extends JPanel implements ActionListener{
 		/**
 		 * Initialize supply costs
 		 */
-		waterCost = 30;
-		foodCost = 50;
-		drugCost = 70;
-		medCost = 100;
-		weaponCost = 200;
-		robotCost = 500;
+		waterCost = WATER_COST;
+		foodCost = FOOD_COST;
+		drugCost = DRUGS_COST;
+		medCost = MEDS_COST;
+		weaponCost = WEAPONS_COST;
+		robotCost = ROBOTS_COST;
 
 		/**
 		 * NORTH Section:
@@ -176,46 +242,38 @@ public class CargoPanel extends JPanel implements ActionListener{
 		
 		//create panel
 		final JPanel gridPanel = new JPanel();
-		gridPanel.setLayout(new GridLayout(7, 6, 0, 0));
+		gridPanel.setLayout(new GridLayout(GRID_LAYOUT_WIDTH, GRID_LAYOUT_HEIGHT, 0, 0));
 		
 		////////////
 		// LABELS //
 		////////////
 		
 		//create labels that show various player supply counts
-		plyrWater = new JLabel("" + player.getCargo(1));
-		plyrFood = new JLabel("" + player.getCargo(2));
-		plyrDrugs = new JLabel("" + player.getCargo(3));
-		plyrMeds = new JLabel("" + player.getCargo(4));
-		plyrWeps = new JLabel("" + player.getCargo(5));
-		plyrRobots = new JLabel("" + player.getCargo(6));
+		plyrWater = new JLabel("" + player.getCargo(WATER));
+		plyrFood = new JLabel("" + player.getCargo(FOOD));
+		plyrDrugs = new JLabel("" + player.getCargo(DRUGS));
+		plyrMeds = new JLabel("" + player.getCargo(MEDS));
+		plyrWeps = new JLabel("" + player.getCargo(WEAPONS));
+		plyrRobots = new JLabel("" + player.getCargo(ROBOTS));
 		
 		//create labels for planet supply counts
-		plWater = new JLabel("" + curr.getCargo(1));
-		plFood = new JLabel("" + curr.getCargo(2));
-		plDrugs = new JLabel("" + curr.getCargo(3));
-		plMeds = new JLabel("" + curr.getCargo(4));
-		plWeps = new JLabel("" + curr.getCargo(5));
-		plRobots = new JLabel("" + curr.getCargo(6));
+		plWater = new JLabel("" + curr.getCargo(WATER));
+		plFood = new JLabel("" + curr.getCargo(FOOD));
+		plDrugs = new JLabel("" + curr.getCargo(DRUGS));
+		plMeds = new JLabel("" + curr.getCargo(MEDS));
+		plWeps = new JLabel("" + curr.getCargo(WEAPONS));
+		plRobots = new JLabel("" + curr.getCargo(ROBOTS));
 		
 		//////////////
 		// SPINNERS //
 		//////////////
 		
 		//create array of spinners and add new spinners to it, with minimum value of 0 and no max
-		spinners = new JSpinner[7];
+		spinners = new JSpinner[NUM_ARRAY_SUPPLY];
 		for(int i=1; i <= NUM_SUPPLY_TYPE; i++) {
 			spinners[i] = new JSpinner(new SpinnerNumberModel(0, 0, null, 1));
 			//spinners[i].addChangeListener(this);
 		}
-		/**
-		waterSpin = new JSpinner();
-		foodSpin = new JSpinner();
-		drugsSpin = new JSpinner();
-		medSpin = new JSpinner();
-		weapSpin = new JSpinner();
-		robotSpin = new JSpinner();
-		*/
 		
 		///////////
 		// ROWS //
@@ -235,7 +293,7 @@ public class CargoPanel extends JPanel implements ActionListener{
 		gridPanel.add(new JLabel("" + (waterCost >> 1)));
 		gridPanel.add(plWater);
 		gridPanel.add(new JLabel("" + waterCost));
-		gridPanel.add(spinners[1]);
+		gridPanel.add(spinners[WATER]);
 
 		//food
 		gridPanel.add(new JLabel("Food: "));
@@ -243,7 +301,7 @@ public class CargoPanel extends JPanel implements ActionListener{
 		gridPanel.add(new JLabel("" + (foodCost >> 1)));
 		gridPanel.add(plFood);
 		gridPanel.add(new JLabel("" + foodCost));
-		gridPanel.add(spinners[2]);
+		gridPanel.add(spinners[FOOD]);
 
 		//drugs
 		gridPanel.add(new JLabel("Drugs: "));
@@ -251,7 +309,7 @@ public class CargoPanel extends JPanel implements ActionListener{
 		gridPanel.add(new JLabel("" + (drugCost >> 1)));
 		gridPanel.add(plDrugs);
 		gridPanel.add(new JLabel("" + drugCost));
-		gridPanel.add(spinners[3]);
+		gridPanel.add(spinners[DRUGS]);
 		
 		//medicine
 		gridPanel.add(new JLabel("Medicine: "));
@@ -259,7 +317,7 @@ public class CargoPanel extends JPanel implements ActionListener{
 		gridPanel.add(new JLabel("" + (medCost >> 1)));
 		gridPanel.add(plMeds);
 		gridPanel.add(new JLabel("" + medCost));
-		gridPanel.add(spinners[4]);
+		gridPanel.add(spinners[MEDS]);
 		
 		//weapons
 		gridPanel.add(new JLabel("Weapons: "));
@@ -267,7 +325,7 @@ public class CargoPanel extends JPanel implements ActionListener{
 		gridPanel.add(new JLabel("" + (weaponCost >> 1)));
 		gridPanel.add(plWeps);
 		gridPanel.add(new JLabel("" + weaponCost));
-		gridPanel.add(spinners[5]);
+		gridPanel.add(spinners[WEAPONS]);
 		
 		//robots
 		gridPanel.add(new JLabel("Robots: "));
@@ -275,7 +333,7 @@ public class CargoPanel extends JPanel implements ActionListener{
 		gridPanel.add(new JLabel("" + (robotCost >> 1)));
 		gridPanel.add(plRobots);
 		gridPanel.add(new JLabel("" + robotCost));
-		gridPanel.add(spinners[6]);
+		gridPanel.add(spinners[ROBOTS]);
 		
 		//add the gridPanel to the main panel
 		add(gridPanel, BorderLayout.CENTER);
@@ -310,8 +368,8 @@ public class CargoPanel extends JPanel implements ActionListener{
 	/**
 	 * Method actionPerformed.
 	 * @param e ActionEvent
-	 * @see java.awt.event.ActionListener#actionPerformed(ActionEvent)
-	 */
+	
+	 * @see java.awt.event.ActionListener#actionPerformed(ActionEvent) */
 	@Override
 	/**
 	 * Handles the events. Performs the transactions based on which 
@@ -347,8 +405,8 @@ public class CargoPanel extends JPanel implements ActionListener{
 			}
 			else{
 				//check water spinner
-				quant = (Integer) spinners[1].getValue();
-				if(quant > curr.getCargo(1)){
+				quant = (Integer) spinners[WATER].getValue();
+				if(quant > curr.getCargo(WATER)){
 					JOptionPane.showMessageDialog(null, "Not enough water!");
 				}
 				else{
@@ -357,15 +415,15 @@ public class CargoPanel extends JPanel implements ActionListener{
 						JOptionPane.showMessageDialog(null, "Not enough money!");
 					}
 					else{
-						player.setCargo(1, quant);
+						player.setCargo(WATER, quant);
 						player.setMoney(player.getMoney() - totalCost);
-						curr.setCargo(1, -quant);
-						spinners[1].setValue(0);
+						curr.setCargo(WATER, -quant);
+						spinners[WATER].setValue(0);
 					}
 				}
 				//check food spinner
-				quant = (Integer) spinners[2].getValue();
-				if(quant > curr.getCargo(2)){
+				quant = (Integer) spinners[FOOD].getValue();
+				if(quant > curr.getCargo(FOOD)){
 					JOptionPane.showMessageDialog(null, "Not enough food!");
 				}
 				else{
@@ -374,16 +432,16 @@ public class CargoPanel extends JPanel implements ActionListener{
 						JOptionPane.showMessageDialog(null, "Not enough money!");
 					}
 					else{
-						player.setCargo(2, quant);
+						player.setCargo(FOOD, quant);
 						player.setMoney(player.getMoney() - totalCost);
-						curr.setCargo(2, -quant);
-						spinners[2].setValue(0);
+						curr.setCargo(FOOD, -quant);
+						spinners[FOOD].setValue(0);
 					}
 				}
 				//check drug spinner
-				quant = (Integer) spinners[3].getValue();
-				if(quant > curr.getCargo(3)){
-					JOptionPane.showMessageDialog(null, "Not enough of this item!");
+				quant = (Integer) spinners[DRUGS].getValue();
+				if(quant > curr.getCargo(DRUGS)){
+					JOptionPane.showMessageDialog(null, "Not enough of drugs!");
 				}
 				else{
 					totalCost = drugCost * quant;
@@ -391,16 +449,16 @@ public class CargoPanel extends JPanel implements ActionListener{
 						JOptionPane.showMessageDialog(null, "Not enough money!");
 					}
 					else{
-						player.setCargo(3, quant);
+						player.setCargo(DRUGS, quant);
 						player.setMoney(player.getMoney() - totalCost);
-						curr.setCargo(3, -quant);
-						spinners[3].setValue(0);
+						curr.setCargo(DRUGS, -quant);
+						spinners[DRUGS].setValue(0);
 					}
 				}	
 				//check medicine spinner
-				quant = (Integer) spinners[4].getValue();
-				if(quant > curr.getCargo(4)){
-					JOptionPane.showMessageDialog(null, "Not enough drugs!");
+				quant = (Integer) spinners[MEDS].getValue();
+				if(quant > curr.getCargo(MEDS)){
+					JOptionPane.showMessageDialog(null, "Not enough medicine!");
 				}
 				else{
 					totalCost = medCost * quant;
@@ -408,16 +466,16 @@ public class CargoPanel extends JPanel implements ActionListener{
 						JOptionPane.showMessageDialog(null, "Not enough money!");
 					}
 					else{
-						player.setCargo(4, quant);
+						player.setCargo(MEDS, quant);
 						player.setMoney(player.getMoney() - totalCost);
-						curr.setCargo(4, -quant);
-						spinners[4].setValue(0);
+						curr.setCargo(MEDS, -quant);
+						spinners[MEDS].setValue(0);
 					}
 				}
 				
 				//check weapon spinner
-				quant = (Integer) spinners[5].getValue();
-				if(quant > curr.getCargo(5)){
+				quant = (Integer) spinners[WEAPONS].getValue();
+				if(quant > curr.getCargo(WEAPONS)){
 					JOptionPane.showMessageDialog(null, "Not enough weapons!");
 				}
 				else{
@@ -426,15 +484,15 @@ public class CargoPanel extends JPanel implements ActionListener{
 						JOptionPane.showMessageDialog(null, "Not enough money!");
 					}
 					else{
-						player.setCargo(5, quant);
+						player.setCargo(WEAPONS, quant);
 						player.setMoney(player.getMoney() - totalCost);
-						curr.setCargo(5, -quant);
-						spinners[5].setValue(0);
+						curr.setCargo(WEAPONS, -quant);
+						spinners[WEAPONS].setValue(0);
 					}
 				}
 				//check robots spinner
-				quant = (Integer) spinners[6].getValue();
-				if(quant > curr.getCargo(6)){
+				quant = (Integer) spinners[ROBOTS].getValue();
+				if(quant > curr.getCargo(ROBOTS)){
 					JOptionPane.showMessageDialog(null, "Not enough robots!");
 				}
 				else{
@@ -443,10 +501,10 @@ public class CargoPanel extends JPanel implements ActionListener{
 						JOptionPane.showMessageDialog(null, "Not enough money!");
 					}
 					else{
-						player.setCargo(6, quant);
+						player.setCargo(ROBOTS, quant);
 						player.setMoney(player.getMoney() - totalCost);
-						curr.setCargo(6, -quant);
-						spinners[6].setValue(0);
+						curr.setCargo(ROBOTS, -quant);
+						spinners[ROBOTS].setValue(0);
 						}
 				}
 			}
@@ -468,81 +526,81 @@ public class CargoPanel extends JPanel implements ActionListener{
 			bays = player.getBays();
 		
 			//check water spinner
-			quant = (Integer) spinners[1].getValue();
-			if(quant > player.getCargo(1)){
+			quant = (Integer) spinners[WATER].getValue();
+			if(quant > player.getCargo(WATER)){
 				JOptionPane.showMessageDialog(null, "Not enough water!");
 			}
 			else{
 				totalCost = (waterCost >> 1) * quant;
-				player.setCargo(1, -quant);
+				player.setCargo(WATER, -quant);
 				player.setMoney(player.getMoney() + totalCost);
-				curr.setCargo(1, quant);
-				spinners[1].setValue(0);
+				curr.setCargo(WATER, quant);
+				spinners[WATER].setValue(0);
 			}
 			
 			//check food spinner
-			quant = (Integer) spinners[2].getValue();
-			if(quant > player.getCargo(2)){
+			quant = (Integer) spinners[FOOD].getValue();
+			if(quant > player.getCargo(FOOD)){
 				JOptionPane.showMessageDialog(null, "Not enough food!");
 			}
 			else{
 				totalCost = (foodCost >> 1) * quant;
-				player.setCargo(2, -quant);
+				player.setCargo(FOOD, -quant);
 				player.setMoney(player.getMoney() + totalCost);
-				curr.setCargo(2, quant);
-				spinners[2].setValue(0);
+				curr.setCargo(FOOD, quant);
+				spinners[FOOD].setValue(0);
 			}
 			
 			//check drug spinner
-			quant = (Integer) spinners[3].getValue();
-			if(quant > player.getCargo(3)){
+			quant = (Integer) spinners[DRUGS].getValue();
+			if(quant > player.getCargo(DRUGS)){
 				JOptionPane.showMessageDialog(null, "Not enough drugs!");
 			}
 			else{
 				totalCost = (drugCost >> 1) * quant;
-				player.setCargo(3, -quant);
+				player.setCargo(DRUGS, -quant);
 				player.setMoney(player.getMoney() + totalCost);
-				curr.setCargo(3, quant);
-				spinners[3].setValue(0);
+				curr.setCargo(DRUGS, quant);
+				spinners[DRUGS].setValue(0);
 			}
 			
 			//check medicine spinner
-			quant = (Integer) spinners[4].getValue();
-			if(quant > player.getCargo(4)){
+			quant = (Integer) spinners[MEDS].getValue();
+			if(quant > player.getCargo(MEDS)){
 				JOptionPane.showMessageDialog(null, "Not enough medicine!");
 			}
 			else{
 				totalCost = (medCost >> 1) * quant;
-				player.setCargo(4, -quant);
+				player.setCargo(MEDS, -quant);
 				player.setMoney(player.getMoney() + totalCost);
-				curr.setCargo(4, quant);
-				spinners[4].setValue(0);
+				curr.setCargo(MEDS, quant);
+				spinners[MEDS].setValue(0);
 			}
 			
 			//check weapons spinner
-			quant = (Integer) spinners[5].getValue();
-			if(quant > player.getCargo(5)){
+			quant = (Integer) spinners[WEAPONS].getValue();
+			if(quant > player.getCargo(WEAPONS)){
 				JOptionPane.showMessageDialog(null, "Not enough weapons!");
 			}
 			else{
 				totalCost = (weaponCost >> 1) * quant;
-				player.setCargo(5, -quant);
+				player.setCargo(WEAPONS, -quant);
 				player.setMoney(player.getMoney() + totalCost);
-				curr.setCargo(5, quant);
-				spinners[5].setValue(0);
+				curr.setCargo(WEAPONS, quant);
+				spinners[WEAPONS].setValue(0);
 			}
 			
 			//check robots spinner
-			quant = (Integer) spinners[6].getValue();
-			if(quant > player.getCargo(6)){
+			quant = (Integer) spinners[ROBOTS].getValue();
+			if(quant > player.getCargo(ROBOTS)){
 				JOptionPane.showMessageDialog(null, "Not enough robots!");
 			}
 			else{
 				totalCost = (robotCost >> 1) * quant;
-				player.setCargo(6, -quant);
+				player.setCargo(ROBOTS, -quant);
 				player.setMoney(player.getMoney() + totalCost);
-				curr.setCargo(6, quant);
-				spinners[6].setValue(0);
+				curr.setCargo(ROBOTS, quant);
+				spinners[ROBOTS].setValue(0);
 			}
 			
 			updateValues();
@@ -554,29 +612,29 @@ public class CargoPanel extends JPanel implements ActionListener{
 	 * and the current StarSystem after transactions
 	 */
 	public void updateValues() {
-		plyrWater.setText("" + player.getCargo(1));
+		plyrWater.setText("" + player.getCargo(WATER));
 		
-		plyrFood.setText("" + player.getCargo(2));
+		plyrFood.setText("" + player.getCargo(FOOD));
 		
-		plyrDrugs.setText("" + player.getCargo(3));
+		plyrDrugs.setText("" + player.getCargo(DRUGS));
 		
-		plyrMeds.setText("" + player.getCargo(4));
+		plyrMeds.setText("" + player.getCargo(MEDS));
 		
-		plyrWeps.setText("" + player.getCargo(5));
+		plyrWeps.setText("" + player.getCargo(WEAPONS));
 		
-		plyrRobots.setText("" + player.getCargo(6));
+		plyrRobots.setText("" + player.getCargo(ROBOTS));
 		
-		plWater.setText("" + curr.getCargo(1));
+		plWater.setText("" + curr.getCargo(WATER));
 		
-		plFood.setText("" + curr.getCargo(2));
+		plFood.setText("" + curr.getCargo(FOOD));
 		
-		plDrugs.setText("" + curr.getCargo(3));
+		plDrugs.setText("" + curr.getCargo(DRUGS));
 		
-		plMeds.setText("" + curr.getCargo(4));
+		plMeds.setText("" + curr.getCargo(MEDS));
 		
-		plWeps.setText("" + curr.getCargo(5));
+		plWeps.setText("" + curr.getCargo(WEAPONS));
 		
-		plRobots.setText("" + curr.getCargo(6));
+		plRobots.setText("" + curr.getCargo(ROBOTS));
 		
 		cMoney.setText("" + player.getMoney());
 		
@@ -585,8 +643,8 @@ public class CargoPanel extends JPanel implements ActionListener{
 
 	/**
 	 * Method getBackBtn.
-	 * @return JButton
-	 */
+	
+	 * @return JButton */
 	public JButton getBackBtn() {
 		return backBtn;
 	}
@@ -600,8 +658,8 @@ public class CargoPanel extends JPanel implements ActionListener{
 	}
 
 	/**
-	 * @return the buyBtn
-	 */
+	
+	 * @return the buyBtn */
 	public JButton getBuyBtn() {
 		return buyBtn;
 	}
@@ -614,8 +672,8 @@ public class CargoPanel extends JPanel implements ActionListener{
 	}
 
 	/**
-	 * @return the sellBtn
-	 */
+	
+	 * @return the sellBtn */
 	public JButton getSellBtn() {
 		return sellBtn;
 	}

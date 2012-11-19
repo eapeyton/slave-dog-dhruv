@@ -6,12 +6,19 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
+import java.io.File;
+
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
 import java.util.HashMap;
 import java.awt.Point;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 
@@ -70,32 +77,32 @@ public class STPanel extends JPanel implements ActionListener {
 	 * Field GAMEPANEL.
 	 * (value is ""Main Game Panel"")
 	 */
-	final static String GAMEPANEL = "Main Game Panel";
+	private static final String GAMEPANEL = "Main Game Panel";
 	/**
 	 * Field CONFIGPANEL.
 	 * (value is ""Player Configuration Panel"")
 	 */
-	final static String CONFIGPANEL = "Player Configuration Panel";
+	private static final String CONFIGPANEL = "Player Configuration Panel";
 	/**
 	 * Field TITLEPANEL.
 	 * (value is ""Title Panel"")
 	 */
-	final static String TITLEPANEL = "Title Panel";
+	private static final String TITLEPANEL = "Title Panel";
 	/**
 	 * Field CARGOPANEL.
 	 * (value is ""Cargo Panel"")
 	 */
-	final static String CARGOPANEL = "Cargo Panel";
+	private static final String CARGOPANEL = "Cargo Panel";
 	/**
 	 * Field FILEPANEL.
 	 * (value is ""File Select Panel"")
 	 */
-	final static String FILEPANEL = "File Select Panel";
+	private static final String FILEPANEL = "File Select Panel";
 	/**
 	 * Field RANDOMPANEL.
 	 * (value is ""Random Event Panel"")
 	 */
-	final static String RANDOMPANEL = "Random Event Panel";
+	private static final String RANDOMPANEL = "Random Event Panel";
 	
 	/**
 	 * Creates a STPanel with a card layout and initializes all the JPanels.

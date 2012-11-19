@@ -41,12 +41,12 @@ public class StarSystem implements Serializable
 	 * Field screenWidth.
 	 * (value is 450)
 	 */
-	private final static int screenWidth=450;
+	private static final int SCREEN_WIDTH=450;
 	/**
 	 * Field screenHeight.
 	 * (value is 200)
 	 */
-	private final static int screenHeight=200;
+	private static final int SCREEN_HEIGHT=200;
 	/**
 	 * Field cargo.
 	 */
@@ -80,7 +80,7 @@ public class StarSystem implements Serializable
 	 * Randomly selects a location for the star system
 	 */
 	public void setRandLocation(){//Incase 2 StarSystems overlap
-		location = new Point((int) (Math.random()*screenWidth), (int) (Math.random()*screenHeight));
+		location = new Point((int) (Math.random()*SCREEN_WIDTH), (int) (Math.random()*SCREEN_HEIGHT));
 	}
 	
 	/**
@@ -180,8 +180,8 @@ public class StarSystem implements Serializable
 		final HashMap<Point, StarSystem> clickMap = new HashMap<Point, StarSystem>();
 		for (StarSystem ss : UsedLocations.values()) {
 			if (!ss.equals(this) && distanceToStarSystem(ss) <= range) {
-				for (int i = -mapPlanetSize/2; i <= mapPlanetSize/2; i++) {
-					for (int j = -mapPlanetSize/2; j<= mapPlanetSize/2; j++) {
+				for (int i = -(mapPlanetSize>>1); i <= (mapPlanetSize>>1); i++) {
+					for (int j = -(mapPlanetSize>>1); j<= (mapPlanetSize>>1); j++) {
 						clickMap.put(new Point((int) ss.getLocation().getX() + i, (int) ss.getLocation().getY() + j), ss);
 					}
 				}
