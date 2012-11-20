@@ -282,13 +282,11 @@ public class STPanel extends JPanel implements ActionListener {
 					try {
 						fIStream = new FileInputStream(savefile);
 					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					try {
 						oIStream = new ObjectInputStream(fIStream);
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					try {
@@ -324,7 +322,7 @@ public class STPanel extends JPanel implements ActionListener {
 							fIStream.close();
 						}
 						catch (Exception y){
-							
+							y.printStackTrace();
 						}
 					}
 					if (game != null) {
