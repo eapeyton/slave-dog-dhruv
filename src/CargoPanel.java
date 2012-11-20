@@ -30,21 +30,25 @@ public class CargoPanel extends JPanel implements ActionListener{
 	 * (value is 7)
 	 */
 	private static final int GRID_LAYOUT_WIDTH = 7;
+	
 	/**
 	 * Field GRID_LAYOUT_HEIGHT.
 	 * (value is 6)
 	 */
 	private static final int GRID_LAYOUT_HEIGHT = 6;
+	
 	/**
 	 * Field NUM_SUPPLY_TYPE.
 	 * (value is 6)
 	 */
 	private static final int NUM_SUPPLY_TYPE = 6;
+	
 	/**
 	 * Field NUM_ARRAY_SUPPLY.
 	 * (value is NUM_SUPPLY_TYPE + 1)
 	 */
 	public static final int NUM_ARRAY_SUPPLY = NUM_SUPPLY_TYPE + 1;
+	
 	/**
 	 * Field ROBOTS.
 	 * (value is 6)

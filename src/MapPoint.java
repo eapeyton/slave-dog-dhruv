@@ -35,7 +35,7 @@ public class MapPoint extends Point {
 	 */
 	@Override
 	public int hashCode() {
-		return Object.hash(x, y);
+		return Objects.hash(x, y);
 	}
 	
 	/**

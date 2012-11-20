@@ -85,27 +85,33 @@ public class ConfigPanel extends JPanel implements ChangeListener, KeyListener {
 	 * (value is 16)
 	 */
 	private static final int NUM_SKILL_POINTS = 16;
+	
 	/**
 	 * Field TITLE_FONT_SIZE.
 	 * (value is 24)
 	 */
 	private static final int TITLE_FONT_SIZE = 24;
+	
 	/**
 	 * Field NORTH_AREA_DIMENSION.
 	 */
 	private static final Dimension NORTH_AREA_DIMENSION = new Dimension(300, 10);
+	
 	/**
 	 * Field SIDE_AREA_DIMENSION.
 	 */
 	private static final Dimension SIDE_AREA_DIMENSION = new Dimension(20, 200);
+	
 	/**
 	 * Field NAME_INPUT_DIMENSION.
 	 */
 	private static final Dimension NAME_INPUT_DIMENSION = new Dimension(100, 20);
+	
 	/**
 	 * Field SKILLS_PANEL_DIMENSION.
 	 */
 	private static final Dimension SKILLS_PANEL_DIMENSION = new Dimension(200, 100);
+	
 	/**
 	 * Field SKILLS_PANEL_LAYOUT.
 	 */

@@ -26,30 +26,37 @@ public class RandomEvent extends JPanel {
 	 * Field nptype.
 	 */
 	public int nptype;
+	
 	/**
 	 * Field message.
 	 */
 	public JLabel message = new JLabel();
+	
 	/**
 	 * Field func1.
 	 */
 	public JButton func1 = new JButton();
+	
 	/**
 	 * Field attack.
 	 */
 	public JButton attack = new JButton("Attack");
+	
 	/**
 	 * Field flee.
 	 */
 	public JButton flee = new JButton("Flee");
+	
 	/**
 	 * Field np.
 	 */
 	public NonPlayer np;
+	
 	/**
 	 * Field fleeState.
 	 */
 	public Boolean fleeState = false; // True if you were able to flee
+	
 	/**
 	 * Field exist.
 	 */
@@ -59,6 +66,7 @@ public class RandomEvent extends JPanel {
 	 * Field player.
 	 */
 	public Player player;
+	
 	/**
 	 * Field TRADER. (value is 2)
 	 */
@@ -164,6 +172,59 @@ public class RandomEvent extends JPanel {
 		public String toString() {
 			return "actionListener";
 		}
+		
+		/**
+		 * Perform the flee action
+		 */
+		public void actionFlee() {
+			if (nptype == TRADER) {// Fleeing from a Tdaer, always
+				// successful
+			fleeState = true;
+			} 
+			else if (Math.random() > ESCAPE_CHANCE) {// Police or Pirate 50 %
+			// chance of Escaping
+			fleeState = true;
+			}
+		}
+		
+		/**
+		 * Performs the attack action
+		 */
+		public void actionAttack() {
+			if (np.canNpTakeDamage((int) Math.random() * ATTACK_MAX)) {
+				message.setText("You succeeded");
+				exist = false; // NP is dead get out of Random Event
+			} else {
+
+				if (nptype == TRADER) {// Trader Flees on Attack
+					message.setText("The Trader Flees");
+					exist = false;
+				}
+
+				if (nptype == POLICE || nptype == PIRATE) {// Police or
+															// Pirate Attack
+					// back
+					final int attack = (int) Math.random() * ATTACK_MAX;
+					message.setText("You have been attacked back."
+							+ " What do you want to do?");
+					player.takeDamage(attack);
+				}
+			}
+		}
+		
+		/**
+		 * Performs the threaten action
+		 */
+		public void actionThreaten() {
+			if (Math.random() < ESCAPE_CHANCE) {
+				message.setText("You scared him off!");
+				exist = false;
+			} else {
+				message.setText("You have been attacked back,"
+						+ " What do you want to do?");
+				player.takeDamage((int) Math.random() * ATTACK_MAX);
+			}
+		}
 
 		/**
 		 * Method actionPerformed.
@@ -178,63 +239,29 @@ public class RandomEvent extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 
 			if (e.getSource().equals(flee)) {
-				if (nptype == TRADER) {// Fleeing from a Tdaer, always
-										// successful
-					fleeState = true;
-				} else {
-					if (Math.random() > ESCAPE_CHANCE) {// Police or Pirate 50 %
-						// chance of Escaping
-						fleeState = true;
-					}
-				}
+				actionFlee();
 
 			}
 
-			if (e.getSource().equals(attack)) {
-				if (np.canNpTakeDamage((int) Math.random() * ATTACK_MAX)) {
-					message.setText("You succeeded");
-					exist = false; // NP is dead get out of Random Event
-				} else {
-
-					if (nptype == TRADER) {// Trader Flees on Attack
-						message.setText("The Trader Flees");
-						exist = false;
-					}
-
-					if (nptype == POLICE || nptype == PIRATE) {// Police or
-																// Pirate Attack
-						// back
-						final int attack = (int) Math.random() * ATTACK_MAX;
-						message.setText("You have been attacked back."
-								+ " What do you want to do?");
-						player.takeDamage(attack);
-					}
-				}
+			else if (e.getSource().equals(attack)) {
+				actionAttack();
 
 			}
 
 			/* If threaten button is pressed */
-			if (e.getSource().equals(func1)) {
-				if (Math.random() < ESCAPE_CHANCE) {
-					message.setText("You scared him off!");
-					exist = false;
-				} else {
-					message.setText("You have been attacked back,"
-							+ " What do you want to do?");
-					player.takeDamage((int) Math.random() * ATTACK_MAX);
-				}
+			else if (e.getSource().equals(func1)) {
+				actionThreaten();
 			}
 
-			/* Check to see if the player has fleed or the enemy has died */
-			if (fleeState || !exist) {
-				if (fleeState) {
-					/* If the flee is successful */
-					message.setText("You successfully fleed!");
-					func1.setText("Continue");
-				} else if (!exist) {
-					message.setText("The other ship has been destroyed!");
-					func1.setText("Continue");
-				}
+			if (fleeState) {
+				/* If the flee is successful */
+				message.setText("You successfully fleed!");
+				func1.setText("Continue");
+				attack.setVisible(false);
+				flee.setVisible(false);
+			} else if (!exist) {
+				message.setText("The other ship has been destroyed!");
+				func1.setText("Continue");
 				attack.setVisible(false);
 				flee.setVisible(false);
 			}
