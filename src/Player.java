@@ -79,24 +79,42 @@ public class Player implements Serializable {
 	 * Field location.
 	 */
 	public StarSystem location;
+	
+	/**
+	 * Field THREE.
+	 * (value is 3)
+	 */
+	/**
+	 * Field TWO.
+	 * (value is 2)
+	 */
+	/**
+	 * Field ONE.
+	 * (value is 1)
+	 */
+	/**
+	 * Field ZERO.
+	 * (value is 0)
+	 */
+	public static final int ZERO=0, ONE=1, TWO=2, THREE=3;
 
 	/**
 	 * 
 	 * @param name
-	 * @param pilotp
-	 * @param fighterp
-	 * @param traderp
-	 * @param enggp
+	
+	
+	
+	
 	 * @param difficulty
+	 * @param arr Integer[]
 	 */
-	public Player(String name, int pilotp, int fighterp, int traderp,
-			int enggp, String difficulty) {
+	public Player(String name, Integer [] arr, String difficulty) {
 		this.name = name;
 		this.health = INITIAL_HEALTH;
-		this.pilotp = pilotp;
-		this.fighterp = fighterp;
-		this.traderp = traderp;
-		this.enggp = enggp;
+		this.pilotp = arr[ZERO];
+		this.fighterp = arr[ONE];
+		this.traderp = arr[TWO];
+		this.enggp = arr[THREE];
 		this.difficulty = difficulty;
 		money = INITIAL_MONEY;
 		ship = new Ship();

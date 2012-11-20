@@ -226,11 +226,12 @@ public class ConfigPanel extends JPanel implements ChangeListener, KeyListener {
 	
 	 * @return the created player */
 	public Player createPlayer() {
-		player = new Player(nameInput.getText(),
+		Integer [] arr={
 				(Integer) pilotSpinner.getValue(),
 				(Integer) fighterSpinner.getValue(),
 				(Integer) traderSpinner.getValue(),
-				(Integer) engineerSpinner.getValue(),
+				(Integer) engineerSpinner.getValue(),};
+		player = new Player(nameInput.getText(), arr,
 				(String) difficulty.getSelectedItem());
 		return player;
 	}

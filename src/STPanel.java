@@ -320,6 +320,7 @@ public class STPanel extends JPanel implements ActionListener {
 					finally{
 						try{
 							fIStream.close();
+							oIStream.close();
 						}
 						catch (Exception y){
 							y.printStackTrace();
@@ -357,6 +358,14 @@ public class STPanel extends JPanel implements ActionListener {
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
+					}
+					finally{
+						try {
+							fOStream.close();
+							oOStream.close();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
 					}
 
 					layout.show(this, GAMEPANEL);

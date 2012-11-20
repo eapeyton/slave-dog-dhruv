@@ -219,7 +219,7 @@ public class GalacticChart extends JPanel {
 		final int planetRadius=(planetSize >> 1);
 		graphicPanel.setColor(Color.GREEN);
 		for (int i = 0; i < universe.size(); i++) {
-			graphicPanel.fillRect((int) universe.get(i).getLocation().getX()
+			graphicPanel.fillRect( (int) universe.get(i).getLocation().getX()
 					- (planetRadius), (int) universe.get(i).getLocation()
 					.getY()
 					- (planetRadius), planetSize, planetSize);
