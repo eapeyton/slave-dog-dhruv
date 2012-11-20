@@ -10,7 +10,7 @@ import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.Point;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -37,7 +37,7 @@ public class GalacticChart extends JPanel {
 	/**
 	 * Field destination.
 	 */
-	private JLabel destination;
+	private JLabel destination=null;
 	/**
 	 * Field go.
 	 */
@@ -216,25 +216,26 @@ public class GalacticChart extends JPanel {
 			Graphics graphicPanel) {
 
 		final int planetSize = PLANET_CIRCLE_SIZE;// Planet Circle Size
+		final int planetRadius=(planetSize >> 1);
 		graphicPanel.setColor(Color.GREEN);
 		for (int i = 0; i < universe.size(); i++) {
 			graphicPanel.fillRect((int) universe.get(i).getLocation().getX()
-					- (planetSize >> 1), (int) universe.get(i).getLocation()
+					- (planetRadius), (int) universe.get(i).getLocation()
 					.getY()
-					- (planetSize >> 1), planetSize, planetSize);
+					- (planetRadius), planetSize, planetSize);
 		}
 		graphicPanel.setColor(Color.BLUE);
 		graphicPanel.fillRect((int) player.location.getLocation().getX()
-				- (planetSize >> 1), (int) player.location.getLocation().getY()
-				- (planetSize >> 1), planetSize, planetSize);
+				- (planetRadius), (int) player.location.getLocation().getY()
+				- (planetRadius), planetSize, planetSize);
 		graphicPanel.drawOval((int) player.location.getLocation().getX()
 				- player.getFuel(), (int) player.location.getLocation().getY()
 				- player.getFuel(),  (player.getFuel() << 1 ), (player.getFuel() << 1));
 		if (selected != null) {
 			graphicPanel.setColor(Color.RED);
 			graphicPanel.fillRect((int) selected.getLocation().getX()
-					- (planetSize >> 1), (int) selected.getLocation().getY()
-					- (planetSize >> 1), planetSize, planetSize);
+					- (planetRadius), (int) selected.getLocation().getY()
+					- (planetRadius), planetSize, planetSize);
 			destination.setText("Destination: " + selected.getName());
 			go.setEnabled(true);
 		} else {

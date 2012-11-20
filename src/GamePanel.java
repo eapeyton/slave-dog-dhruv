@@ -6,7 +6,8 @@ import javax.swing.BoxLayout;
 import java.awt.BorderLayout;
 
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.BorderFactory;
@@ -68,7 +69,7 @@ public class GamePanel extends JPanel {
 	/**
 	 * Field universe.
 	 */
-	public ArrayList<StarSystem> universe;
+	public List<StarSystem> universe;
 
 	/**
 	 * Creates a new GamePanel taking in an ActionListener as a parameter.
@@ -95,7 +96,7 @@ public class GamePanel extends JPanel {
 
 		// Generate the universe and set the player's location
 		chart.setPlayer(player);
-		universe = (ArrayList<StarSystem>) chart.generateUniverse();
+		universe = chart.generateUniverse();
 		player.setLocation(universe.get(rand.nextInt(universe.size())));
 
 		final JPanel centerPanel = new JPanel();
@@ -171,7 +172,7 @@ public class GamePanel extends JPanel {
 		fuelSel = new JSpinner();
 
 		this.chart = chart;
-		universe = (ArrayList<StarSystem>) chart.getUniverse();
+		universe = chart.getUniverse();
 		this.chart.setPlayer(player);
 
 		this.player = player;

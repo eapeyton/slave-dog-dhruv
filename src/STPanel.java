@@ -15,7 +15,9 @@ import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-import java.awt.Point;
+import java.util.List;
+import java.util.Map;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -291,10 +293,10 @@ public class STPanel extends JPanel implements ActionListener {
 					}
 					try {
 						final Player player = (Player) oIStream.readObject();
-						final ArrayList<StarSystem> universe =
+						final List<StarSystem> universe =
 								(ArrayList<StarSystem>) oIStream
 								.readObject();
-						final HashMap<MapPoint, StarSystem> usedLocations =
+						final Map<MapPoint,StarSystem> usedLocations =
 								(HashMap<MapPoint, StarSystem>) oIStream
 								.readObject();
 						StarSystem.setUsedLocations(usedLocations);

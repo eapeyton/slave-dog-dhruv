@@ -55,7 +55,7 @@ public class TitlePanel extends JPanel {
 	/**
 	 * Field MENU_STRUT_2.
 	 */
-	private static final Component MENU_STRUT_2 = Box.createVerticalStrut(15);
+	private static final Component MENU_STRUT_TWO = Box.createVerticalStrut(15);
 	/**
 	 * Field SIDE_AREA.
 	 */
@@ -104,7 +104,7 @@ public class TitlePanel extends JPanel {
 		btnLoadGame.addActionListener(listener);
 		panel.add(btnLoadGame);
 
-		panel.add(MENU_STRUT_2);
+		panel.add(MENU_STRUT_TWO);
 
 		btnSettings = new JButton("SETTINGS");
 		btnSettings.setFont(MENU_FONT);

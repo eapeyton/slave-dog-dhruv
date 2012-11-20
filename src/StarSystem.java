@@ -1,9 +1,10 @@
 /**
  * File Comment
  */
-import java.awt.Point;
+
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Holds information about a star system. Used by Galactic chart to add star
@@ -21,7 +22,7 @@ public class StarSystem implements Serializable {
 	/**
 	 * Field name.
 	 */
-	private String name; // name of the star system
+	private String name=null; // name of the star system
 	/**
 	 * Field location.
 	 */
@@ -39,7 +40,7 @@ public class StarSystem implements Serializable {
 	/**
 	 * Field usedLocations.
 	 */
-	private static HashMap<MapPoint, StarSystem> UsedLocations =
+	private static Map<MapPoint,StarSystem> UsedLocations =
 			new HashMap<MapPoint, StarSystem>();
 	/**
 	 * Field screenWidth. (value is 450)
@@ -103,7 +104,8 @@ public class StarSystem implements Serializable {
 	 * Field TECH_LEVEL_3.
 	 * (value is 3)
 	 */
-	private static final int TECH_LEVEL_3 = 3, TECH_LEVEL_4 = 4, TECH_LEVEL_6 = 6;
+	private static final int TECH_LEVEL_THREE = 3, 
+			TECH_LEVEL_FOUR = 4, TECH_LEVEL_SIX = 6;
 	/**
 	 * Field cargo.
 	 */
@@ -120,7 +122,7 @@ public class StarSystem implements Serializable {
 	public StarSystem(String name) {
 		this.name = name;
 		while (location == null || UsedLocations.containsKey(location)) {
-			setRandLocation();
+			initRandLocation();
 		}
 		/**
 		 * Initialize tech, resources, government, and empty cargo.
@@ -140,7 +142,7 @@ public class StarSystem implements Serializable {
 	/**
 	 * Randomly selects a location for the star system
 	 */
-	public void setRandLocation() {// Incase 2 StarSystems overlap
+	public void initRandLocation() {// Incase 2 StarSystems overlap
 		location = new MapPoint((int) (Math.random() * SCREEN_WIDTH),
 				(int) (Math.random() * SCREEN_HEIGHT));
 	}
@@ -178,22 +180,22 @@ public class StarSystem implements Serializable {
 		}
 
 		// drugs
-		if (techLevel >= TECH_LEVEL_3) {
+		if (techLevel >= TECH_LEVEL_THREE) {
 			cargo[CargoPanel.DRUGS] = (int) (Math.random() * DRUGS_GENER);
 		}
 
 		// medicine
-		if (techLevel >= TECH_LEVEL_4) {
+		if (techLevel >= TECH_LEVEL_FOUR) {
 			cargo[CargoPanel.MEDS] = (int) (Math.random() * MEDS_GENER);
 		}
 
 		// weapons
-		if (techLevel >= TECH_LEVEL_4) {
+		if (techLevel >= TECH_LEVEL_FOUR) {
 			cargo[CargoPanel.WEAPONS] = (int) (Math.random() * WEPS_GENER);
 		}
 
 		// robots
-		if (techLevel >= TECH_LEVEL_6) {
+		if (techLevel >= TECH_LEVEL_SIX) {
 			cargo[CargoPanel.ROBOTS] = (int) (Math.random() * ROBOT_GENER);
 		}
 	}
@@ -235,8 +237,8 @@ public class StarSystem implements Serializable {
 	 * 
 	
 	 * @return A hashmap mapping points on the map to star systems */
-	public HashMap<MapPoint, StarSystem> getClickMap(int mapPlanetSize, int range) {
-		final HashMap<MapPoint, StarSystem> clickMap =
+	public Map<MapPoint,StarSystem> getClickMap(int mapPlanetSize, int range) {
+		final Map<MapPoint,StarSystem> clickMap =
 				new HashMap<MapPoint, StarSystem>();
 		for (StarSystem ss : UsedLocations.values()) {
 			if (!ss.equals(this) && distanceToStarSystem(ss) <= range) {
@@ -300,7 +302,7 @@ public class StarSystem implements Serializable {
 	 * 
 	
 	 * @return The locations already occupied by StarSystems */
-	public static HashMap<MapPoint, StarSystem> getUsedLocations() {
+	public static Map<MapPoint,StarSystem> getUsedLocations() {
 		return UsedLocations;
 	}
 
@@ -309,7 +311,7 @@ public class StarSystem implements Serializable {
 	 *            The locations already occupied by StarSystems; used when
 	 *            loading game from file
 	 */
-	public static void setUsedLocations(HashMap<MapPoint, StarSystem> uL) {
+	public static void setUsedLocations(Map<MapPoint,StarSystem> uL) {
 		UsedLocations = uL;
 	}
 	
